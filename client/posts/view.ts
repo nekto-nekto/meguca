@@ -31,6 +31,9 @@ export default class PostView extends ImageHandler {
             if (model.editing) {
                 attrs.class += ' editing'
             }
+            //if (model.isEmpty()) {
+            //    attrs.class += " hidden"
+            //}
             if (model.id === model.op) {
                 attrs.class += " op"
             }

@@ -233,6 +233,10 @@ export const specs: { [id: string]: OptionSpec } = {
 		default: 83,
 		type: optionType.shortcut,
 	},
+	cancel: {
+		default: 90,
+		type: optionType.shortcut,
+	},
 	toggleSpoiler: {
 		default: 73,
 		type: optionType.shortcut,

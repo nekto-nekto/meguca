@@ -45,6 +45,7 @@ export default class FormView extends PostView {
         })
         this.onClick({
             "input[name=\"done\"]": postSM.feeder(postEvent.done),
+			"input[name=\"cancel\"]": postSM.feeder(postEvent.cancel),
         })
         this.updateDoneButton();
 
@@ -98,7 +99,8 @@ export default class FormView extends PostView {
 
         document.getElementById("thread-container").append(this.el)
         this.resizeSpacer()
-        this.setEditing(true);
+        //this.setEditing(true);
+        this.setEditing(identity.live);
     }
 
     // Resize bottomSpacer to the same top position as this post
@@ -242,7 +244,11 @@ export default class FormView extends PostView {
     public insertImage() {
         this.renderImage(false);
         this.resizeInput();
-        this.upload.hideButton();
+
+		// temporally hack
+		if (this.upload) {
+        	this.upload.hideButton();
+		}
 
         if (postSM.state !== postState.alloc) {
             return;
@@ -261,6 +267,16 @@ export default class FormView extends PostView {
         if (!el) {
             return;
         }
+        const el2 = this.inputElement("cancel");
+        if (!el2) {
+            return;
+        }
+		if (identity.live) {
+			//el2.remove();
+			el2.style.display = "none";
+		}
+
+
         let text = lang.ui["done"];
         let disable = false;
         switch (postSM.state) {
@@ -268,7 +284,9 @@ export default class FormView extends PostView {
                 disable = true;
                 break;
             case postState.draft:
-                text = lang.ui["cancel"];
+				if (identity.live) {
+               		text = lang.ui["cancel"];
+				}
                 break;
             case postState.alloc:
                 break;

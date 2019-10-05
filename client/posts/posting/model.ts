@@ -7,7 +7,9 @@ import { postSM, postEvent, postState } from "."
 import { extend, modPaste } from "../../util"
 import { SpliceResponse } from "../../client"
 import { FileData } from "./upload"
-import { newAllocRequest } from "./identity"
+import identity, { newAllocRequest } from "./identity" 
+//import { captchaLoaded } from "../../ui/captcha";
+
 
 // Form Model of an OP post
 export default class FormModel extends Post {
@@ -65,6 +67,11 @@ export default class FormModel extends Post {
 
 	// Compare new value to old and generate appropriate commands
 	public parseInput(val: string): void {
+		// Handle live update toggling
+		if (postSM.state === postState.draft && !identity.live) {
+			return
+		}
+
 		// These operations should only be performed on fresh allocations or
 		// after the server has verified the allocation
 		switch (postSM.state) {
@@ -150,9 +157,15 @@ export default class FormModel extends Post {
 
 	// Close the form and revert to regular post. Cancel also erases all post
 	// contents.
-	public commitClose() {
+	//public commitClose() {
+ 	public commitClose(cancel: boolean) { 
 		this.parseInput(this.view.input.value)
 		this.abandon()
+		//this.send(message.closePost, !!cancel) // Ensure boolean type
+		if (cancel) {
+			this.view.hide()
+		}
+		//
 		this.send(message.closePost, null)
 	}
 
@@ -243,6 +256,52 @@ export default class FormModel extends Post {
 			postSM.state !== postState.draft || old.length !== 0)
 	}
 
+
+	// Commit a post made with live updates disabled
+	public async commitNonLive() {
+		let files: FileList
+		console.log("commitNonLive this.view",this.view);
+		if (this.view.upload) {
+			//files = this.view.input.files
+			files = this.view.upload.hiddenInput.files;
+		}
+		console.log(files);
+		const text = this.view.input.value;
+		if (!text.length && !files.length) {
+			console.log("!text.length && !files.length");
+			return postSM.feed(postEvent.done);
+		}
+
+		const req = newAllocRequest();
+		req["open"] = true;
+		if (this.view.upload && files.length) {
+			console.log("req image");
+			req["image"] = await this.view.upload.uploadFile(files[0]);
+			this.view.input.focus();
+			//this.handleUploadResponse(req["image"]);
+		}
+		if (text) {
+			req["body"] = text;
+		}
+
+		send(message.insertPost, req);
+		console.log("send->message.insertPost");
+		postSM.feed(postEvent.sentAllocRequest);
+		console.log("feed->postEvent.sentAllocRequest");
+		handlers[message.postID] = this.receiveID();
+
+		//send(message.insertPost, req);
+		//postSM.feed(postEvent.sentAllocRequest);
+		//handlers[message.postID] = this.receiveID();
+		//send(message.closePost, null);
+	}
+	public async commitNonLiveEnd() {
+		send(message.closePost, null);
+		//postSM.feed(postEvent.done);
+	}
+
+
+
 	// Returns a function, that handles a message from the server, containing
 	// the ID of the allocated post.
 	private receiveID(): (id: number) => void {
@@ -277,18 +336,27 @@ export default class FormModel extends Post {
 	// Handle draft post allocation
 	public onAllocation(data: PostData) {
 		extend(this, data);
+		//
 		this.view.renderAlloc();
 		if (this.image) {
 			this.insertImage(this.image);
 		}
 		if (postSM.state !== postState.alloc) {
+ 		//if (postSM.state === postState.alloc) { 
+ 		//	this.view.renderAlloc(); 
+ 		//	if (this.image) { 
+ 		//		this.insertImage(this.image); 
+ 		//	}
+ 		//} else {
 			this.propagateLinks();
 		}
 	}
 
 	// Upload the file and request its allocation
 	public async uploadFile(file: File) {
-		if (!boardConfig.textOnly && !this.image) {
+		if (!boardConfig.textOnly && !this.image && identity.live) { // ?
+			console.log("upload!!! identity.live", identity.live);
+			console.log("upload!!! this", this);
 			const pr = this.view.upload.uploadFile(file);
 			this.view.input.focus();
 			this.handleUploadResponse(await pr);

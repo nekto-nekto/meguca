@@ -13,7 +13,12 @@
 		"unbanned": "UNBANNED BY '%s'",
 		"viewedSameIP": "POSTS OF THE SAME IP WERE VIEWED BY '%s'"
 	},
-	"forms": {},
+	"forms": {
+		"nonLive": [
+			"Non-live",
+			"Disable live updates of open post text and images"
+		]
+	},
 	"plurals": {
 		"day": [
 			"day",

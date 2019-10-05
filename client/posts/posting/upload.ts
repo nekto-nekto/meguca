@@ -51,7 +51,7 @@ export default class UploadForm extends View<Post> {
     private audioChunks: any[] = [];
     private recorder: MediaRecorder | null;
 
-    private hiddenInput: HTMLInputElement;
+    public hiddenInput: HTMLInputElement;
 
     private xhr: XMLHttpRequest;
     private bufferedFile: File; // In case we need to resubmit a file
@@ -144,8 +144,10 @@ export default class UploadForm extends View<Post> {
             case postState.draft:
             case postState.allocating:
             case postState.alloc:
+				console.log("canAllocImage true");
                 return true;
             default:
+				console.log("canAllocImage false");
                 return false;
         }
     }
@@ -153,6 +155,7 @@ export default class UploadForm extends View<Post> {
     // Read the file from input and send as a POST request to the server.
     // Returns image request data, if upload succeeded.
     public async uploadFile(file: File): Promise<FileData> | null {
+		console.log("uploadFile Promise");
         if (!navigator.onLine || this.isUploading) {
             return null;
         }
@@ -249,6 +252,7 @@ export default class UploadForm extends View<Post> {
 
     // Upload file to server and return the file allocation token
     private async upload(file: File): Promise<string> {
+		console.log("upload Promise");
         const formData = new FormData();
         formData.append("image", file);
 
