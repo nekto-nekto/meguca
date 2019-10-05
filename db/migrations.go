@@ -1497,7 +1497,7 @@ var migrations = []func(*sql.Tx) error{
 			)`,
 		)
 	},
-	func(tx *sql.Tx) (err error) {
+	/*func(tx *sql.Tx) (err error) {
 		return execAll(tx,
 			`ALTER TABLE boards	ADD COLUMN nonLive bool default false`,
 			`ALTER TABLE threads ADD COLUMN nonLive bool default false`,
@@ -1508,7 +1508,7 @@ var migrations = []func(*sql.Tx) error{
 			`alter table boards drop column nonLive`,
 			`alter table threads drop column nonLive`,
 		)
-	},
+	},*/
 }
 
 func createIndex(table string, columns ...string) string {

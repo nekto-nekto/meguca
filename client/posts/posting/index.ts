@@ -255,7 +255,7 @@ export default () => {
 
 	// Regained connectivity, when post is allocated
 	postSM.act(postState.halted, postEvent.reclaim, () => {
-		console.log("postState.halted, postEvent.reclaim");
+		//console.log("postState.halted, postEvent.reclaim");
 		return postState.alloc})
 
 	// Regained connectivity too late and post can no longer be reclaimed
@@ -277,16 +277,16 @@ export default () => {
 
 	// Reset state during page navigation
 	postSM.wildAct(postEvent.reset, () =>
-		postState.ready)
+		postState.ready);
 
 	// Transition a draft post into allocated state. All the logic for this is
 	// model- and view-side.
 	postSM.act(postState.allocating, postEvent.alloc, () => {
-		console.log("postState.allocating, postEvent.alloc");
+		//console.log("postState.allocating, postEvent.alloc");
 		return postState.alloc;
 	});
 	postSM.act(postState.allocatingNonLive, postEvent.alloc, () => {
-		console.log("postState.allocatingNonLive, postEvent.alloc");
+		//console.log("postState.allocatingNonLive, postEvent.alloc");
 		return postState.ready;
 		//return postState.draft;
 	});
@@ -301,7 +301,7 @@ export default () => {
 
 	// Open a new post creation form, if none open
 	postSM.act(postState.ready, postEvent.open, () => {
-		console.log("postState.ready, postEvent.open");
+		//console.log("postState.ready, postEvent.open");
 		postModel = new FormModel()
 		postForm = new FormView(postModel)
 		return postState.draft
@@ -316,9 +316,9 @@ export default () => {
 		hidePostControls())
 
 	postSM.act(postState.draft, postEvent.sentAllocRequest, () => {
-		console.log("postState.draft, postEvent.sentAllocRequest");
+		//console.log("postState.draft, postEvent.sentAllocRequest");
 		if (!identity.live) {
-			console.log("!identity.live");
+			//console.log("!identity.live");
 			//postModel.commitNonLiveEnd();
 			return postState.allocatingNonLive;
 		}
@@ -331,7 +331,7 @@ export default () => {
 		postState.draft, postState.allocating, postState.allocatingNonLive,
 	]) { 
 		postSM.act(s, postEvent.captchaRequested, () => {
-			console.log(s, "postState.draft, postState.allocating, postState.allocatingNonLive, postEvent.captchaRequested");
+			//console.log(s, "postState.draft, postState.allocating, postState.allocatingNonLive, postEvent.captchaRequested");
 			postModel.inputBody = "";
 			renderCaptchaForm(postSM.feeder(postEvent.captchaSolved));
 			if (postForm.upload) {
@@ -341,7 +341,7 @@ export default () => {
 		});
 	}
 	postSM.act(postState.alloc, postEvent.captchaRequested, () => {
-		console.log("postState.alloc, postEvent.captchaRequested");
+		//console.log("postState.alloc, postEvent.captchaRequested");
 		renderCaptchaForm(postSM.feeder(postEvent.captchaSolved));
 		if (postForm.upload) {
 			postForm.upload.reset();
@@ -353,18 +353,18 @@ export default () => {
 	for (let s of [postState.draft, postState.allocating, postState.alloc]) {
 		// Capture variable in inner scope
 		((s: postState) => {
-			console.log("postState.draft, postState.allocating, postState.alloc");
+			//console.log("postState.draft, postState.allocating, postState.alloc");
 			postSM.act(s, postEvent.captchaSolved, () => {
-				console.log("postEvent.captchaSolved");
+				//console.log("postEvent.captchaSolved");
 				if (!identity.live) {
 					if (isEmpty()) {}
 					//if (isEmpty()) {
 					//	postForm.input.focus();
 					//	return postState.draft;
 					//}
-					console.log("!identity.live postModel.commitNonLive()");
+					//console.log("!identity.live postModel.commitNonLive()");
 					postModel.commitNonLive();
-					console.log("postState.allocatingNonLive");
+					//console.log("postState.allocatingNonLive");
 					return postState.allocatingNonLive;
 				} 
 				if (postSM.state === postState.draft) {
@@ -373,7 +373,7 @@ export default () => {
 						postModel.parseInput(b);
 					}
 				}
-				console.log("postModel.retryUpload()");
+				//console.log("postModel.retryUpload()");
 				postModel.retryUpload();
 				postForm.input.focus();
 				return s;
@@ -383,40 +383,40 @@ export default () => {
 
 	// Close unallocated draft or commit in non-live mode
 	postSM.act(postState.draft, postEvent.done, () => {
-		console.log("postState.draft, postEvent.done");
+		//console.log("postState.draft, postEvent.done");
 		if (captchaLoaded()) {
-			console.log("captchaLoaded() return postState.draft");
+			//console.log("captchaLoaded() return postState.draft");
 			return postState.draft;
 		}
 
 		// Commit a draft made as a non-live post
 		if (!identity.live) { // && !isEmpty()) {
-			console.log("!identity.live && !isEmpty() ->postState.allocatingNonLive");
+			//console.log("!identity.live && !isEmpty() ->postState.allocatingNonLive");
 			postModel.commitNonLive();
-			console.log("!identity.live && !isEmpty() ->postModel.commitNonLive() & return postState.allocatingNonLive");
+			//console.log("!identity.live && !isEmpty() ->postModel.commitNonLive() & return postState.allocatingNonLive");
 			//console.log(identity, postForm, postModel);
 			//postSM.feed(postEvent.done);
 			return postState.draft;
 			//return postState.allocatingNonLive;
 		}
-		console.log("postForm.remove()->");
+		//console.log("postForm.remove()->");
 		postForm.remove();
-		console.log("postForm.remove(); return postState.ready");
+		//console.log("postForm.remove(); return postState.ready");
 		return postState.ready;
 	})
 
 	// Cancel unallocated draft
 	postSM.act(postState.draft, postEvent.cancel, () => {
-		console.log("postState.draft, postEvent.cancel");
+		//console.log("postState.draft, postEvent.cancel");
 		postForm.remove()
 		return postState.ready
 	})
 
 	// Close allocated post
 	postSM.act(postState.alloc, postEvent.done, () => {
-		console.log("postState.alloc, postEvent.done");
+		//console.log("postState.alloc, postEvent.done");
 		if (captchaLoaded()) {
-			console.log("postState.alloc, postEvent.done captchaLoaded()");
+			//console.log("postState.alloc, postEvent.done captchaLoaded()");
 			return postState.alloc;
 		}
 		postModel.commitClose(false);
@@ -427,19 +427,19 @@ export default () => {
 
 	// Cancel allocated post
 	postSM.act(postState.alloc, postEvent.cancel, () => {
-		console.log("postState.alloc, postEvent.cancel");
+		//console.log("postState.alloc, postEvent.cancel");
 		postModel.commitClose(true)
 		return postState.ready;
 	})
 
 	// Just close the post, after it is committed
 	postSM.act(postState.allocatingNonLive, postEvent.done, () => {
-		console.log("postState.allocatingNonLive, postEvent.done");
+		//console.log("postState.allocatingNonLive, postEvent.done");
 		return postState.ready;
 	});
 
 	postSM.act(postState.allocatingNonLive, postEvent.open, () => {
-		console.log("postState.allocatingNonLive, postEvent.open");
+		//console.log("postState.allocatingNonLive, postEvent.open");
 		return postState.ready;
 	});
 	/*
@@ -449,18 +449,18 @@ export default () => {
 	});
 	*/
 	postSM.act(postState.allocatingNonLive, postEvent.captchaSolved, () => {
-		console.log("postState.allocatingNonLive, postEvent.captchaSolved");
+		//console.log("postState.allocatingNonLive, postEvent.captchaSolved");
 		return postState.ready;
 	});
 	postSM.act(postState.allocatingNonLive, postEvent.sentAllocRequest, () => {
-		console.log("postState.allocatingNonLive, postEvent.sentAllocRequest");
+		//console.log("postState.allocatingNonLive, postEvent.sentAllocRequest");
 		//postModel.commitNonLiveEnd();
 		postModel.commitClose(false);
 		return postState.ready;
 		//return postState.draft;
 	});
 	postSM.act(postState.allocatingNonLive, postEvent.alloc, () => {
-		console.log("postState.allocatingNonLive, postEvent.alloc");
+		//console.log("postState.allocatingNonLive, postEvent.alloc");
 		postModel.commitNonLiveEnd();
 		return postState.ready;
 	});
@@ -468,7 +468,7 @@ export default () => {
 
 	// Just cancel the post, after it is committed
 	postSM.act(postState.allocatingNonLive, postEvent.cancel, () => {
-		console.log("postState.allocatingNonLive, postEvent.cancel");
+		//console.log("postState.allocatingNonLive, postEvent.cancel");
 		return postState.ready;
 	});
 

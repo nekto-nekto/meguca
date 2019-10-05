@@ -8,8 +8,6 @@ import { extend, modPaste } from "../../util"
 import { SpliceResponse } from "../../client"
 import { FileData } from "./upload"
 import identity, { newAllocRequest } from "./identity" 
-//import { captchaLoaded } from "../../ui/captcha";
-
 
 // Form Model of an OP post
 export default class FormModel extends Post {
@@ -260,22 +258,22 @@ export default class FormModel extends Post {
 	// Commit a post made with live updates disabled
 	public async commitNonLive() {
 		let files: FileList
-		console.log("commitNonLive this.view",this.view);
+		//console.log("commitNonLive this.view",this.view);
 		if (this.view.upload) {
 			//files = this.view.input.files
 			files = this.view.upload.hiddenInput.files;
 		}
-		console.log(files);
+		//console.log(files);
 		const text = this.view.input.value;
 		if (!text.length && !files.length) {
-			console.log("!text.length && !files.length");
+			//console.log("!text.length && !files.length");
 			return postSM.feed(postEvent.done);
 		}
 
 		const req = newAllocRequest();
 		req["open"] = true;
 		if (this.view.upload && files.length) {
-			console.log("req image");
+			//console.log("req image");
 			req["image"] = await this.view.upload.uploadFile(files[0]);
 			this.view.input.focus();
 			//this.handleUploadResponse(req["image"]);
@@ -285,9 +283,9 @@ export default class FormModel extends Post {
 		}
 
 		send(message.insertPost, req);
-		console.log("send->message.insertPost");
+		//console.log("send->message.insertPost");
 		postSM.feed(postEvent.sentAllocRequest);
-		console.log("feed->postEvent.sentAllocRequest");
+		//console.log("feed->postEvent.sentAllocRequest");
 		handlers[message.postID] = this.receiveID();
 
 		//send(message.insertPost, req);
@@ -342,12 +340,12 @@ export default class FormModel extends Post {
 			this.insertImage(this.image);
 		}
 		if (postSM.state !== postState.alloc) {
- 		//if (postSM.state === postState.alloc) { 
- 		//	this.view.renderAlloc(); 
- 		//	if (this.image) { 
- 		//		this.insertImage(this.image); 
- 		//	}
- 		//} else {
+		//if (postSM.state === postState.alloc) { 
+		//	this.view.renderAlloc(); 
+		//	if (this.image) { 
+		//		this.insertImage(this.image); 
+		//	}
+		//} else {
 			this.propagateLinks();
 		}
 	}
@@ -355,8 +353,8 @@ export default class FormModel extends Post {
 	// Upload the file and request its allocation
 	public async uploadFile(file: File) {
 		if (!boardConfig.textOnly && !this.image && identity.live) { // ?
-			console.log("upload!!! identity.live", identity.live);
-			console.log("upload!!! this", this);
+			//console.log("upload!!! identity.live", identity.live);
+			//console.log("upload!!! this", this);
 			const pr = this.view.upload.uploadFile(file);
 			this.view.input.focus();
 			this.handleUploadResponse(await pr);
