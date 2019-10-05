@@ -26,6 +26,9 @@ css:
 generate:
 	go generate ./...
 
+statik:
+	statik -src ./static/src -f
+
 server:
 	go build -v
 
