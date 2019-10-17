@@ -357,11 +357,10 @@ export default () => {
 			postSM.act(s, postEvent.captchaSolved, () => {
 				//console.log("postEvent.captchaSolved");
 				if (!identity.live) {
-					if (isEmpty()) {}
-					//if (isEmpty()) {
-					//	postForm.input.focus();
-					//	return postState.draft;
-					//}
+					if (isEmpty()) {
+						postForm.input.focus();
+						return postState.draft;
+					}
 					//console.log("!identity.live postModel.commitNonLive()");
 					postModel.commitNonLive();
 					//console.log("postState.allocatingNonLive");
@@ -390,7 +389,7 @@ export default () => {
 		}
 
 		// Commit a draft made as a non-live post
-		if (!identity.live) { // && !isEmpty()) {
+		if (!identity.live && !isEmpty()) {
 			//console.log("!identity.live && !isEmpty() ->postState.allocatingNonLive");
 			postModel.commitNonLive();
 			//console.log("!identity.live && !isEmpty() ->postModel.commitNonLive() & return postState.allocatingNonLive");
@@ -522,5 +521,6 @@ export default () => {
 }
 
 function isEmpty(): boolean {
-	return !postForm.input.value;// && !hasBufferedImage();
+	return !postForm.input.value && !postForm.upload.hiddenInput.files.length;
+	// && !hasBufferedImage();
 }
