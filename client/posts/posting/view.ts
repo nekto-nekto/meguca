@@ -264,17 +264,38 @@ export default class FormView extends PostView {
     // Update the display of the Done button according to postSM state
     public updateDoneButton() {
         const el = this.inputElement("done");
-        if (!el) {
-            return;
-        }
         const el2 = this.inputElement("cancel");
-        if (!el2) {
-            return;
-        }
-        if (identity.live) {
-            el2.style.display = "none";
-        }
+        const el3 = this.classElement("record-button");
+        const el4 = this.inputElement("image");
+        const el5 = this.classElement("upload");
 
+        if (identity.live) {
+            if (el2) {
+                el2.style.display = "none";
+            }
+            if (el3) {
+                el3.style.display = "";
+            }
+            if (el4) {
+                el4.style.display = "none";
+            }
+            if (el5) {
+                el5.style.display = "";
+            }
+        } else {
+            if (el2) {
+                el2.style.display = "";
+            }
+            if (el3) {
+                el3.style.display = "none";
+            }
+            if (el4) {
+                el4.style.display = "initial";
+            }
+            if (el5) {
+                el5.style.display = "none";
+            }
+        }
 
         let text = lang.ui["done"];
         let disable = false;
@@ -293,7 +314,19 @@ export default class FormView extends PostView {
             case postState.erred:
                 disable = true;
                 break;
+            case postState.allocatingNonLive:
+                if (!identity.live) {
+                    if (el5) {
+                        el5.style.display = "";
+                    }
+                }
+				break;
         }
+
+        if (!el) {
+            return;
+        }
+
         el.disabled = disable;
         el.value = text;
     }

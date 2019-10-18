@@ -510,6 +510,7 @@ export default () => {
 			return;
 		}
 		postForm.setEditing(live);
+		postForm.updateDoneButton();
 		//postForm.inputElement("done").hidden = live;
 	});
 

@@ -115,16 +115,16 @@
 			<div id="post-controls">
 				<input name="done" type="button" value="{%s= ln.Common.UI["done"] %}">
 				<span class="upload-container" hidden>
-					<button>
+					<button class="upload">
 						{%s= ln.Common.UI["uploadFile"] %}
 					</button>
+					<input type="file" hidden name="image" accept="image/png, image/gif, image/jpeg, video/webm, video/ogg, audio/ogg, application/ogg, video/mp4, audio/mp4, audio/mp3, application/zip, application/x-7z-compressed, application/x-xz, application/x-gzip, audio/x-flac, text/plain, application/pdf, video/quicktime, audio/x-flac">
 					<span data-id="spoiler">
 						<label>
 							<input type="checkbox" name="spoiler">
 							{%s= ln.Common.Posts["spoiler"] %}
 						</label>
 					</span>
-					<input type="file" hidden name="image" accept="image/png, image/gif, image/jpeg, video/webm, video/ogg, audio/ogg, application/ogg, video/mp4, audio/mp4, audio/mp3, application/zip, application/x-7z-compressed, application/x-xz, application/x-gzip, audio/x-flac, text/plain, application/pdf, video/quicktime, audio/x-flac">
 				</span>
 				{%= cancel() %}
 			</div>
