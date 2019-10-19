@@ -33,3 +33,6 @@ client_cpp/*.js
 debug.test
 /config.json
 db_*.db
+/templates/*.html.go
+/static/statik/
+package-lock.json

@@ -25,6 +25,7 @@ var (
 
 // ThreadCreationRequest contains data for creating a new thread
 type ThreadCreationRequest struct {
+	//NonLive bool
 	ReplyCreationRequest
 	Subject, Board string
 }
@@ -74,6 +75,7 @@ func CreateThread(req ThreadCreationRequest, ip string) (
 	// possible data races with unused image cleanup
 	err = db.InTransaction(false, func(tx *sql.Tx) (err error) {
 		err = db.InsertThread(tx, subject, &post)
+		//err = db.InsertThread(tx, subject, conf.NonLive || req.NonLive, &post)
 		if err != nil {
 			return
 		}
@@ -149,6 +151,17 @@ func CreatePost(
 		err = common.StatusError{errors.New("thread is locked"), 400}
 		return
 	}
+
+	// Disable live updates, if thread is non-live
+	/*
+	if req.Open {
+		var disabled bool
+		disabled, err = db.CheckThreadNonLive(op)
+		if err != nil {
+			return
+		}
+		req.Open = !disabled
+	}*/
 
 	post, err = constructPost(req, conf, ip)
 	if err != nil {

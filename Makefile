@@ -26,11 +26,15 @@ css:
 generate:
 	go generate ./...
 
+statik:
+	statik -src ./static/src -f
+
 server:
 	go build -v
 
 client_clean:
-	rm -rf www/js www/css/*.css www/css/maps node_modules
+	rm -rf www/js www/css/*.css www/css/maps
+	#rm -rf www/js www/css/*.css www/css/maps node_modules
 
 clean: client_clean
 	rm -rf .build .ffmpeg .package target meguca-*.zip meguca-*.tar.xz meguca meguca.exe server/pkg

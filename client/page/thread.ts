@@ -41,6 +41,13 @@ export default function () {
     }
     renderPostCounter()
 
+    // Disable live posting toggle in non-live threads
+    /*if (data.nonLive) {
+        const el = document.getElementById("live") as HTMLInputElement
+        el.checked = false
+        el.disabled = true
+    }*/
+
     extractPost(data, data.id, data.board, backlinks)
 
     for (let post of posts) {

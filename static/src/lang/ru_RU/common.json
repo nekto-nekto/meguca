@@ -13,7 +13,12 @@
 		"unbanned": "UNBANNED BY '%s'",
 		"viewedSameIP": "POSTS OF THE SAME IP WERE VIEWED BY '%s'"
 	},
-	"forms": {},
+	"forms": {
+		"nonLive": [
+			"Non-live",
+			"Выключить живое обновление текста и изображений открытых сообщений"
+		]
+	}, 
 	"plurals": {
 		"day": [
 			"день",
@@ -83,7 +88,7 @@
 			"Июн",
 			"Июл",
 			"Авг",
-			"Сеп",
+			"Сен",
 			"Окт",
 			"Ноя",
 			"Дек"

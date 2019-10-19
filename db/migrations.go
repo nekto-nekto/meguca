@@ -725,12 +725,12 @@ var migrations = []func(*sql.Tx) error{
 		_, err = sq.Insert("boards").
 			Columns(
 				"id", "readOnly", "textOnly", "forcedAnon", "disableRobots",
-				"flags", "NSFW",
+				"flags", "NSFW", "nonLive",
 				"rbText", "created", "defaultCSS", "title",
 				"notice", "rules", "eightball").
 			Values(
 				c.ID, c.ReadOnly, c.TextOnly, c.ForcedAnon, c.DisableRobots,
-				c.Flags, c.NSFW, c.RbText,
+				c.Flags, c.NSFW, c.NonLive, c.RbText,
 				c.Created, c.DefaultCSS, c.Title, c.Notice, c.Rules,
 				pq.StringArray(c.Eightball)).
 			RunWith(tx).
@@ -1497,6 +1497,18 @@ var migrations = []func(*sql.Tx) error{
 			)`,
 		)
 	},
+	/*func(tx *sql.Tx) (err error) {
+		return execAll(tx,
+			`ALTER TABLE boards	ADD COLUMN nonLive bool default false`,
+			`ALTER TABLE threads ADD COLUMN nonLive bool default false`,
+		)
+	},
+	func(tx *sql.Tx) (err error) {
+		return execAll(tx,
+			`alter table boards drop column nonLive`,
+			`alter table threads drop column nonLive`,
+		)
+	},*/
 }
 
 func createIndex(table string, columns ...string) string {

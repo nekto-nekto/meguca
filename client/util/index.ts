@@ -172,6 +172,14 @@ export function inputElement(
 	return parent.querySelector(`input[name="${name}"]`) as HTMLInputElement
 }
 
+// Returns an element inside the parent by class
+export function classElement(
+	parent: QuerySelector,
+	name: string,
+): HTMLInputElement {
+	return parent.querySelector(`.${name}`) as HTMLInputElement
+}
+
 // Set a global cookie, that expires after `days`
 export function setCookie(key: string, val: string, days: number) {
 	let date = new Date()

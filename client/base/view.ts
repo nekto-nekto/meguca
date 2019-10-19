@@ -1,4 +1,4 @@
-import { on, OnOptions, inputElement } from '../util'
+import { on, OnOptions, inputElement, classElement } from '../util'
 
 export interface ViewAttrs {
 	el?: HTMLElement
@@ -66,6 +66,11 @@ export default class View<M extends Model> {
 	public inputElement(name: string): HTMLInputElement {
 		return inputElement(this.el, name)
 	}
+	// Returns element inside the view by name
+	public classElement(name: string): HTMLInputElement {
+		return classElement(this.el, name)
+	}
+
 
 	// Extract duration from input elements in seconds
 	protected extractDuration(): number {
