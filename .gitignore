@@ -35,3 +35,4 @@ debug.test
 db_*.db
 /templates/*.html.go
 /static/statik/
+package-lock.json
