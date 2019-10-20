@@ -326,8 +326,8 @@ export default class FormView extends PostView {
         if (!el) {
             return;
         }
-
         el.disabled = disable;
         el.value = text;
+        el2.disabled = disable;
     }
 }

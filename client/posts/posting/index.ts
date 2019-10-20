@@ -238,11 +238,12 @@ export default () => {
 			case postState.halted:
 				return postState.halted
 			case postState.draft:       // Clear any unallocated postForm
-				postForm.remove()
-				postModel = postForm = null
+				//postForm.remove()
+				//postModel = postForm = null
 				stylePostControls(el =>
 					el.style.display = "")
-				break
+				return postState.halted;
+				//break;
 			case postState.locked:
 				return postState.locked
 		}
@@ -259,12 +260,21 @@ export default () => {
 		return postState.alloc})
 
 	// Regained connectivity too late and post can no longer be reclaimed
-	postSM.act(postState.halted, postEvent.abandon, () =>
-		postState.ready)
+	postSM.act(postState.halted, postEvent.abandon, () => {
+		//console.log("postState.halted, postEvent.abandon");
+		if (postForm) {
+			return postState.draft;
+		}
+		return postState.ready})
 
 	// Regained connectivity, when no post open
-	postSM.act(postState.locked, postEvent.sync, () =>
-		postState.ready)
+	postSM.act(postState.locked, postEvent.sync, () => {
+		//console.log("sync!");
+		if (postForm) {
+			return postState.draft;
+		}
+		return postState.ready;
+	})
 
 	// Handle critical errors
 	postSM.wildAct(postEvent.error, () => {
