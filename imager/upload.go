@@ -286,8 +286,8 @@ func newThumbnail(f multipart.File, SHA1 string) (
 			Height: uint(conf.MaxHeight),
 		},
 		ThumbDims: thumbnailer.Dims{
-			Width:  150,
-			Height: 150,
+			Width:  250,
+			Height: 250,
 		},
 		AcceptedMimeTypes: allowedMimeTypes,
 	})
