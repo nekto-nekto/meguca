@@ -30,7 +30,7 @@ var (
 			Eightball: EightballDefaults,
 			BoardPublic: BoardPublic{
 				DefaultCSS: Defaults.DefaultCSS,
-				Title:      "Aggregator metaboard",
+				Title:      "🕸",
 				Banners:    []uint16{},
 			},
 		},

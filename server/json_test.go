@@ -204,7 +204,7 @@ func TestServeBoardList(t *testing.T) {
 	},
 	{
 		"id":"all",
-		"title":"Aggregator metaboard"
+		"title":"🕸"
 	}
 ]`)
 
