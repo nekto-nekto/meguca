@@ -5,11 +5,11 @@
 			"Текст FAQ"
 		],
 		"JPEGThumbnails": [
-			"JPEG thumbnails",
+			"JPEG миниатюры",
 			"meguca uses WebP thumbnails by default. Enable this, if you want to support older browsers, Safari or Apple devices at the expense of no thumbnail transparency."
 		],
 		"NSFW": [
-			"Not Safe For Work",
+			"Не безопасно для работы (NSFW)",
 			"Board allows material, that are not safe to be viewed in a work environment"
 		],
 		"alwaysLock": [
@@ -21,7 +21,7 @@
 			"Отображать всех постеров анонимами"
 		],
 		"audioVolume": [
-			"Audio volume",
+			"Громкость звука",
 			"Volume of audio in music and video players"
 		],
 		"autogif": [
@@ -61,7 +61,7 @@
 			"Заставлять пользователей вводить капчу для некоторых действий, например при регистрации и создании треда"
 		],
 		"captchaTags": [
-			"Captcha tags",
+			"Метки капчи",
 			"Tags to source for captcha solutions. One tag is randomly chosen for each generated captcha. Required to contain at least 3 different tags."
 		],
 		"charScore": [
@@ -133,16 +133,16 @@
 			"Развернуть все изображения (не влияет на WebM, PDF, MP3 и собственные посты)"
 		],
 		"export": [
-			"Экспортировать",
-			"Экспортировать настройки в файл"
+			"Выгрузить",
+			"Выгрузить настройки в файл"
 		],
 		"feedbackEmail": [
 			"Обратная связь",
 			"Почта, отображаемая в верхнем баннере"
 		],
 		"flags": [
-			"Country flags",
-			"Display poster country flags on posts"
+			"Флаги стран",
+			"Показывать страну запостившего"
 		],
 		"forcedAnon": [
 			"Форсированная анонимность",
@@ -165,16 +165,16 @@
 			"Очистить список скрытого"
 		],
 		"hideBinned": [
-			"Hide Deleted Posts",
-			"Hide all posts that have been deleted"
+			"Скрыть удалённые посты",
+			"Все посты что были удалены скрываются"
 		],
 		"hideNSFW": [
-			"Hide NSFW on /all/",
+			"Скрыть NSFW в /all/",
 			"Hide boards tagged as not safe for work from the /all/ metaboard"
 		],
 		"hideRecursively": [
-			"Recursive post hiding",
-			"Hide all posts, that replied to a hidden post recursively"
+			"Рекурсивное скрытие постов",
+			"Скрыть все ответы на скрытые посты"
 		],
 		"hideThumbs": [
 			"Скрыть превью",
@@ -487,15 +487,15 @@
 		"deleteBoard": "Удалить доску",
 		"deleteImage": "Удалить изображение",
 		"deletePost": "Удалить пост",
-		"duration": "Duration",
+		"duration": "Длительность",
 		"expires": "Истекает",
 		"feedback": "Обратная связь",
 		"fuckOff": "FUCK OFF",
 		"global": "Глобальный",
-		"id": "ID",
+		"id": "ИД",
 		"identity": "Личность",
 		"illegal": "Запрещённое содержимое",
- 		"live": "Live",
+ 		"live": "Живое",
 		"loadCaptcha": "Кликните для загрузки капчи",
 		"loadingSpecs": "Accepts a GIF or WEBM file with maximum dimensions of 300x300, maximum file size of 100 KB and no sound.",
 		"logout": "Выход",
