@@ -80,7 +80,7 @@ func resolveTheme(r *http.Request, board string) string {
 			}
 		}
 	}
-	if board == "all" {
+	if board == "all" || board == "b" {
 		return config.Get().DefaultCSS
 	}
 	return config.GetBoardConfigs(board).DefaultCSS

@@ -27,7 +27,7 @@ const (
 	MaxLenAuth         = 50
 	MaxLenPostPassword = 100
 	MaxLenSubject      = 100
-	MaxLenBody         = 2000
+	MaxLenBody         = 16000
 	MaxLinesBody       = 100
 	MaxLenPassword     = 50
 	MaxLenUserID       = 20
@@ -62,7 +62,7 @@ var (
 		"sk_SK",
 		"tr_TR",
 		"uk_UA",
-    "zh_TW",
+		"zh_TW",
 	}
 	Themes = []string{
 		"ashita",

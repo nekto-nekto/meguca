@@ -109,8 +109,13 @@ func createRouter() http.Handler {
 			// Artificially set board to "all"
 			boardHTML(w, r, "all", true)
 		})
+		r.GET("/b/catalog", func(w http.ResponseWriter, r *http.Request) {
+			// Artificially set board to "b"
+			boardHTML(w, r, "b", true)
+		})
 		r.GET("/:board/:thread", threadHTML)
 		r.GET("/all/:id", crossRedirect)
+		r.GET("/b/:id", crossRedirect)
 
 		html := r.NewGroup("/html")
 		html.GET("/board-navigation", boardNavigation)
@@ -123,8 +128,10 @@ func createRouter() http.Handler {
 		html.GET("/set-banners", bannerSettingForm)
 		html.GET("/set-loading", loadingAnimationForm)
 		html.GET("/bans/:board", banList)
+		html.GET("/mod-log/", modLog)
 		html.GET("/mod-log/:board", modLog)
 		html.GET("/report/:id", reportForm)
+		html.GET("/reports/", reportList)
 		html.GET("/reports/:board", reportList)
 
 		// JSON API

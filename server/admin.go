@@ -247,7 +247,7 @@ func createBoard(w http.ResponseWriter, r *http.Request) {
 			// Returns, if the board name, matches a reserved ID
 			func() bool {
 				for _, s := range [...]string{
-					"html", "json", "api", "assets", "all",
+					"html", "json", "api", "assets", "all", "b",
 				} {
 					if msg.ID == s {
 						return true
@@ -776,7 +776,7 @@ func unban(w http.ResponseWriter, r *http.Request) {
 // Serve moderation log for a specific board
 func modLog(w http.ResponseWriter, r *http.Request) {
 	board := extractParam(r, "board")
-	if !auth.IsBoard(board) {
+	if !auth.IsBoard(board) && (board != "all" && board != "") {
 		text404(w)
 		return
 	}

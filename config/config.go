@@ -30,11 +30,25 @@ var (
 			Eightball: EightballDefaults,
 			BoardPublic: BoardPublic{
 				DefaultCSS: Defaults.DefaultCSS,
-				Title:      "Aggregator metaboard",
+				Title:      "🕸",
 				Banners:    []uint16{},
 			},
 		},
 		Hash: "0",
+	}
+	// BestBoardConfigs stores board-specific configurations for the /b/
+	// metaboard. Constant.
+	BestBoardConfigs = BoardConfContainer{
+		BoardConfigs: BoardConfigs{
+			ID:        "b",
+			Eightball: EightballDefaults,
+			BoardPublic: BoardPublic{
+				DefaultCSS: Defaults.DefaultCSS,
+				Title:      "best",
+				Banners:    []uint16{},
+			},
+		},
+		Hash: "1",
 	}
 
 	// JSON of client-accessible configuration
@@ -104,6 +118,10 @@ const defaultFAQ = `Supported upload file types are JPEG, PNG, APNG, WEBM, MP3, 
 func init() {
 	var err error
 	AllBoardConfigs.JSON, err = json.Marshal(AllBoardConfigs.BoardPublic)
+	if err != nil {
+		panic(err)
+	}
+	BestBoardConfigs.JSON, err = json.Marshal(BestBoardConfigs.BoardPublic)
 	if err != nil {
 		panic(err)
 	}
@@ -179,13 +197,17 @@ func GetBoardTitles() BoardTitles {
 	boardMu.RLock()
 	defer boardMu.RUnlock()
 
-	bt := make(BoardTitles, 1, len(boardConfigs)+1)
+	bt := make(BoardTitles, 2, len(boardConfigs)+1)
 	bt[0] = BoardTitle{
 		ID:    AllBoardConfigs.ID,
 		Title: AllBoardConfigs.Title,
 	}
+	bt[1] = BoardTitle{
+		ID:    BestBoardConfigs.ID,
+		Title: BestBoardConfigs.Title,
+	}
 	for id, conf := range boardConfigs {
-		if id == "all" {
+		if id == "all" || id == "b" {
 			continue
 		}
 		bt = append(bt, BoardTitle{
@@ -204,7 +226,7 @@ func GetBoards() []string {
 	defer boardMu.RUnlock()
 	boards := make([]string, 0, len(boardConfigs))
 	for b := range boardConfigs {
-		if b != "all" {
+		if b != "all" && b != "b" {
 			boards = append(boards, b)
 		}
 	}

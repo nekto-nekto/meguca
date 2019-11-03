@@ -3,6 +3,7 @@ package db
 import (
 	"database/sql"
 
+	"github.com/Masterminds/squirrel"
 	"github.com/bakape/meguca/auth"
 	"github.com/bakape/meguca/config"
 	"github.com/go-playground/log"
@@ -31,11 +32,20 @@ func GetReports(board string) (rep []auth.Report, err error) {
 		Board: board,
 	}
 	rep = make([]auth.Report, 0, 64)
-	err = queryAll(
-		sq.Select("id", "target", "reason", "created").
+
+	var query squirrel.SelectBuilder
+	if board == "all" || board == "" {
+		query = sq.Select("id", "target", "reason", "created").
+			From("reports").
+			OrderBy("created desc")
+	} else {
+		query = sq.Select("id", "target", "reason", "created").
 			From("reports").
 			Where("board = ?", board).
-			OrderBy("created desc"),
+			OrderBy("created desc")
+	}
+	err = queryAll(
+		query,
 		func(r *sql.Rows) (err error) {
 			err = r.Scan(&tmp.ID, &tmp.Target, &tmp.Reason, &tmp.Created)
 			if err != nil {

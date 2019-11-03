@@ -141,6 +141,7 @@ type Thread struct {
 	PostCtr, ImageCtr    uint32
 	UpdateTime, BumpTime int64
 	Subject, Board       string
+	//nonLive              bool
 }
 
 // ThreadCounter retrieves the progress counter of a thread
@@ -188,13 +189,14 @@ func WriteThread(t Thread, p Post) (err error) {
 	return InTransaction(false, func(tx *sql.Tx) (err error) {
 		_, err = sq.
 			Insert("threads").
-			Columns("board", "id", "update_time", "bump_time", "subject").
+			Columns("board", "id", "update_time", "bump_time", "subject"/*, "nonLive"*/).
 			Values(
 				t.Board,
 				t.ID,
 				t.UpdateTime,
 				t.BumpTime,
 				t.Subject,
+				//t.nonLive,
 			).
 			RunWith(tx).
 			Exec()
@@ -204,6 +206,20 @@ func WriteThread(t Thread, p Post) (err error) {
 		return WritePost(tx, p)
 	})
 }
+
+func queryThreadBool(id uint64, key string) (val bool, err error) {
+	err = sq.Select(key).
+		From("threads").
+		Where("id = ?", id).
+		QueryRow().
+		Scan(&val)
+	return
+}
+/*
+// CheckThreadNonLive checks, if a thread has live post updates disabled
+func CheckThreadNonLive(id uint64) (bool, error) {
+	return queryThreadBool(id, "nonLive")
+}*/
 
 // CheckThreadLocked checks, if a thread has been locked by a moderator
 func CheckThreadLocked(id uint64) (locked bool, err error) {

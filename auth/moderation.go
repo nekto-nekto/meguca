@@ -46,7 +46,7 @@ func DisconnectByBoardAndIP(ip, board string) {
 		return
 	}
 	var cls []common.Client
-	if board == "all" {
+	if board == "all" || board == "b" {
 		cls = common.GetClientsByIP(ip)
 	} else {
 		cls = common.GetByIPAndBoard(ip, board)

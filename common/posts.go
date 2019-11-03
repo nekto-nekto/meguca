@@ -32,6 +32,7 @@ func (b Board) Less(i, j int) bool {
 type Thread struct {
 	Abbrev     bool   `json:"abbrev"`
 	Sticky     bool   `json:"sticky"`
+ 	//NonLive    bool   `json:"nonLive,omitempty"`
 	Locked     bool   `json:"locked"`
 	PostCount  uint32 `json:"post_count"`
 	ImageCount uint32 `json:"image_count"`

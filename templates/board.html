@@ -25,10 +25,10 @@
 				</a>
 			</span>
 			<form id="new-thread-form" action="/api/create-thread" method="post" enctype="multipart/form-data" class="hidden">
-				{% if id == "all" %}
+				{% if id == "all" || id == "b" %}
 					<select name="board" required>
 						{% for _, b := range config.GetBoardTitles() %}
-							{% if b.ID == "all" %}
+							{% if b.ID == "all" || b.ID == "b" %}
 								{% continue %}
 							{% endif %}
 							<option value="{%s= b.ID %}">
@@ -43,7 +43,16 @@
 				<input name="subject" placeholder="{%s= ln.UI["subject"] %}" required type="text" maxlength="100">
 				<br>
 				{%= noscriptPostCreationFields(pos) %}
-				{% if id == "all" || !conf.TextOnly %}
+
+				{% comment %}
+				{% code nl:= ln.Forms["nonLive"] %}
+				<label title="{%s= nl[1] %}">
+					<input type="checkbox" name="nonLive" {% if conf.NonLive %}checked disabled{% endif %}>
+					{%s= nl[0] %}
+				</label>
+				{% endcomment %}
+
+				{% if id == "all" || id == "b" || !conf.TextOnly %}
 					{%= uploadForm() %}
 				{% endif %}
 				{%= captcha(id) %}

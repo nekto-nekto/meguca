@@ -51,7 +51,7 @@ export default class UploadForm extends View<Post> {
     private audioChunks: any[] = [];
     private recorder: MediaRecorder | null;
 
-    private hiddenInput: HTMLInputElement;
+    public hiddenInput: HTMLInputElement;
 
     private xhr: XMLHttpRequest;
     private bufferedFile: File; // In case we need to resubmit a file

@@ -45,6 +45,7 @@ func listenToThreadDeletion() error {
 		}
 		cache.DeleteByBoard(board)
 		cache.DeleteByBoard("all")
+		cache.DeleteByBoard("b")
 
 		return nil
 	})

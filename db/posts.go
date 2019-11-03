@@ -56,6 +56,14 @@ func AllBoardCounter() (uint64, error) {
 	return getCounter(q)
 }
 
+// BestBoardCounter retrieves the progress counter of the /b/ board
+func BestBoardCounter() (uint64, error) {
+	q := sq.Select("max(update_time) + count(*)").
+		From("threads").
+		Where(bestBoards)
+	return getCounter(q)
+}
+
 // WritePost writes a post struct to the database. Only used in tests and
 // migrations.
 func WritePost(tx *sql.Tx, p Post) (err error) {

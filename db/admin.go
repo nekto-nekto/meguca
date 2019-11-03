@@ -104,8 +104,8 @@ func DeleteImages(ids []uint64, by string) (err error) {
 
 // DeleteBoard deletes a board and all of its contained threads and posts
 func DeleteBoard(board, by string) error {
-	if board == "all" {
-		return common.ErrInvalidInput("can not delete /all/")
+	if board == "all" || board == "b" {
+		return common.ErrInvalidInput("can not delete meta-board")
 	}
 	return InTransaction(false, func(tx *sql.Tx) error {
 		return deleteBoard(tx, board, by,
@@ -308,11 +308,20 @@ func SetThreadLock(id uint64, locked bool, by string) error {
 func GetModLog(board string) (log []auth.ModLogEntry, err error) {
 	log = make([]auth.ModLogEntry, 0, 64)
 	e := auth.ModLogEntry{Board: board}
-	err = queryAll(
-		sq.Select("type", "post_id", "by", "created", "length", "data").
+
+	var query squirrel.SelectBuilder
+	if board == "all" || board == "" {
+		query = sq.Select("type", "post_id", "by", "created", "length", "data").
+			From("mod_log").
+			OrderBy("created desc")
+	} else {
+		query = sq.Select("type", "post_id", "by", "created", "length", "data").
 			From("mod_log").
 			Where("board = ?", board).
-			OrderBy("created desc"),
+			OrderBy("created desc")
+	}
+	err = queryAll(
+		query,
 		func(r *sql.Rows) (err error) {
 			err = r.Scan(&e.Type, &e.ID, &e.By, &e.Created, &e.Length,
 				&e.Data)

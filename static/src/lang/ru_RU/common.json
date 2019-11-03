@@ -1,19 +1,24 @@
 {
 	"format": {
-		"banned": "BANNED BY '%s' FOR %s FOR \"%s\"",
-		"deleted": "DELETED BY '%s'",
-		"imageDeleted": "IMAGE DELETED BY '%s'",
-		"imageSpoilered": "IMAGE SPOILERED BY '%s'",
-		"newPostsInThread": "%d new posts in thread.",
-		"postsAndImagesOmitted": "%d posts(s) and %d image(s) omitted",
-		"postsOmitted": "%d posts(s) omitted",
-		"purgedPost": "POST PURGED BY '%s' FOR \"%s\"",
+		"banned": "ЗАБАНЕН '%s' ДЛЯ %s ДЛЯ \"%s\"",
+		"deleted": "УДАЛЁН '%s'",
+		"imageDeleted": "ИЗОБРАЖЕНИЕ УДАЛЕНО '%s'",
+		"imageSpoilered": "СПОЙЛЕР ИЗОБРАЖЕНИЯ '%s'",
+		"newPostsInThread": "%d новых сообщений в теме.",
+		"postsAndImagesOmitted": "%d сообщение(я) и %d изображение(я) опущено",
+		"postsOmitted": "%d сообщение(я) опущено",
+		"purgedPost": "СООБЩЕНИЕ ОЧИЩЕНО '%s' ДЛЯ \"%s\"",
 		"shadowBinned": "SHADOW BINNED BY '%s' FOR %s FOR \"%s\"",
 		"threadLockToggled": "THREAD %s BY '%s'",
-		"unbanned": "UNBANNED BY '%s'",
-		"viewedSameIP": "POSTS OF THE SAME IP WERE VIEWED BY '%s'"
+		"unbanned": "РАЗБАНЕН '%s'",
+		"viewedSameIP": "СООБЩЕНИЯ ТОГО ЖЕ IP ПРОСМОТРЕНО '%s'"
 	},
-	"forms": {},
+	"forms": {
+		"nonLive": [
+			"Non-live",
+			"Выключить живое обновление текста и изображений открытых сообщений"
+		]
+	}, 
 	"plurals": {
 		"day": [
 			"день",
@@ -45,7 +50,7 @@
 		"ago": "тому",
 		"and": "и",
 		"anon": "Аноним",
-		"contract": "Contract",
+		"contract": "Свернуть",
 		"contractImages": "Свернуть изображения",
 		"deleteBySameIP": "Удалить все с этого IP",
 		"expand": "Развернуть",
@@ -54,7 +59,7 @@
 		"in": "в",
 		"janitors": "Помощник",
 		"justNow": "только что",
-		"locked": "locked",
+		"locked": "заблокировано",
 		"moderators": "Модератор",
 		"omitted": "пропущено",
 		"owners": "Владелец доски",
@@ -62,7 +67,7 @@
 		"show": "Показать",
 		"spoiler": "Спойлер",
 		"toggleSticky": "Прикрепить",
-		"unlocked": "unlocked",
+		"unlocked": "разблокировано",
 		"viewBySameIP": "Тот же IP",
 		"you": "(Вы)"
 	},
@@ -83,7 +88,7 @@
 			"Июн",
 			"Июл",
 			"Авг",
-			"Сеп",
+			"Сен",
 			"Окт",
 			"Ноя",
 			"Дек"
@@ -99,29 +104,29 @@
 		]
 	},
 	"ui": {
-		"bottom": "Низ",
+		"bottom": "Вниз",
 		"cancel": "Отменить",
 		"catalog": "Каталог",
-		"clickToCancel": "Click to cancel",
+		"clickToCancel": "Нажать для отмены",
 		"deleteBoard": "Удалить доску",
 		"done": "Готово",
-		"fileTooLarge": "file too large",
+		"fileTooLarge": "файл слишком большой",
 		"finished": "Завершено",
 		"googleSong": "Нажмите чтобы искать песню",
 		"importCorrupt": "Импорт не удался. Файл повреждён.",
 		"importDone": "Импорт завершён. Страница будет перезагружена.",
 		"invalidCaptcha": "Неверная капча",
 		"keepDeletingFor": "Keep deleting for",
-		"last": "Последний",
-		"lockThread": "Toggle thread lock",
-		"lockedToBottom": "Закрепить внизу",
+		"last": "Последние",
+		"lockThread": "Переключить блокировку треда",
+		"lockedToBottom": "Закреплено внизу",
 		"meidoVisionPost": "Meido vision",
 		"mustMatch": "Пароли должны совпадать",
 		"newThread": "Новый тред",
 		"pointToCatalog": "Перейти к каталогу",
 		"postsImages": "Посты/Картинки/TTL",
 		"quoted": "Вас процитировали",
-		"reason": "Reason",
+		"reason": "Причина",
 		"redirectByIP": "Redirect all by IP",
 		"redirectByThread": "Redirect all by thread",
 		"refresh": "Обновить",
@@ -133,12 +138,12 @@
 		"sessionExpired": "Сессия истекла",
 		"showNotice": "Объявление",
 		"submit": "Отправить",
-		"thumbnailing": "Генерация превью…",
-		"top": "Верх",
+		"thumbnailing": "Генерация миниатюры…",
+		"top": "Вверх",
 		"unfinishedPost": "У вас есть незавершённый пост",
-		"unwatchThread": "Unwatch thread",
-		"uploadFile": "Upload file",
+		"unwatchThread": "Не следить",
+		"uploadFile": "Загрузить файл",
 		"uploadProgress": "загрузка…",
-		"watchThread": "Watch thread"
+		"watchThread": "Следить"
 	}
 }

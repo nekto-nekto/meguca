@@ -173,7 +173,7 @@ func TestGetBoardTitles(t *testing.T) {
 		},
 		{
 			ID:    "all",
-			Title: "Aggregator metaboard",
+			Title: "🕸",
 		},
 		{
 			ID:    "g",
