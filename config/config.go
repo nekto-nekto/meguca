@@ -48,7 +48,7 @@ var (
 				Banners:    []uint16{},
 			},
 		},
-		Hash: "0",
+		Hash: "1",
 	}
 
 	// JSON of client-accessible configuration
@@ -197,7 +197,7 @@ func GetBoardTitles() BoardTitles {
 	boardMu.RLock()
 	defer boardMu.RUnlock()
 
-	bt := make(BoardTitles, 2, len(boardConfigs)+2)
+	bt := make(BoardTitles, 2, len(boardConfigs)+1)
 	bt[0] = BoardTitle{
 		ID:    AllBoardConfigs.ID,
 		Title: AllBoardConfigs.Title,

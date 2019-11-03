@@ -58,6 +58,7 @@ const (
 )
 
 const bestBoards = `board = 'media' OR board = 'life' OR board = 'world' OR board = 'sci' OR board = 'self' OR board = 'meta'`
+const bestTBoards = `t.board = 'media' OR t.board = 'life' OR t.board = 'world' OR t.board = 'sci' OR t.board = 'self' OR t.board = 'meta'`
 
 type imageScanner struct {
 	Audio, Video, Spoiler             sql.NullBool
@@ -346,7 +347,7 @@ func GetAllBoardCatalog() (board common.Board, err error) {
 // GetBestBoardCatalog retrieves all threads for the "/b/" meta-board
 func GetBestBoardCatalog() (board common.Board, err error) {
 	board, err = scanCatalog(getOPs().
-		Where(bestBoards).
+		Where(bestTBoards).
 		OrderBy("bump_time desc"))
 	if err != nil {
 		return
