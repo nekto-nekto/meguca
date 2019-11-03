@@ -27,7 +27,7 @@ generate:
 	go generate ./...
 
 statik:
-	statik -src ./static/src -f
+	statik -src ./static/src -f -dest ./static
 
 server:
 	go build -v
