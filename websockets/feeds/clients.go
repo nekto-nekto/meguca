@@ -1,8 +1,9 @@
 package feeds
 
 import (
-	"github.com/bakape/meguca/common"
 	"sync"
+
+	"github.com/bakape/meguca/common"
 )
 
 var (
@@ -115,7 +116,7 @@ func GetByIPAndBoard(ip, board string) []common.Client {
 
 	cls := make([]common.Client, 0, 16)
 	for cl, sync := range clients.clients {
-		if cl.IP() == ip && (board == "all" || sync.board == board) {
+		if cl.IP() == ip && (board == "all" || board == "b" || sync.board == board) {
 			cls = append(cls, cl)
 		}
 	}

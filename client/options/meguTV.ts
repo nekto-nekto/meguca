@@ -93,7 +93,7 @@ function subscribe() {
 
 export default function () {
 	const el = document.getElementById("megu-tv");
-	if (el || page.board === "all" || !page.thread) {
+	if (el || page.board === "all"|| page.board === "b" || !page.thread) {
 		return;
 	}
 	if (connSM.state === connState.synced) {
@@ -103,7 +103,7 @@ export default function () {
 
 	// Handle toggling of the option
 	options.onChange("meguTV", on => {
-		if (on && page.board !== "all") {
+		if (on && page.board !== "all" && page.board !== "b") {
 			if (!document.getElementById("megu-tv")) {
 				render();
 			}

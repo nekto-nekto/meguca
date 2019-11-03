@@ -57,6 +57,8 @@ const (
 	order by id asc`
 )
 
+const bestBoards = `board = 'media' OR board = 'life' OR board = 'world' OR board = 'sci' OR board = 'self' OR board = 'meta'`
+
 type imageScanner struct {
 	Audio, Video, Spoiler             sql.NullBool
 	FileType, ThumbType, Length, Size sql.NullInt64
@@ -341,10 +343,42 @@ func GetAllBoardCatalog() (board common.Board, err error) {
 	return
 }
 
+// GetBestBoardCatalog retrieves all threads for the "/b/" meta-board
+func GetBestBoardCatalog() (board common.Board, err error) {
+	board, err = scanCatalog(getOPs().
+		Where(bestBoards).
+		OrderBy("bump_time desc"))
+	if err != nil {
+		return
+	}
+
+	// Hide threads from NSFW boards, if enabled
+	if config.Get().HideNSFW {
+		filtered := make([]common.Thread, 0, len(board.Threads))
+		confs := config.GetAllBoardConfigs()
+		for _, t := range board.Threads {
+			if !confs[t.Board].NSFW {
+				filtered = append(filtered, t)
+			}
+		}
+		board.Threads = filtered
+	}
+
+	return
+}
+
 // GetAllThreadsIDs retrieves all threads IDs in bump order
 func GetAllThreadsIDs() ([]uint64, error) {
 	return scanThreadIDs(sq.Select("id").
 		From("threads").
+		OrderBy("bump_time desc"))
+}
+
+// GetBestThreadsIDs retrieves all threads IDs in bump order
+func GetBestThreadsIDs() ([]uint64, error) {
+	return scanThreadIDs(sq.Select("id").
+		From("threads").
+		Where(bestBoards).
 		OrderBy("bump_time desc"))
 }
 

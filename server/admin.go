@@ -247,7 +247,7 @@ func createBoard(w http.ResponseWriter, r *http.Request) {
 			// Returns, if the board name, matches a reserved ID
 			func() bool {
 				for _, s := range [...]string{
-					"html", "json", "api", "assets", "all",
+					"html", "json", "api", "assets", "all", "b",
 				} {
 					if msg.ID == s {
 						return true

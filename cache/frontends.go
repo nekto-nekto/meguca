@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"errors"
+
 	"github.com/bakape/meguca/common"
 	"github.com/bakape/meguca/config"
 	"github.com/bakape/meguca/db"
@@ -42,6 +43,8 @@ var CatalogFE = FrontEnd{
 	GetCounter: func(k Key) (uint64, error) {
 		if k.Board == "all" {
 			return db.AllBoardCounter()
+		} else if k.Board == "b" {
+			return db.BestBoardCounter()
 		}
 		return db.BoardCounter(k.Board)
 	},
@@ -49,6 +52,8 @@ var CatalogFE = FrontEnd{
 	GetFresh: func(k Key) (interface{}, error) {
 		if k.Board == "all" {
 			return db.GetAllBoardCatalog()
+		} else if k.Board == "b" {
+			return db.GetBestBoardCatalog()
 		}
 		return db.GetBoardCatalog(k.Board)
 	},
@@ -65,6 +70,8 @@ var BoardFE = FrontEnd{
 	GetCounter: func(k Key) (uint64, error) {
 		if k.Board == "all" {
 			return db.AllBoardCounter()
+		} else if k.Board == "b" {
+			return db.BestBoardCounter()
 		}
 		return db.BoardCounter(k.Board)
 	},
@@ -79,6 +86,8 @@ var BoardFE = FrontEnd{
 		)
 		if k.Board == "all" {
 			ids, err = db.GetAllThreadsIDs()
+		} else if k.Board == "b" {
+			ids, err = db.GetBestThreadsIDs()
 		} else {
 			ids, err = db.GetThreadIDs(k.Board)
 		}
@@ -118,7 +127,7 @@ var BoardFE = FrontEnd{
 			confs    map[string]config.BoardConfContainer
 			hideNSFW bool
 		)
-		if k.Board == "all" && config.Get().HideNSFW {
+		if (k.Board == "all" || k.Board == "b") && config.Get().HideNSFW {
 			hideNSFW = true
 			confs = config.GetAllBoardConfigs()
 		}

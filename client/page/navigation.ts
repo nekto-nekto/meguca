@@ -20,9 +20,9 @@ class BoardNavigation extends View<null> {
 	public render() {
 		let html = "["
 		const boards = Array.from(selected).sort((a, b) => {
-			if (a == "all") {
+			if (a == "all" || a == "b") {
 				return -1
-			} else if (b == "all") {
+			} else if (b == "all" || b == "b") {
 				return 1
 			}
 			return a > b ? 1 : -1
@@ -208,6 +208,7 @@ export default () => {
 	}
 	if (!selected.size) {
 		selected.add("all")
+		selected.add("b")
 	}
 
 	// Start the module

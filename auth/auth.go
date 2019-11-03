@@ -16,13 +16,13 @@ import (
 
 // IsBoard confirms the string is a valid board
 func IsBoard(board string) bool {
-	return board == "all" || IsNonMetaBoard(board)
+	return board == "all" || board == "b" || IsNonMetaBoard(board)
 }
 
 // IsNonMetaBoard returns whether a valid board is a classic board and not
 // some other path that emulates a board
 func IsNonMetaBoard(b string) bool {
-	return b != "all" && config.IsBoard(b)
+	return b != "all" && b != "b" && config.IsBoard(b)
 }
 
 // GetIP extracts the IP of a request, honouring reverse proxies, if set

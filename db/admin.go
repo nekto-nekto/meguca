@@ -104,8 +104,8 @@ func DeleteImages(ids []uint64, by string) (err error) {
 
 // DeleteBoard deletes a board and all of its contained threads and posts
 func DeleteBoard(board, by string) error {
-	if board == "all" {
-		return common.ErrInvalidInput("can not delete /all/")
+	if board == "all" || board == "b" {
+		return common.ErrInvalidInput("can not delete meta-board")
 	}
 	return InTransaction(false, func(tx *sql.Tx) error {
 		return deleteBoard(tx, board, by,
