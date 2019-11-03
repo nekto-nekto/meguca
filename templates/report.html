@@ -21,6 +21,7 @@ Report submission form
 
 Render list of all reports on board
 {% func ReportList(reports []auth.Report) %}{% stripspace %}
+	{%= htmlHeader() %}
 	{%= tableStyle() %}
 	<table>
 		{%= tableHeaders("id", "post", "reason", "time") %}
@@ -33,4 +34,5 @@ Render list of all reports on board
 			</tr>
 		{% endfor %}
 	</table>
+	{%= htmlEnd() %}
 {% endstripspace %}{% endfunc %}
