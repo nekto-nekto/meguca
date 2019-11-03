@@ -89,7 +89,8 @@ func reportForm(w http.ResponseWriter, r *http.Request) {
 // Render a list of reports for the board
 func reportList(w http.ResponseWriter, r *http.Request) {
 	board := extractParam(r, "board")
-	if !auth.IsNonMetaBoard(board) {
+
+	if !auth.IsNonMetaBoard(board) && (board != "all" && board != "") {
 		text404(w)
 		return
 	}
