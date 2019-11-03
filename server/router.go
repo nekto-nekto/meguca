@@ -128,10 +128,11 @@ func createRouter() http.Handler {
 		html.GET("/set-banners", bannerSettingForm)
 		html.GET("/set-loading", loadingAnimationForm)
 		html.GET("/bans/:board", banList)
+		html.GET("/mod-log/", modLog)
 		html.GET("/mod-log/:board", modLog)
 		html.GET("/report/:id", reportForm)
-		html.GET("/reports/:board", reportList)
 		html.GET("/reports/", reportList)
+		html.GET("/reports/:board", reportList)
 
 		// JSON API
 		json := r.NewGroup("/json")
