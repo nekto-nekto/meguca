@@ -6,7 +6,7 @@ declare
 begin
 	select exists (select 1
 					from staff s
-					where s.board in ('all', assert_can_perform.board)
+					where s.board in ('all', 'b', assert_can_perform.board)
 						and s.position >= assert_can_perform.level
 						and s.account = assert_can_perform.account)
 		into can;
