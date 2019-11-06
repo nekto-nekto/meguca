@@ -1,4 +1,4 @@
-create or replace function bump_thread(op bigint, bump_time bool = false, deleted bool = false, pid bigint)
+create or replace function bump_thread(op bigint, bump_time bool = false, deleted bool = false, pid bigint = 0)
 returns void
 as $$
 declare
