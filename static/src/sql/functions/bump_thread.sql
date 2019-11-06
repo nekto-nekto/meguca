@@ -14,10 +14,10 @@ begin
 		 where id = bump_thread.op;
 	elseif bump_thread.deleted then
 		if bump_thread.pid = bump_thread.op then
-			update threads
+			/*update threads
 			 set bump_time = 0
-			 where id = bump_thread.op;
-		else
+			 where id = bump_thread.op;*/
+		else -- fix necrobump spam
 			select p.time into last_bump_time
 			 from posts p
 			 where p.op = bump_thread.pid
