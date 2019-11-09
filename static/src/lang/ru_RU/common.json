@@ -1,15 +1,15 @@
 {
 	"format": {
-		"banned": "ЗАБАНЕН '%s' ДЛЯ %s ДЛЯ \"%s\"",
+		"banned": "ЗАБАНЕН '%s' НА %s ЗА \"%s\"",
 		"deleted": "УДАЛЁН '%s'",
 		"imageDeleted": "ИЗОБРАЖЕНИЕ УДАЛЕНО '%s'",
 		"imageSpoilered": "СПОЙЛЕР ИЗОБРАЖЕНИЯ '%s'",
 		"newPostsInThread": "%d новых сообщений в теме.",
 		"postsAndImagesOmitted": "%d сообщение(я) и %d изображение(я) опущено",
 		"postsOmitted": "%d сообщение(я) опущено",
-		"purgedPost": "СООБЩЕНИЕ ОЧИЩЕНО '%s' ДЛЯ \"%s\"",
-		"shadowBinned": "SHADOW BINNED BY '%s' FOR %s FOR \"%s\"",
-		"threadLockToggled": "THREAD %s BY '%s'",
+		"purgedPost": "СООБЩЕНИЕ ОЧИЩЕНО '%s' ЗА \"%s\"",
+		"shadowBinned": "ПОСТЕР СКРЫТ '%s' НА %s ЗА \"%s\"",
+		"threadLockToggled": "ТЕМА %s '%s'",
 		"unbanned": "РАЗБАНЕН '%s'",
 		"viewedSameIP": "СООБЩЕНИЯ ТОГО ЖЕ IP ПРОСМОТРЕНО '%s'"
 	},
