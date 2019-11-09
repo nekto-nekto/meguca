@@ -23,9 +23,11 @@ begin
 			 where p.op = bump_thread.pid
 			 and p.moderated = false
 			 order by p.time desc limit 1;
-			update threads
-			 set bump_time = last_bump_time
-			 where id = bump_thread.op;
+			if last_bump_time is not null then
+				update threads
+				 set bump_time = last_bump_time
+				 where id = bump_thread.op;
+			end if;
 		end if;
 	end if;
 end;
