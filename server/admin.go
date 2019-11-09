@@ -470,6 +470,12 @@ func ban(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
+		// temporarily disabled func for non-admin users
+		err = isAdmin(w, r)
+		if err != nil {
+			return
+		}
+
 		var msg banRequest
 		err = decodeJSON(r, &msg)
 		if err != nil {
@@ -619,6 +625,12 @@ func extractID(r *http.Request) (uint64, error) {
 func getSameIPPosts(w http.ResponseWriter, r *http.Request) {
 	err := func() (err error) {
 		id, err := extractID(r)
+		if err != nil {
+			return
+		}
+
+		// temporarily disabled func for non-admin users
+		err = isAdmin(w, r)
 		if err != nil {
 			return
 		}
