@@ -81,6 +81,8 @@ var (
 		"tavern",
 		"tea",
 		"win95",
+		"photon",
+		"photon-new",
 	}
 )
 

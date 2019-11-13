@@ -1,0 +1,189 @@
+@import "common.mix.less";
+
+@body: #EEE;
+@link: #FF6600;
+
+@em: #000;
+@del: #FFF;
+
+@postBG: #DDD;
+@border: 1px solid #ccc;
+@bold: #004a99;
+@admin: #f00000;
+@mod: #9b5cff;
+
+
+article,
+body,
+code.code-tag {
+	color: #333333;
+}
+.name.sage:not(.admin),
+a {
+	color: #FF6600;
+}
+.modal hr {
+	border-top: 1px solid #54578c
+}
+.divide-rows tr:not(:last-child) {
+	border-bottom: 1px solid #54578c
+}
+.divide-rows td {
+	padding: .5em
+}
+#banner {
+	background-color: #EEEEEE;
+	border-bottom: 1px solid #000
+}
+b {
+	color: #000
+}
+b.board {
+	color: #FF6600;
+}
+b.name {
+	color: #004A99;
+	font-weight: 800;
+}
+.admin {
+	color: #d60000
+}
+header>svg {
+	fill: #d60000
+}
+.popup-menu {
+	border: 1px solid #b9d9b7
+}
+article audio::-webkit-media-controls-current-time-display,
+article audio::-webkit-media-controls-time-remaining-display {
+	color: #54578c
+}
+.ms-string,
+em {
+	color: #789922
+}
+del {
+	text-decoration: none
+}
+del,
+del em {
+	background-color: #000
+}
+del.reveal,
+del:hover {
+	color: #fff
+}
+del:not(:hover):not(.reveal),
+del:not(:hover):not(.reveal) a,
+del:not(:hover):not(.reveal) em {
+	color: #000
+}
+.ms-operator {
+	color: #7800b3
+}
+.ms-comment {
+	color: hsla(0, 0%, 4%, .6)
+}
+.ms-function,
+blockquote a {
+	color: #FF6600;
+}
+a:hover {
+	color: #0066FF;
+}
+article,
+aside {
+	background-color: #DDDDDD;
+	border: solid 1px #CCCCCC;
+}
+article article {
+	border: solid 1px #CCCCCC;
+}
+article.highlight:not(.editing),
+article:target {
+	background: #EEDACB;
+	color: #333333;
+	border: 2px dashed #EE6600;
+}
+article.highlight:not(.editing) article,
+article:target article {
+	border: 1px solid #9fbf9d
+}
+article.editing {
+	background-color: #DDDDDD;
+	border-color: #CCCCCC;
+}
+article.editing article {
+	border: 1px solid #dbd1aa
+}
+body {
+	background-color: #EEEEEE;
+	font-family: "Trebuchet MS", Trebuchet, serif;
+}
+h1 {
+	font-size: 30px;
+	letter-spacing: 1px
+}
+h1,
+h2 {
+	color: #FF6600;
+	clear: both;
+	text-align: left;
+	font-size: 2em;
+	font-weight: bold;
+}
+h3 {
+	color: #000
+}
+header nav a {
+	color: #0a0a0a
+}
+hr {
+	border-top: 1px solid #bac9b7
+}
+.popup-menu li:hover {
+	background-color: #f9fcf7
+}
+.modal,
+.popup-menu,
+.preview:not(.editing),
+.side-panel {
+	background: #DDDDDD;
+	border-right: 1px solid #e5e8e2;
+	border-bottom: 1px solid #e5e8e2
+}
+a.tab-sel {
+	color: #ba8d7a
+}
+.omit {
+	color: #666666;
+}
+/*
+#text-input {
+	color: inherit;
+	font-size: inherit;
+	border: 2px inset;
+	padding: 0;
+	background-color: #FFF;
+	outline: none;
+	width: 100%;
+	max-height: 85vh;
+	max-width: 100%;
+	resize: both;
+	overflow: hidden;
+	word-break: break-word;
+	word-wrap: break-word;
+}
+*/
+.fileinfo,
+.fileinfo+a {
+	font-size: 8pt;
+}
+a {
+	text-decoration: underline !important;
+}
+a.quote {
+	text-decoration: none !important;
+}
+
+
