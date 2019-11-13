@@ -128,3 +128,17 @@ a.tab-sel {
 .post-collection article {
 	border: 1px solid fade(@link, 10%);
 }
+
+
+/* временный костыль */
+#threads:not(.custom-BG) section > article.editing:not(:first-child) {
+	background-color: #393d46;
+	border-color: #ff9336;
+	border-style: dashed;
+	color: #c5c8c6;
+}
+
+#threads:not(.custom-BG) section>article.editing:not(:first-child)>.backlinks>a, #threads:not(.custom-BG) section>article.editing:not(:first-child)>.backlinks>em>a, #threads:not(.custom-BG) section>article.editing:not(:first-child)>.post-container>blockquote>a, #threads:not(.custom-BG) section>article.editing:not(:first-child)>.post-container>blockquote>em>a, #threads:not(.custom-BG) section>article.editing:not(:first-child)>figcaption a, #threads:not(.custom-BG) section>article.editing:not(:first-child)>figcaption b:not(.admin):not(.sage), #threads:not(.custom-BG) section>article.editing:not(:first-child)>header a, #threads:not(.custom-BG) section>article.editing:not(:first-child)>header b:not(.admin):not(.sage) {
+	color: #c5c8c6;
+}
+
