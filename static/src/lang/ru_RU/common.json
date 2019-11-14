@@ -1,17 +1,17 @@
 {
 	"format": {
-		"banned": "ЗАБАНЕН '%s' НА %s ЗА \"%s\"",
-		"deleted": "УДАЛЁН '%s'",
-		"imageDeleted": "ИЗОБРАЖЕНИЕ УДАЛЕНО '%s'",
-		"imageSpoilered": "СПОЙЛЕР ИЗОБРАЖЕНИЯ '%s'",
+		"banned": "Забанен '%s' НА %s ЗА \"%s\"",
+		"deleted": "Удалён '%s'",
+		"imageDeleted": "Изображение удалено '%s'",
+		"imageSpoilered": "Спойлер изображения '%s'",
 		"newPostsInThread": "%d новых сообщений в теме.",
 		"postsAndImagesOmitted": "%d сообщение(я) и %d изображение(я) опущено",
 		"postsOmitted": "%d сообщение(я) опущено",
-		"purgedPost": "СООБЩЕНИЕ ОЧИЩЕНО '%s' ЗА \"%s\"",
-		"shadowBinned": "ПОСТЕР СКРЫТ '%s' НА %s ЗА \"%s\"",
-		"threadLockToggled": "ТЕМА %s '%s'",
-		"unbanned": "РАЗБАНЕН '%s'",
-		"viewedSameIP": "СООБЩЕНИЯ ТОГО ЖЕ IP ПРОСМОТРЕНО '%s'"
+		"purgedPost": "Сообщение очищено '%s' ЗА \"%s\"",
+		"shadowBinned": "Постер скрыт '%s' НА %s ЗА \"%s\"",
+		"threadLockToggled": "Тема %s '%s'",
+		"unbanned": "Разбанен '%s'",
+		"viewedSameIP": "Сообщения того же IP просмотрены '%s'"
 	},
 	"forms": {
 		"nonLive": [
@@ -59,7 +59,7 @@
 		"in": "в",
 		"janitors": "Помощник",
 		"justNow": "только что",
-		"locked": "заблокировано",
+		"locked": "заблокирована",
 		"moderators": "Модератор",
 		"omitted": "пропущено",
 		"owners": "Владелец доски",
@@ -67,7 +67,7 @@
 		"show": "Показать",
 		"spoiler": "Спойлер",
 		"toggleSticky": "Прикрепить",
-		"unlocked": "разблокировано",
+		"unlocked": "разблокирована",
 		"viewBySameIP": "Тот же IP",
 		"you": "(Вы)"
 	},
