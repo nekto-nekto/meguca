@@ -134,6 +134,11 @@ func InsertPost(tx *sql.Tx, p *Post) (err error) {
 		args = append(args, p.ID)
 	}
 
+	err = writeLinks(tx, p.ID, p.Links)
+	if err != nil {
+		return
+	}
+
 	err = q.
 		Values(args...).
 		Suffix("returning id, time, moderated").
