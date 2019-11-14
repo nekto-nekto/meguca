@@ -25,7 +25,7 @@ var (
 	lastSolvedCaptchaRetention = time.Hour * 3
 
 	// Limit of allowed incorrect captchas per hour
-	incorrectCaptchaLimit = 10
+	incorrectCaptchaLimit = 30
 )
 
 type sessionData struct {
