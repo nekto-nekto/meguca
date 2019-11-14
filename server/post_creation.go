@@ -30,8 +30,8 @@ func createThread(w http.ResponseWriter, r *http.Request) {
 		// Map form data to websocket thread creation request
 		f := r.Form
 		req := websockets.ThreadCreationRequest{
-			Subject:              f.Get("subject"),
-			Board:                f.Get("board"),
+			Subject: f.Get("subject"),
+			Board:   f.Get("board"),
 			//NonLive:              f.Get("nonLive") == "on",
 			ReplyCreationRequest: repReq,
 		}
@@ -174,7 +174,7 @@ func createReply(w http.ResponseWriter, r *http.Request) {
 
 		feeds.InsertPostInto(post.StandalonePost, msg)
 		http.Redirect(w, r,
-			fmt.Sprintf(`/%s/%d?last100=true#bottom`, board, op), 303)
+			fmt.Sprintf(`/%s/%d?last=100#bottom`, board, op), 303)
 		incrementSpamscore(ip, req.Body, session, false)
 
 		return
