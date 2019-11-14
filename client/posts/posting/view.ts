@@ -34,7 +34,7 @@ export default class FormView extends PostView {
             id: "text-input",
             name: "body",
             rows: "1",
-            maxlength: "16000",
+            maxlength: "64000",
         })
         this.el.append(importTemplate("post-controls"))
         this.resizeInput()

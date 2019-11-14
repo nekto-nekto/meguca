@@ -27,7 +27,7 @@ const (
 	MaxLenAuth         = 50
 	MaxLenPostPassword = 100
 	MaxLenSubject      = 100
-	MaxLenBody         = 16000
+	MaxLenBody         = 64000
 	MaxLinesBody       = 300
 	MaxLenPassword     = 50
 	MaxLenUserID       = 20

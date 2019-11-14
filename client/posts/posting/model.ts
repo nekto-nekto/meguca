@@ -106,9 +106,9 @@ export default class FormModel extends Post {
 
 	// Trim input string, if it has too many lines
 	private trimInput(val: string, write: boolean): string {
-		if (val.length > 16000) {
-			const extra = val.length - 16000;
-			val = val.slice(0, 16000)
+		if (val.length > 64000) {
+			const extra = val.length - 64000;
+			val = val.slice(0, 64000)
 			if (write) {
 				this.view.trimInput(extra);
 			}
@@ -240,9 +240,9 @@ export default class FormModel extends Post {
 			return
 		}
 
-		if (p.body.length > 16000) {
+		if (p.body.length > 64000) {
 			p.body = this.trimInput(p.body, false);
-			p.pos = 16000;
+			p.pos = 64000;
 		} else if (start != end) {
 			p.body = old.slice(0, start) + p.body + old.slice(end)
 			p.pos -= (end - start)
