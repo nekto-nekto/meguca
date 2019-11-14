@@ -417,8 +417,8 @@
 			"Фоновое изображение"
 		],
 		"watchThreadsOnReply": [
-			"Watch threads on reply",
-			"Automatically add thread to watched threads on reply"
+			"Следить за тредом при ответе",
+			"Автоматически добавить тред в наблюдаемые треды после ответа"
 		],
 		"webmHover": [
 			"Раскрытие WebM по наведению",
