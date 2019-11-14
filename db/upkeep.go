@@ -98,7 +98,7 @@ func removeIdentityInfo() error {
 		Set("ip", nil).
 		Set("password", nil).
 		Where(`time < extract(epoch from now() at time zone 'utc'
-			- interval '7 days')`).
+			- interval '1 days')`).
 		Where("ip is not null").
 		Exec()
 	return err
