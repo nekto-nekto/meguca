@@ -209,6 +209,13 @@ export default () => {
 	if (!selected.size) {
 		selected.add("all")
 		selected.add("b")
+		selected.add("media")
+		selected.add("life")
+		selected.add("world")
+		selected.add("sci")
+		selected.add("self")
+		selected.add("meta")
+		selected.add("int")
 	}
 
 	// Start the module
