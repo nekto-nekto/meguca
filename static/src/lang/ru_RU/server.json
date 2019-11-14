@@ -29,7 +29,7 @@
 			"Анимированные GIF-превью"
 		],
 		"bgMute": [
-			"Mute Background Video",
+			"Заглушить фоновое видео",
 			"Mute the background video"
 		],
 		"bgVideo": [
@@ -297,7 +297,7 @@
 			""
 		],
 		"overrideCaptchaTags": [
-			"Override Captcha Tags",
+			"Переопредилить метки капчи",
 			"Mapping of boards to tags to use as the solution on the specified board."
 		],
 		"owners": [
@@ -329,8 +329,8 @@
 			"Don't ask"
 		],
 		"rbText": [
-			"Red/Blue Text",
-			"Display red and blue text if formatted with '^r' or '^b'"
+			"Красный/синий текст",
+			"Отображать красный/синий текст при '^r' или '^b'"
 		],
 		"readOnly": [
 			"Только чтение",
@@ -437,8 +437,8 @@
 			"Скрыть изображения и пользовательский фон"
 		],
 		"yandex": [
-			"Yandex",
-			"Yandex image search"
+			"Яндекс",
+			"Поиск картинок через Яндекс"
 		]
 	},
 	"options": {
@@ -462,7 +462,7 @@
 	],
 	"templates": {
 		"banPage": [
-			"Вы были забанены на /%s/ модератором %s по причине:",
+			"Вы были забанены на /%s/ модератором %s за:",
 			"Ваш бан истечёт %s или в %s.",
 			"Ваш IP — %s."
 		]
@@ -507,14 +507,14 @@
 		"purgePost": "Очищение поста/изображения",
 		"searchTooltip": "Фильтровать треды по теме, содержанию и имени доски (обрамлённую бэкслэшами), допустимы регулярные выражения",
 		"setBanners": "Добавить баннеры",
-		"setLoading": "Set loading animation",
+		"setLoading": "Установить анимацию загрузки",
 		"shadow": "shadow",
 		"shadowBin": "Shadow bin",
 		"sortMode": "Сортировать треды по",
 		"spoilerImage": "Спойлер для изображения",
 		"subject": "Тема",
 		"sync": "Статус соединения",
-		"syncCount": "Unique connected active/total IP count",
+		"syncCount": "Уникальных активных подключений/всего IP",
 		"text": "Текст",
 		"time": "Время",
 		"type": "Тип",
