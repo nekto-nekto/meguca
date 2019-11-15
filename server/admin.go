@@ -470,12 +470,6 @@ func ban(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		// temporarily disabled func for non-admin users
-		err = isAdmin(w, r)
-		if err != nil {
-			return
-		}
-
 		var msg banRequest
 		err = decodeJSON(r, &msg)
 		if err != nil {
@@ -532,8 +526,11 @@ func ban(w http.ResponseWriter, r *http.Request) {
 
 		// Apply bans
 		for _, id := range msg.IDs {
-			err = db.Ban(board, msg.Reason, creds.UserID,
-				time.Minute*time.Duration(msg.Duration), id)
+			//err = db.Ban(board, msg.Reason, creds.UserID,
+			//	time.Minute*time.Duration(msg.Duration), id)
+			err = db.DeletePostsByIP(id, creds.UserID,
+				time.Duration(msg.Duration)*time.Minute, msg.Reason)
+
 			if err != nil {
 				return
 			}
