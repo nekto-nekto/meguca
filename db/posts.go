@@ -100,6 +100,10 @@ func WritePost(tx *sql.Tx, p Post) (err error) {
 	if err != nil {
 		return
 	}
+	err = writeLinks(tx, p.ID, p.Links)
+	if err != nil {
+		return
+	}
 
 	if p.Editing {
 		err = SetOpenBody(p.ID, []byte(p.Body))
@@ -128,11 +132,6 @@ func InsertPost(tx *sql.Tx, p *Post) (err error) {
 	if p.ID != 0 { // OP of a thread
 		q = q.Columns("id")
 		args = append(args, p.ID)
-	}
-
-	err = writeLinks(tx, p.ID, p.Links)
-	if err != nil {
-		return
 	}
 
 	err = q.
