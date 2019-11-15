@@ -6,6 +6,10 @@
 {% import "github.com/bakape/meguca/imager/assets" %}
 {% import ass "github.com/bakape/meguca/assets" %}
 
+{% func renderOption(id string, title string) %}
+	{%s= fmt.Sprintf("<option value=\"%[1]s\">%[2]s</option>", id, formatTitle(id, title)) %}
+{% endfunc %}
+
 {% func renderBoard(threadHTML []byte, id, title string, conf config.BoardConfContainer, page, total int, pos common.ModerationLevel, catalog bool) %}{% stripspace %}
 	{% code ln := lang.Get() %}
 	{% code bannerID, mime, ok := ass.Banners.Random(conf.ID) %}
@@ -25,16 +29,56 @@
 				</a>
 			</span>
 			<form id="new-thread-form" action="/api/create-thread" method="post" enctype="multipart/form-data" class="hidden">
-				{% if id == "all" || id == "b" %}
+				{% code
+					nonOffBoards := ""
+					bestBoard := ""
+					bestBoardsCheck := map[string]bool{
+						//"int": true,
+						"life": true,
+						"media": true,
+						"meta": true,
+						"sci": true,
+						"self": true,
+						"world": true,
+					}
+				%}
+				{% if id == "all" %}
 					<select name="board" required>
 						{% for _, b := range config.GetBoardTitles() %}
 							{% if b.ID == "all" || b.ID == "b" %}
 								{% continue %}
 							{% endif %}
-							<option value="{%s= b.ID %}">
-								{%= formatTitle(b.ID, b.Title) %}
-							</option>
+							{% if b.ID == "0" %}{% comment %}decision by ultrasemen{% endcomment %}
+								{% code
+									bestBoard += renderOption(b.ID, b.Title)
+								%}
+							{% elseif bestBoardsCheck[b.ID] == true %}
+								{% code
+									bestBoard += renderOption(b.ID, b.Title)
+								%}
+							{% else %}
+								{% code
+									nonOffBoards += renderOption(b.ID, b.Title)
+								%}
+							{% endif %}
 						{% endfor %}
+						{%s= bestBoard + nonOffBoards %}
+					</select>
+					<br>
+				{% elseif id == "b" %}
+					<select name="board" required>
+						<option value=""></option>
+						{% for _, b := range config.GetBoardTitles() %}
+							{% if b.ID == "all" || b.ID == "b" %}
+								{% continue %}
+							{% endif %}
+							{% if bestBoardsCheck[b.ID] == true %}
+								{% code
+									bestBoard += renderOption(b.ID, b.Title)
+								%}
+							{% endif %}
+						{% endfor %}
+						{%s= bestBoard %}
 					</select>
 					<br>
 				{% else %}
