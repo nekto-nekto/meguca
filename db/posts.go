@@ -143,6 +143,10 @@ func InsertPost(tx *sql.Tx, p *Post) (err error) {
 	if err != nil {
 		return
 	}
+	err = writeLinks(tx, p.ID, p.Links)
+	if err != nil {
+		return
+	}
 
 	if p.Moderated {
 		// Read moderation log, if post deleted on insert
