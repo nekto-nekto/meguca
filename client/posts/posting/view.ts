@@ -134,11 +134,11 @@ export default class FormView extends PostView {
             s = el.style
         s.width = "0px"
         s.height = "0px"
-        el.wrap = "off"
+        //el.wrap = "off"
         // Make the line slightly larger, so there is enough space for the next
         // character. This prevents wrapping on type.
         s.width = Math.max(260, el.scrollWidth + 5) + "px"
-        el.wrap = "soft"
+        //el.wrap = "soft"
         s.height = Math.max(16, el.scrollHeight) + "px"
     }
 
