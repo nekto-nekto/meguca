@@ -41,15 +41,16 @@ article.highlight, article:target, .popup-menu {
 }
 
 .editing-mixin() {
-	background-color: #cec952;
-	border-color: #aa3;
-	color: black;
+	background-color: #393d46;
+	border-color: #ff9336;
+	border-style: dashed;
+	color: #c5c8c6;
 	.red {
 		color: #9a0000;
 	}
 	.blue {
 		color: #1048ff;
-	}
+	}/*
 	& > header, & > figcaption {
 		a, b:not(.admin):not(.sage) {
 			color: #222;
@@ -62,7 +63,7 @@ article.highlight, article:target, .popup-menu {
 		& > em {
 			color: #656d28;
 		}
-	}
+	}*/
 	code.code-tag {
 		background: #222;
 	}
@@ -130,15 +131,22 @@ a.tab-sel {
 }
 
 
-/* временный костыль */
+/* временный костыль
 #threads:not(.custom-BG) section > article.editing:not(:first-child) {
 	background-color: #393d46;
 	border-color: #ff9336;
 	border-style: dashed;
 	color: #c5c8c6;
-}
+} */
 
-#threads:not(.custom-BG) section>article.editing:not(:first-child)>.backlinks>a, #threads:not(.custom-BG) section>article.editing:not(:first-child)>.backlinks>em>a, #threads:not(.custom-BG) section>article.editing:not(:first-child)>.post-container>blockquote>a, #threads:not(.custom-BG) section>article.editing:not(:first-child)>.post-container>blockquote>em>a, #threads:not(.custom-BG) section>article.editing:not(:first-child)>figcaption a, #threads:not(.custom-BG) section>article.editing:not(:first-child)>figcaption b:not(.admin):not(.sage), #threads:not(.custom-BG) section>article.editing:not(:first-child)>header a, #threads:not(.custom-BG) section>article.editing:not(:first-child)>header b:not(.admin):not(.sage) {
+#threads:not(.custom-BG) section>article.editing:not(:first-child)>.backlinks>a,
+#threads:not(.custom-BG) section>article.editing:not(:first-child)>.backlinks>em>a,
+#threads:not(.custom-BG) section>article.editing:not(:first-child)>.post-container>blockquote>a,
+#threads:not(.custom-BG) section>article.editing:not(:first-child)>.post-container>blockquote>em>a,
+#threads:not(.custom-BG) section>article.editing:not(:first-child)>figcaption a,
+#threads:not(.custom-BG) section>article.editing:not(:first-child)>figcaption b:not(.admin):not(.sage),
+#threads:not(.custom-BG) section>article.editing:not(:first-child)>header a,
+#threads:not(.custom-BG) section>article.editing:not(:first-child)>header b:not(.admin):not(.sage) {
 	color: #c5c8c6;
 }
 
