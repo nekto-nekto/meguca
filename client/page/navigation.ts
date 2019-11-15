@@ -18,7 +18,16 @@ class BoardNavigation extends View<null> {
 	}
 
 	public render() {
-		let html = "["
+		let mobile = false;
+
+		if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) { 
+			mobile = true;
+		}
+
+		let html = "";
+		if (!mobile) {
+			html = "["
+		}
 		const boards = Array.from(selected).sort((a, b) => {
 			if (a == "all" || a == "b") {
 				return -1
@@ -29,6 +38,7 @@ class BoardNavigation extends View<null> {
 		})
 		const catalog = pointToCatalog() ? "catalog" : ""
 		for (let i = 0; i < boards.length; i++) {
+			if (!mobile) {
 			if (i !== 0) {
 				html += " / "
 			}
@@ -36,9 +46,14 @@ class BoardNavigation extends View<null> {
 				`<a href="../${boards[i]}/${catalog}">
 					${boards[i]}
 				</a>`
+			}
+		}
+		if (!mobile) {
+			html += HTML
+			`] `
 		}
 		html += HTML
-			`] [
+			`[
 			<a class="board-selection bold mono">
 				+
 			</a>

@@ -15,6 +15,11 @@ for (let el of document.head.querySelectorAll("template")) {
     templates[el.getAttribute("name")] = (el as HTMLTemplateElement).content
 }
 
+// Mobile hacks
+if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) { document.body.classList.add("mobile"); };
+
+
+
 // Toggle an optional style element in the head
 export function toggleHeadStyle(
     name: string,

@@ -304,7 +304,7 @@ td {
 
 /* временный костыль */
 #banner {
-	height: 2.3em;
+	height: 2.5em;
 }
 /*
 .banner-float svg {
@@ -343,4 +343,71 @@ hr {
 header .mod-checkbox { float: left; }
 
 #sync { font-size: 12px; }
+
+
+
+#banner > span {
+	margin: 5px 10px;
+}
+
+
+
+/* hacks */
+.snowflakes, 
+#user-background, 
+#overlay-container { transform: translateZ(0); }
+.snowflakes_body { pointer-events: none; } 
+figcaption.spaced { overflow: auto; display: inline-block; } 
+.upload-container > span { display: inline-block; } 
+.upload-container > input { margin-bottom: 10px; } 
+#post-controls > input { margin-bottom: 10px; margin-right: 10px; } 
+.reply-form { z-index: 300 !important; }
+#text-input { overflow: auto !important; max-height: 78vh !important; } 
+.mainLink { font-size: 20px; margin: 5px 0px 0px 0px; }
+@keyframes zoom {
+0% {transform: scale(1,1);} 
+50% {transform: scale(1.2,1.2);}
+100% {transform: scale(1,1);}
+}
+.likes { display:inline; }
+.likes button { border:0; background:none; text-shadow:0px 0px 3px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; }
+.likes button:active { top:1px; left:2px; color:#FFF; position:relative; }
+.likes button span { border-radius:5px; padding:0 3px; text-shadow:1px 1px 3px #000,1px 1px 3px #000,1px 1px 3px #000; }
+.likes button.like span { border:1px solid #358e00; background:#196900; color:#60ff00; }
+.likes button.dislike span { border:1px solid #8c5902; background:#693b00; color:#ffa700; }
+.like { color:#60ff00 }
+.dislike { color:#ffa700 }
+.likes > button:active { animation: zoom 0.1s forwards; }
+.likes > button:active span { font-size: 16px; }
+
+
+
+/* mobile fixs */
+#board-navigation {
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+figcaption.spaced > a[download] {
+    word-break: break-all;
+}
+
+/*.mobile #text-input { max-height: 46vh !important; }*/
+.mobile .index-thread,
+.mobile article { display:block; }
+.mobile #threads { padding: 0 !important; }
+
+.mobile .reply-form:not(.preview) {position: relative; margin: 1em 0;}
+.mobile .overlay-container { position: relative; }
+
+.mobile article,
+.mobile aside {
+	margin: 0px;
+}
+
+@media (pointer: coarse) {
+	.mobile #banner,
+	.mobile #banner a {
+			font-size: 100%;
+	}
+}
 
