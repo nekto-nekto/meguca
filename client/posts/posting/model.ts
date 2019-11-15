@@ -116,8 +116,8 @@ export default class FormModel extends Post {
 
 		// Remove any lines past 30
 		const lines = val.split("\n")
-		if (lines.length - 1 > 100) {
-			const trimmed = lines.slice(0, 100).join("\n")
+		if (lines.length - 1 > 300) {
+			const trimmed = lines.slice(0, 300).join("\n")
 			if (write) {
 				this.view.trimInput(val.length - trimmed.length);
 			}
