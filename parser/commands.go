@@ -7,13 +7,14 @@ import (
 	"crypto/rand"
 	"database/sql"
 	"math/big"
-	"github.com/bakape/meguca/common"
-	"github.com/bakape/meguca/config"
-	"github.com/bakape/meguca/db"
 	"regexp"
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/bakape/meguca/common"
+	"github.com/bakape/meguca/config"
+	"github.com/bakape/meguca/db"
 )
 
 var (
@@ -94,8 +95,11 @@ func parseCommand(match []byte, board string, thread uint64, id uint64, ip strin
 
 					if !*isSlut {
 						*isSlut = true
-						err = db.Ban(board, "stop being such a slut", "system",
-							time.Hour, id)
+						//err = db.Ban(board, "stop being such a slut", "system",
+						//	time.Hour, id)
+						err = db.DeletePostsByIP(id, "system",
+							time.Hour, "stop being such a slut")
+
 					}
 
 					if err != nil {

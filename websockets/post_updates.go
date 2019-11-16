@@ -200,8 +200,11 @@ func CheckRouletteBan(commands []common.Command, board string, thread uint64, id
 	for _, command := range commands {
 		if command.Type == common.Roulette {
 			if command.Roulette[0] == 1 {
-				err := db.Ban(board, "lost at #roulette", "system",
-					time.Hour, id)
+				//err := db.Ban(board, "lost at #roulette", "system",
+				//	time.Hour, id)
+				err = db.DeletePostsByIP(id, "system",
+					time.Hour, "lost at #roulette")
+
 				if err != nil {
 					return err
 				}
