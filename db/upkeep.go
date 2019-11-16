@@ -104,7 +104,7 @@ func removeIdentityInfo() error {
 	return err
 }
 
-// Close any open posts that have not been closed for 30 minutes
+// Close any open posts that have not been closed for 60 minutes
 func closeDanglingPosts() error {
 	type post struct {
 		id, op uint64
@@ -119,7 +119,7 @@ func closeDanglingPosts() error {
 		sq.Select("id", "op", "board", "ip").
 			From("posts").
 			Where(`editing = true and time
-				< floor(extract(epoch from now() at time zone 'utc')) - 900`),
+				< floor(extract(epoch from now() at time zone 'utc')) - 3600`),
 		func(r *sql.Rows) (err error) {
 			err = r.Scan(&p.id, &p.op, &p.board, &p.ip)
 			if err != nil {
