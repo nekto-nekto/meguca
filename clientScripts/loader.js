@@ -1,49 +1,5 @@
 // Selects and loads the client files and polyfills, if any. Use only ES5.
 
-Document.prototype.append || (function (arr) { // Source: https://github.com/jserz/js_piece/blob/master/DOM/ParentNode/append()/append().md
-	arr.forEach(function (item) {
-		if (item.hasOwnProperty('append')) {
-			return;
-		}
-		Object.defineProperty(item, 'append', {
-			configurable: true,
-			enumerable: true,
-			writable: true,
-			value: function append() {
-				var argArr = Array.prototype.slice.call(arguments),
-				docFrag = document.createDocumentFragment();
-				argArr.forEach(function (argItem) {
-					var isNode = argItem instanceof Node;
-					docFrag.appendChild(isNode ? argItem : document.createTextNode(String(argItem)));
-				});
-				this.appendChild(docFrag);
-			}
-		});
-	});
-})([Element.prototype, Document.prototype, DocumentFragment.prototype]);
-Document.prototype.prepend || (function (arr) { // Source: https://github.com/jserz/js_piece/blob/master/DOM/ParentNode/prepend()/prepend().md
-	arr.forEach(function (item) {
-		if (item.hasOwnProperty('prepend')) {
-			return;
-		}
-		Object.defineProperty(item, 'prepend', {
-			configurable: true,
-			enumerable: true,
-			writable: true,
-			value: function prepend() {
-				var argArr = Array.prototype.slice.call(arguments),
-				docFrag = document.createDocumentFragment();
-				argArr.forEach(function (argItem) {
-					var isNode = argItem instanceof Node;
-					docFrag.appendChild(isNode ? argItem : document.createTextNode(String(argItem)));
-				});
-				this.insertBefore(docFrag, this.firstChild);
-			}
-		});
-	});
-})([Element.prototype, Document.prototype, DocumentFragment.prototype]);
-
-
 (function () {
 	// Check if the client is an automated crawler
 	var isBot,
@@ -215,6 +171,9 @@ Document.prototype.prepend || (function (arr) { // Source: https://github.com/js
 		// 		document.head.appendChild(script);
 		// 	});
 		// } else {
+
+		Document.prototype.append || loadScript("js/scripts/polyfil-append-prepend");
+
 		loadScript("js/main").onload = function () {
 			require("main");
 		};
