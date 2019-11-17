@@ -206,9 +206,11 @@ export const specs: { [id: string]: OptionSpec } = {
 		exec: toggleImageSearch("google"),
 	},
 	yandex: {
+		default: true,
 		exec: toggleImageSearch("yandex"),
 	},
 	iqdb: {
+		default: true,
 		exec: toggleImageSearch("iqdb"),
 	},
 	saucenao: {
@@ -216,12 +218,15 @@ export const specs: { [id: string]: OptionSpec } = {
 		exec: toggleImageSearch("saucenao"),
 	},
 	whatAnime: {
+		default: true,
 		exec: toggleImageSearch("whatAnime"),
 	},
 	desustorage: {
+		default: true,
 		exec: toggleImageSearch("desustorage"),
 	},
 	exhentai: {
+		default: true,
 		exec: toggleImageSearch("exhentai"),
 	},
 	// Shortcut keys
