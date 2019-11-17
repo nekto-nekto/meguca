@@ -81,7 +81,10 @@ class CaptchaForm extends FormView {
 
 		const res = await fetch(`/api/captcha/${page.board}`, {
 			body: this.query(body),
-			method: "POST"
+			method: "POST",
+			headers: {
+				"Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+			},
 		});
 		const t = await res.text();
 		switch (res.status) {

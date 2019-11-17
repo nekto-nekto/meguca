@@ -173,6 +173,7 @@
 		// } else {
 
 		Document.prototype.append || loadScript("js/scripts/polyfil-append-prepend");
+		new URLSearchParams({q: "+"}).get('q') === "+" || loadScript("js/scripts/polyfil-url-search-params");
 
 		loadScript("js/main").onload = function () {
 			require("main");
