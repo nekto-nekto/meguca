@@ -29,7 +29,7 @@ enum provider { YouTube, SoundCloud, Vimeo, Coub, BitChute, Invidious }
 const patterns: [provider, RegExp][] = [
 	[
 		provider.YouTube,
-		/https?:\/\/(?:[^\.]+\.)?(?:youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/watch\?v=)[a-zA-Z0-9_-]+/,
+		/https?:\/\/(?:[^\.]+\.)?(?:youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/watch\?v=)([a-zA-Z0-9_-]+)/,
 	],
 	[
 		provider.SoundCloud,
@@ -54,7 +54,7 @@ const patterns: [provider, RegExp][] = [
 ]
 
 // Map of providers to formatter functions
-const formatters: { [key: number]: (s: string) => string } = {}
+const formatters: { [key: number]: (s: string, eid: string) => string } = {}
 
 // Map of providers to information fetcher functions
 const fetchers: { [key: number]: (el: Element) => Promise<any> } = {}
@@ -85,14 +85,17 @@ for (let p of [
 }
 
 // formatter for the noembed.com meta-provider, YouTube or BitChute
-function formatProvider(type: provider): (s: string) => string {
-	return (href: string) => {
+function formatProvider(type: provider): (s: string, eid: string) => string {
+	return (href: string, eid: string) => {
 		const attrs = {
 			rel: "noreferrer",
 			href: escape(href),
 			class: "embed",
 			target: "_blank",
 			"data-type": type.toString(),
+		}
+		if (type === provider.YouTube) {
+			return `<em><a ${makeAttrs(attrs)}>[${provider[type]}] ???<img class="thumb youtube" src="/assets/images/preview/${eid}.jpg" onerror="this.src='/assets/images/preview/hddefault.jpeg'" /></a></em>`
 		}
 		return `<em><a ${makeAttrs(attrs)}>[${provider[type]}] ???</a></em>`
 	}
@@ -189,7 +192,7 @@ function fetchNoEmbed(
 	type: provider,
 ): (el: Element) => Promise<OEmbedDoc | null> {
 	return async (el: Element) => {
-		const url = "https://noembed.com/embed?url=" + el.getAttribute("href"),
+		const url = "https://noembed.com/embed?url=" + el.getAttribute("href") + "&autoplay=1",
 			[data, err] = await fetchJSON<OEmbedDoc>(url)
 
 		if (err) {
@@ -211,7 +214,11 @@ function fetchNoEmbed(
 }
 
 function setNoembedData(el: Element, type: provider, data: OEmbedDoc) {
-	el.textContent = format(data.title, type);
+	for (let i = 0; i < el.childNodes.length; i++) {
+		if (el.childNodes[i].nodeName == "#text") {
+			el.childNodes[i].nodeValue = format(data.title, type);
+		}
+	}
 	el.setAttribute("data-html", encodeURIComponent(data.html.trim()));
 }
 
@@ -224,7 +231,13 @@ function format(s: string, type: provider): string {
 export function parseEmbeds(s: string): string {
 	for (let [type, patt] of patterns) {
 		if (patt.test(s)) {
-			return formatters[type](s)
+			if (type === provider.YouTube) {
+				let eid = s.match(patt)[1];
+				return formatters[type](s, eid)
+			} else {
+				return formatters[type](s, "")
+			}
+
 		}
 	}
 	return ""
@@ -232,7 +245,13 @@ export function parseEmbeds(s: string): string {
 
 // Fetch and render any metadata int the embed on mouseover
 function fetchMeta(e: MouseEvent) {
-	const el = e.target as Element
+	let el = e.target as Element
+
+	// if img
+	if (!el.classList.contains("embed")) {
+		el = el.parentElement;
+	}
+
 	if (el.hasAttribute("data-title-requested")
 		|| el.classList.contains("expanded")
 	) {
@@ -248,7 +267,21 @@ function execFetcher(el: Element): Promise<void> {
 
 // Toggle the expansion of an embed
 async function toggleExpansion(e: MouseEvent) {
-	const el = e.target as Element
+	let el = e.target as Element
+
+	// if img
+	if (!el.classList.contains("embed")) {
+		el.classList.add("hide");
+		el = el.parentElement;
+	} else {
+		for (let i = 0; i < el.childNodes.length; i++) {
+			if (el.childNodes[i].nodeName != "#text") {
+				let element = el.childNodes[i] as Element
+				element.classList.add("hide")
+			}
+		}
+	}
+
 
 	// Don't trigger, when user is trying to open in a new tab or fetch has
 	// erred
@@ -263,6 +296,13 @@ async function toggleExpansion(e: MouseEvent) {
 		if (iframe) {
 			iframe.remove()
 		}
+		for (let i = 0; i < el.childNodes.length; i++) {
+			if (el.childNodes[i].nodeName != "#text") {
+				let element = el.childNodes[i] as Element
+				element.classList.remove("hide")
+			}
+		}
+
 		return
 	}
 
@@ -291,7 +331,13 @@ on(document, "mouseover", fetchMeta, {
 	passive: true,
 	selector: "a.embed",
 })
+on(document, "mouseover", fetchMeta, {
+	passive: true,
+	selector: "a.embed > img",
+})
 on(document, "click", toggleExpansion, {
 	selector: "a.embed",
 })
-
+on(document, "click", toggleExpansion, {
+	selector: "a.embed > img",
+})

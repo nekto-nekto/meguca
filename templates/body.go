@@ -8,6 +8,11 @@ import (
 	"strconv"
 	"strings"
 
+	"io"
+	"net/http"
+	"os"
+	"path/filepath"
+
 	"github.com/bakape/meguca/common"
 	"github.com/bakape/meguca/config"
 	"github.com/bakape/meguca/util"
@@ -43,7 +48,7 @@ var (
 	}{
 		{
 			youTube,
-			regexp.MustCompile(`https?:\/\/(?:[^\.]+\.)?(?:youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/watch\?v=)[a-zA-Z0-9_-]+`),
+			regexp.MustCompile(`https?:\/\/(?:[^\.]+\.)?(?:youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/watch\?v=)([a-zA-Z0-9_-]+)`),
 		},
 		{
 			soundCloud,
@@ -74,6 +79,7 @@ var (
 		'f': "ftp",
 		'b': "bitcoin",
 	}
+	pathPreview, _ = filepath.Abs("images/preview")
 )
 
 type bodyContext struct {
@@ -525,11 +531,44 @@ func (c *bodyContext) parseURL(bit string) {
 	}
 }
 
+func downloadFile(filepath string, url string) error {
+	_, err := os.Stat(filepath)
+	if !os.IsNotExist(err) {
+		return err
+	}
+
+	resp, err := http.Get(url)
+	if err != nil {
+		return err
+	}
+	defer resp.Body.Close()
+
+	out, err := os.Create(filepath)
+	if err != nil {
+		return err
+	}
+	defer out.Close()
+
+	_, err = io.Copy(out, resp.Body)
+	return err
+}
+
 // Parse select embeddable URLs. Returns, if any found.
 func (c *bodyContext) parseEmbeds(s string) bool {
 	for _, t := range embedPatterns {
 		if !t.patt.MatchString(s) {
 			continue
+		}
+		var id string
+		var idYoutubeLenValid = false
+		if t.typ == youTube {
+			id = t.patt.FindStringSubmatch(s)[1]
+			if len(id) == 11 { // https://webapps.stackexchange.com/questions/54443/format-for-id-of-youtube-video/101153#101153
+				idYoutubeLenValid = true
+			}
+			if idYoutubeLenValid {
+				go downloadFile(pathPreview+"/"+id+".jpg", "https://i.ytimg.com/vi/"+id+"/hqdefault.jpg")
+			}
 		}
 
 		c.string(`<em><a rel="noreferrer" class="embed" target="_blank" data-type="`)
@@ -538,7 +577,14 @@ func (c *bodyContext) parseEmbeds(s string) bool {
 		c.escape(s)
 		c.string(`">[`)
 		c.string(providers[t.typ])
-		c.string(`] ???</a></em>`)
+
+		c.string(`] ???`)
+		if t.typ == youTube && idYoutubeLenValid {
+			c.string(`<img class="thumb youtube" src="/assets/images/preview/`)
+			c.string(id)
+			c.string(`.jpg" onerror="this.src='/assets/images/preview/hddefault.jpeg'" />`)
+		}
+		c.string(`</a></em>`)
 
 		return true
 	}

@@ -70,17 +70,20 @@ code.code-tag {
 .embed {
 	background-color: rgba(255, 255, 255, 0.5);
 	border-radius: 4px;
-	display: inline-block;
+	display: block;
 	font-style: normal;
 	margin: 0.1em;
 	padding: 2px;
 	color: black;
+	max-width: 480px;
 	&.expanded {
-		max-width: 480px;
-		display: block;
+		background-color: transparent;
+		color: inherit;
+		border: 1px solid;
 	}
 	& > iframe {
 		display: block;
+		width: 480px;
 		margin: auto;
 		border-style: none;
 	}
