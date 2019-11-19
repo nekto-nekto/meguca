@@ -95,7 +95,7 @@ function formatProvider(type: provider): (s: string, eid: string) => string {
 			"data-type": type.toString(),
 		}
 		if (type === provider.YouTube) {
-			return `<em><a ${makeAttrs(attrs)}>[${provider[type]}] ???<img class="thumb youtube" src="/assets/images/preview/${eid}.jpg" onerror="this.src='/assets/images/preview/hddefault.jpeg'" /></a></em>`
+			return `<em><a ${makeAttrs(attrs)}>[${provider[type]}] ???<img class="thumb youtube" src="/assets/images/preview/${eid}.jpg" onerror="this.style='display: none;'" /></a></em>`
 		}
 		return `<em><a ${makeAttrs(attrs)}>[${provider[type]}] ???</a></em>`
 	}
