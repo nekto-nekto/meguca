@@ -14,10 +14,10 @@ begin
 			concat_ws(',', op, new.id));
 
 		-- Posts bump threads only on creation and closure
-		if (new.type = 2 OR new.type = 8) then
+		if (new.type = 2) then
 			perform bump_thread(op, true, true, new.post_id);
-		else
-			perform bump_thread(op, true);
+		--else
+		--	perform bump_thread(op, true);
 		end if;
 	end if;
 	return null;
