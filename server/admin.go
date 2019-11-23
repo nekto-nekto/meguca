@@ -528,7 +528,7 @@ func ban(w http.ResponseWriter, r *http.Request) {
 		for _, id := range msg.IDs {
 			bantime := time.Minute * time.Duration(msg.Duration)
 			day7 := 7 * (time.Hour * 24)
-			if bantime > 7*day7 {
+			if bantime > day7 {
 				bantime = day7
 			}
 			err = db.Ban(board, msg.Reason, creds.UserID,
