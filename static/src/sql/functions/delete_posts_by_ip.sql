@@ -21,7 +21,7 @@ begin
 	perform assert_can_perform(account, target_board, 1::smallint);
 
 	-- Delete the posts
-	if account = "admin" then
+	if account = 'admin' then
 		for id in (select p.id
 					from posts p
 					where p.ip = target_ip
