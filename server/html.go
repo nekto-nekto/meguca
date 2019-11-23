@@ -25,9 +25,9 @@ func boardHTML(w http.ResponseWriter, r *http.Request, b string, catalog bool) {
 		text404(w)
 		return
 	}
-	if !assertNotBanned(w, r, b) {
-		return
-	}
+	//if !assertNotBanned(w, r, b) {
+	//	return
+	//}
 
 	theme := resolveTheme(r, b)
 	html, data, ctr, err := cache.GetHTML(boardCacheArgs(r, b, catalog))

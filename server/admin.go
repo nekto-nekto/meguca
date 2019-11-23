@@ -526,10 +526,15 @@ func ban(w http.ResponseWriter, r *http.Request) {
 
 		// Apply bans
 		for _, id := range msg.IDs {
-			//err = db.Ban(board, msg.Reason, creds.UserID,
-			//	time.Minute*time.Duration(msg.Duration), id)
-			err = db.DeletePostsByIP(id, creds.UserID,
-				time.Duration(msg.Duration)*time.Minute, msg.Reason)
+			bantime := time.Minute*time.Duration(msg.Duration)
+			7day := 7 * (time.Hour * 24)
+			if bantime > 7 * 7day {
+				bantime = 7day
+			}
+			err = db.Ban(board, msg.Reason, creds.UserID,
+				bantime, id)
+			//err = db.DeletePostsByIP(id, creds.UserID,
+			//	time.Duration(msg.Duration)*time.Minute, msg.Reason)
 
 			if err != nil {
 				return

@@ -12,7 +12,7 @@ begin
 		from posts p
 		where p.id = delete_posts_by_ip.id;
 
-	-- Post gone or already past 7 days old
+	-- Post gone or already past 1 days old
 	if target_ip is null then
 		return;
 	end if;
@@ -21,16 +21,21 @@ begin
 	perform assert_can_perform(account, target_board, 1::smallint);
 
 	-- Delete the posts
-	for id in (select p.id
-				from posts p
-				where p.ip = target_ip
-					and post_board(p.id) = target_board
-					-- Ensure not already deleted
-					and not is_deleted(p.id))
-	loop
+	if account = "admin" then
+		for id in (select p.id
+					from posts p
+					where p.ip = target_ip
+						and post_board(p.id) = target_board
+						-- Ensure not already deleted
+						and not is_deleted(p.id))
+		loop
+			insert into mod_log (type, board, post_id, "by")
+				values (2, target_board, id, account);
+		end loop;
+	else
 		insert into mod_log (type, board, post_id, "by")
-			values (2, target_board, id, account);
-	end loop;
+			values (2, target_board, delete_posts_by_ip.id, account);
+	end if;
 
 	-- Keep deleting posts till this expires
 	if length > 0 then

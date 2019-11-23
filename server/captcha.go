@@ -23,7 +23,8 @@ func (e errCaptchasNotReady) Error() string {
 // Authenticate a captcha solution
 func authenticateCaptcha(w http.ResponseWriter, r *http.Request) {
 	err := func() (err error) {
-		if !assertNotBanned(w, r, "all") {
+		b := extractParam(r, "board")
+		if !assertNotBanned(w, r, b) || !assertNotBanned(w, r, "all") {
 			return
 		}
 		err = r.ParseForm()
@@ -47,7 +48,6 @@ func authenticateCaptcha(w http.ResponseWriter, r *http.Request) {
 		}
 		err = db.ValidateCaptcha(c, session, ip)
 		if err == common.ErrInvalidCaptcha {
-			b := extractParam(r, "board")
 			s := auth.CaptchaService(b)
 			if s == nil {
 				return errCaptchasNotReady(b)
@@ -71,7 +71,7 @@ func authenticateCaptcha(w http.ResponseWriter, r *http.Request) {
 func serveNewCaptcha(w http.ResponseWriter, r *http.Request) {
 	httpError(w, r, func() (err error) {
 		b := extractParam(r, "board")
-		if !assertNotBanned(w, r, "all") {
+		if !assertNotBanned(w, r, b) || !assertNotBanned(w, r, "all") {
 			return
 		}
 

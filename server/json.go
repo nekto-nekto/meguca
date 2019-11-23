@@ -140,9 +140,9 @@ func threadJSON(w http.ResponseWriter, r *http.Request) {
 func validateThread(w http.ResponseWriter, r *http.Request) (uint64, bool) {
 	board := extractParam(r, "board")
 
-	if !assertNotBanned(w, r, board) {
-		return 0, false
-	}
+	//if !assertNotBanned(w, r, board) {
+	//	return 0, false
+	//}
 
 	id, err := strconv.ParseUint(extractParam(r, "thread"), 10, 64)
 	if err != nil {
@@ -170,9 +170,9 @@ func boardJSON(w http.ResponseWriter, r *http.Request, catalog bool) {
 		text404(w)
 		return
 	}
-	if !assertNotBanned(w, r, b) {
-		return
-	}
+	//if !assertNotBanned(w, r, b) {
+	//	return
+	//}
 
 	data, _, ctr, err := cache.GetJSONAndData(boardCacheArgs(r, b, catalog))
 	switch err {
