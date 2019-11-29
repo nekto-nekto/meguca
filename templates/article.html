@@ -160,12 +160,14 @@
 			<blockquote>
 				{%= body(p, c.op, c.board, c.index, c.rbText, c.pyu) %}
 			</blockquote>
+			<div class="post-moderation-block">
 			{% for _, e := range p.Moderation %}
 				<b class="admin post-moderation">
 					{%= postModeration(e) %}
 					<br>
 				</b>
 			{% endfor %}
+			</div>
 		</div>
 		{% if c.omit != 0 %}
 			<span class="omit spaced" data-omit="{%d c.omit %}" data-image-omit="{%d c.imageOmit %}">
