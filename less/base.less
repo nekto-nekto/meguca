@@ -44,7 +44,7 @@ body {
 
 #threads {
 	flex: 1;
-	padding: 1em 1.4em;
+	padding: 3em 1.4em;
 	outline: none;
 	max-width: 100vw;
 }
@@ -267,7 +267,7 @@ td {
 		min-width: 15em;
 	}
 	#threads {
-		padding: 1em 0.3em;
+		padding: 3em 0.3em;
 	}
 	#thread-post-counters, #sync-counter, .image-banner {
 		display: none;
@@ -302,15 +302,9 @@ td {
 }
 
 
-/* временный костыль */
-/*
-.banner-float svg {
-	width: 2em;
-	height: 2em;
-}*/
-#threads {
-	padding: 2em 1.4em;
-}
+/* dirty css fixes and hacks
+TODO: refactoring
+*/
 #board-navigation {
 	font-size: 20px;
 	margin: 5px 10px;
@@ -362,7 +356,6 @@ header .mod-checkbox { float: left; }
 
 
 
-/* hacks */
 .snowflakes, 
 #user-background, 
 #overlay-container { transform: translateZ(0); }
