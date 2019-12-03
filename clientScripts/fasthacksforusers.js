@@ -1,7 +1,8 @@
 (function () {
 
-	var hiddenboards = localStorage.getItem("hiddenboards").split(",")
-	if (hiddenboards !== null) {
+	let hiddenboardsRaw = localStorage.getItem("hiddenboards");
+	if (hiddenboardsRaw !== null) {
+		let hiddenboards = hiddenboardsRaw.split(",");
 		let hiddenboards_mode = localStorage.getItem("hiddenboards_mode");
 		if (hiddenboards_mode === null) {
 			hiddenboards_mode = "deleted";
