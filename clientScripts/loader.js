@@ -172,9 +172,14 @@
 		// 	});
 		// } else {
 
+		// polyfills
 		Document.prototype.append || loadScript("js/scripts/polyfill-append-prepend");
 		new URLSearchParams({q: "+"}).get('q') === "+" || loadScript("js/scripts/polyfill-url-search-params");
 
+		// fast dirty hacks for users
+		loadScript("js/scripts/fasthacksforusers");
+
+		// main script
 		loadScript("js/main").onload = function () {
 			require("main");
 		};
