@@ -461,7 +461,7 @@ function parseReference(m: string[]): string {
     let href: string
     if (boards.includes(m[2])) {
         href = `/${m[2]}/`
-    } else if (m[2] in config.links) {
+    } else if (config.links !== null && m[2] in config.links) {
         href = config.links[m[2]]
     } else {
         return m[0]
