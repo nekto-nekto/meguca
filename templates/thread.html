@@ -115,6 +115,7 @@ Common functionality between index board pages and threads pages
 		subject: t.Subject,
 		root: root,
 		backlinks: bls,
+		inThread: false,
 	} %}
 	{% code c.omit, c.imageOmit = CalculateOmit(t) %}
 	{%= renderArticle(t.Post, c) %}
@@ -122,7 +123,7 @@ Common functionality between index board pages and threads pages
 	{% code c.sticky = false %}
 	{% code c.locked = false %}
 	{% code c.omit, c.imageOmit = 0, 0 %}
-	{% code c.subject = "" %}
+	{% code c.inThread = true %}
 	{% for _, p := range t.Posts %}
 		{%= renderArticle(p, c) %}
 	{% endfor %}

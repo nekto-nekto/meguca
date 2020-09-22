@@ -23,6 +23,7 @@ type articleContext struct {
 	op                                 uint64
 	board, subject, root               string
 	backlinks                          backlinks
+	inThread                           bool
 }
 
 // Map of all backlinks on a page
