@@ -20,7 +20,7 @@ func setHTMLHeaders(w http.ResponseWriter) {
 }
 
 // Serves board HTML to regular or noscript clients
-func boardHTML(w http.ResponseWriter, r *http.Request, b string, catalog bool) {
+func boardHTML(w http.ResponseWriter, r *http.Request, b string, catalog bool, catalogMode uint8) {
 	if !auth.IsBoard(b) {
 		text404(w)
 		return
@@ -30,7 +30,7 @@ func boardHTML(w http.ResponseWriter, r *http.Request, b string, catalog bool) {
 	//}
 
 	theme := resolveTheme(r, b)
-	html, data, ctr, err := cache.GetHTML(boardCacheArgs(r, b, catalog))
+	html, data, ctr, err := cache.GetHTML(boardCacheArgs(r, b, catalog, catalogMode))
 	switch err {
 	case nil:
 	case cache.ErrPageOverflow:

@@ -36,6 +36,7 @@ export interface BoardConfigs {
 // The current state of a board or thread page
 export type PageState = {
 	catalog: boolean
+	catalogMode: number
 	thread: number
 	lastN: number
 	page: number
@@ -89,6 +90,7 @@ function read(href: string): PageState {
 		lastN: /[&\?]last=100/.test(u.search) ? 100 : 0,
 		page: page ? parseInt(page[1]) : 0,
 		catalog: /^\/\w+\/catalog/.test(u.pathname),
+		catalogMode: /^\/\w+\/catalogMod/.test(u.pathname) ? 1 : 0,
 		thread: parseInt(thread && thread[1]) || 0,
 	} as PageState
 }

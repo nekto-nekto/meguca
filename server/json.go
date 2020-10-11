@@ -164,7 +164,7 @@ func validateThread(w http.ResponseWriter, r *http.Request) (uint64, bool) {
 }
 
 // Serves board page JSON
-func boardJSON(w http.ResponseWriter, r *http.Request, catalog bool) {
+func boardJSON(w http.ResponseWriter, r *http.Request, catalog bool, catalogMode uint8) {
 	b := extractParam(r, "board")
 	if !auth.IsBoard(b) {
 		text404(w)
@@ -174,7 +174,7 @@ func boardJSON(w http.ResponseWriter, r *http.Request, catalog bool) {
 	//	return
 	//}
 
-	data, _, ctr, err := cache.GetJSONAndData(boardCacheArgs(r, b, catalog))
+	data, _, ctr, err := cache.GetJSONAndData(boardCacheArgs(r, b, catalog, catalogMode))
 	switch err {
 	case nil:
 		writeJSON(w, r, formatEtag(ctr, "", common.NotLoggedIn), data)

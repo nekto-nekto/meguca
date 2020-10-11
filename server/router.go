@@ -99,19 +99,22 @@ func createRouter() http.Handler {
 		// HTML
 		r.GET("/", redirectToDefault)
 		r.GET("/:board/", func(w http.ResponseWriter, r *http.Request) {
-			boardHTML(w, r, extractParam(r, "board"), false)
+			boardHTML(w, r, extractParam(r, "board"), false, 0)
 		})
 		r.GET("/:board/catalog", func(w http.ResponseWriter, r *http.Request) {
-			boardHTML(w, r, extractParam(r, "board"), true)
+			boardHTML(w, r, extractParam(r, "board"), true, 0)
 		})
 		// Needs override, because it conflicts with crossRedirect
 		r.GET("/all/catalog", func(w http.ResponseWriter, r *http.Request) {
 			// Artificially set board to "all"
-			boardHTML(w, r, "all", true)
+			boardHTML(w, r, "all", true, 0)
+		})
+		r.GET("/all/catalogMod", func(w http.ResponseWriter, r *http.Request) {
+			boardHTML(w, r, "all", true, 1)
 		})
 		r.GET("/b/catalog", func(w http.ResponseWriter, r *http.Request) {
 			// Artificially set board to "b"
-			boardHTML(w, r, "b", true)
+			boardHTML(w, r, "b", true, 0)
 		})
 		r.GET("/:board/:thread", threadHTML)
 		r.GET("/all/:id", crossRedirect)
@@ -138,12 +141,17 @@ func createRouter() http.Handler {
 		json := r.NewGroup("/json")
 		boards := json.NewGroup("/boards")
 		boards.GET("/:board/", func(w http.ResponseWriter, r *http.Request) {
-			boardJSON(w, r, false)
+			boardJSON(w, r, false, 0)
 		})
 		boards.GET("/:board/catalog", func(w http.ResponseWriter,
 			r *http.Request,
 		) {
-			boardJSON(w, r, true)
+			boardJSON(w, r, true, 0)
+		})
+		boards.GET("/:board/catalogMod", func(w http.ResponseWriter,
+			r *http.Request,
+		) {
+			boardJSON(w, r, true, 1)
 		})
 		boards.GET("/:board/:thread", threadJSON)
 		json.GET("/post/:post", servePost)

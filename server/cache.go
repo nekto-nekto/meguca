@@ -11,7 +11,7 @@ import (
 )
 
 // Returns arguments for accessing the board page JSON/HTML cache
-func boardCacheArgs(r *http.Request, board string, catalog bool) (
+func boardCacheArgs(r *http.Request, board string, catalog bool, catalogMode uint8) (
 	k cache.Key, f cache.FrontEnd,
 ) {
 	var page int64
@@ -22,10 +22,14 @@ func boardCacheArgs(r *http.Request, board string, catalog bool) (
 		}
 	}
 
-	k = cache.BoardKey(board, page, !catalog)
-	if catalog {
+	if catalog && catalogMode == 0 {
+		k = cache.BoardKey(board, page, !catalog)
 		f = cache.CatalogFE
+	} else if catalog && catalogMode == 1 {
+		k = cache.BoardKey(board, -1, !catalog) // dirty hack for dirty software
+		f = cache.CatalogFEMod
 	} else {
+		k = cache.BoardKey(board, page, !catalog)
 		f = cache.BoardPageFE
 	}
 	return

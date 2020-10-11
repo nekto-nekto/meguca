@@ -238,6 +238,25 @@ func scanOP(r rowScanner) (t common.Thread, err error) {
 	t.Post, err = extractPost(post, img)
 	return
 }
+func scanOPMod(r rowScanner) (t common.Thread, err error) {
+	var (
+		post  postScanner
+		img   imageScanner
+		pArgs = post.ScanArgs()
+		iArgs = img.ScanArgs()
+		args  = make([]interface{}, 0, 8+len(pArgs)+len(iArgs))
+	)
+	args = append(args, pArgs...)
+	args = append(args, iArgs...)
+
+	err = r.Scan(args...)
+	if err != nil {
+		return
+	}
+
+	t.Post, err = extractPost(post, img)
+	return
+}
 
 func extractPost(ps postScanner, is imageScanner) (p common.Post, err error) {
 	p, err = ps.Val()
@@ -306,6 +325,21 @@ func getOPs() squirrel.SelectBuilder {
 		LeftJoin("images as i on p.SHA1 = i.SHA1")
 }
 
+func getPosts() squirrel.SelectBuilder {
+	return sq.Select(`
+			p.editing, p.moderated, p.spoiler, p.sage, p.id,
+			p.time, p.body, p.flag, p.name, p.trip, p.auth,
+			(select array_agg((l.target, linked_post.op, linked_thread.board))
+				from links as l
+				join posts as linked_post on l.target = linked_post.id
+				join threads as linked_thread on linked_post.op = linked_thread.id
+				where l.source = p.id
+			), p.commands, p.imagename, i.*
+		`).From("posts as p").
+		LeftJoin("images as i on p.SHA1 = i.SHA1")
+}
+
+
 // GetBoardCatalog retrieves all OPs of a single board
 func GetBoardCatalog(board string) (b common.Board, err error) {
 	b, err = scanCatalog(getOPs().
@@ -341,6 +375,15 @@ func GetAllBoardCatalog() (board common.Board, err error) {
 		board.Threads = filtered
 	}
 
+	return
+}
+
+// GetAllBoardCatalogMod retrieves all posts (by id) for the "/all/" meta-board
+func GetAllBoardCatalogMod() (board common.Board, err error) {
+	board, err = scanCatalogMod(getPosts().Where("p.imagename != ''").OrderBy("id desc").Limit(500))
+	if err != nil {
+		return
+	}
 	return
 }
 
@@ -387,6 +430,35 @@ func scanCatalog(q squirrel.SelectBuilder) (board common.Board, err error) {
 	board.Threads = make([]common.Thread, 0, 32)
 	err = queryAll(q, func(r *sql.Rows) (err error) {
 		t, err := scanOP(r)
+		if err != nil {
+			return
+		}
+		board.Threads = append(board.Threads, t)
+		return
+	})
+	if err != nil {
+		return
+	}
+
+	open := make([]*common.Post, 0, 16)
+	moderated := make([]*common.Post, 0, 16)
+	for i := range board.Threads {
+		ptr := &board.Threads[i].Post
+		filterOpen(&open, ptr)
+		filterModerated(&moderated, ptr)
+	}
+	err = injectOpenBodies(open)
+	if err != nil {
+		return
+	}
+	err = injectModeration(moderated, nil)
+	return
+}
+
+func scanCatalogMod(q squirrel.SelectBuilder) (board common.Board, err error) {
+	board.Threads = make([]common.Thread, 0, 25)
+	err = queryAll(q, func(r *sql.Rows) (err error) {
+		t, err := scanOPMod(r)
 		if err != nil {
 			return
 		}

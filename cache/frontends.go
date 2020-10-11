@@ -64,6 +64,28 @@ var CatalogFE = FrontEnd{
 		return b.Bytes()
 	},
 }
+// CatalogFEMod is for accessing cached catalog pages
+var CatalogFEMod = FrontEnd{
+	GetCounter: func(k Key) (uint64, error) {
+		if k.Board == "all" {
+			return db.AllBoardCounter()
+		}
+		return db.BoardCounter(k.Board)
+	},
+
+	GetFresh: func(k Key) (interface{}, error) {
+		if k.Board == "all" {
+			return db.GetAllBoardCatalogMod()
+		}
+		return db.GetBoardCatalog(k.Board)
+	},
+
+	RenderHTML: func(data interface{}, json []byte) []byte {
+		var b bytes.Buffer
+		templates.WriteCatalogThreadsMod(&b, data.(common.Board).Threads, json)
+		return b.Bytes()
+	},
+}
 
 // BoardFE is for accessing cached board pages
 var BoardFE = FrontEnd{

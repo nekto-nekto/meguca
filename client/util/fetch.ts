@@ -24,7 +24,14 @@ export async function fetchBoard(
 	board: string,
 	page: number,
 	catalog: boolean,
+	catalogMode: number,
 ): Promise<Response> {
+	let catalogDest;
+	if (catalogMode === 1) {
+		catalogDest = "catalogMod"
+	} else {
+		catalogDest = "catalog"
+	}
 	return fetch(
-		`/${board}/${catalog ? "catalog" : ""}?minimal=true&page=${page}`)
+		`/${board}/${catalog ? catalogDest : ""}?minimal=true&page=${page}`)
 }
