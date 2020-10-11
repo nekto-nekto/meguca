@@ -182,6 +182,13 @@ function updateIdentity() {
 	}
 }
 
+// Don't close tab when open form
+function preventExit(e: Event) {
+  e.preventDefault();
+  return "";
+}
+
+
 async function openReply(e: MouseEvent) {
 	// Don't trigger, when user is trying to open in a new tab
 	if (e.which !== 1
@@ -314,6 +321,7 @@ export default () => {
 		//console.log("postState.ready, postEvent.open");
 		postModel = new FormModel()
 		postForm = new FormView(postModel)
+		window.addEventListener("beforeunload", preventExit);
 		return postState.draft
 	})
 
@@ -392,6 +400,7 @@ export default () => {
 
 	// Close unallocated draft or commit in non-live mode
 	postSM.act(postState.draft, postEvent.done, () => {
+		window.removeEventListener('beforeunload', preventExit);
 		//console.log("postState.draft, postEvent.done");
 		if (captchaLoaded()) {
 			//console.log("captchaLoaded() return postState.draft");
@@ -416,6 +425,7 @@ export default () => {
 
 	// Cancel unallocated draft
 	postSM.act(postState.draft, postEvent.cancel, () => {
+		window.removeEventListener('beforeunload', preventExit);
 		//console.log("postState.draft, postEvent.cancel");
 		postForm.remove()
 		return postState.ready
@@ -424,6 +434,7 @@ export default () => {
 	// Close allocated post
 	postSM.act(postState.alloc, postEvent.done, () => {
 		//console.log("postState.alloc, postEvent.done");
+		window.removeEventListener('beforeunload', preventExit);
 		if (captchaLoaded()) {
 			//console.log("postState.alloc, postEvent.done captchaLoaded()");
 			return postState.alloc;
@@ -437,12 +448,14 @@ export default () => {
 	// Cancel allocated post
 	postSM.act(postState.alloc, postEvent.cancel, () => {
 		//console.log("postState.alloc, postEvent.cancel");
+		window.removeEventListener('beforeunload', preventExit);
 		postModel.commitClose(true)
 		return postState.ready;
 	})
 
 	// Just close the post, after it is committed
 	postSM.act(postState.allocatingNonLive, postEvent.done, () => {
+		window.removeEventListener('beforeunload', preventExit);
 		//console.log("postState.allocatingNonLive, postEvent.done");
 		return postState.ready;
 	});
