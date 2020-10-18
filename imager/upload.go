@@ -38,6 +38,7 @@ var (
 		"image/webp":                    common.WEBP,
 		mimePDF:                         common.PDF,
 		"video/webm":                    common.WEBM,
+		"video/x-matroska":              common.WEBM,
 		"application/ogg":               common.OGG,
 		"video/mp4":                     common.MP4,
 		"video/quicktime":               common.MP4,
