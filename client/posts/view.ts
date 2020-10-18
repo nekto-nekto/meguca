@@ -295,7 +295,7 @@ export default class PostView extends ImageHandler {
                 case ModerationAction.deletePost:
                     if (mine.has(this.model.id)) {
                         // Hide own deletes from user
-                        continue;
+                        //continue;
                     }
                     s = this.format('deleted', by);
                     break;
