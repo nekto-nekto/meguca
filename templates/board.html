@@ -204,8 +204,11 @@ allow caching of generated posts.
 			{% code idStr:= strconv.FormatUint(t.ID, 10) %}
 			{% code hasImage := t.Image != nil && t.Image.ThumbType != common.NoFile %}
 			{% if hasImage %}
-			<article id="p{%s= idStr %}" {% space %} {% comment %}{%= postClass(t.Post, t.ID) %}{% endcomment %} {% space %} data-id="{%s= idStr %}">
+			<article id="p{%s= idStr %}" {% space %} {%= postClass(t.Post, t.ID) %} {% space %} data-id="{%s= idStr %}">
+				{% comment %}
 				{%= deletedToggle() %}
+				{% endcomment %}
+				<input type="checkbox" class="mod-checkbox hidden">
 				{% if hasImage %}
 					<figure>
 						{% code img := *t.Image %}
