@@ -231,12 +231,12 @@ export class Post extends Model implements PostData {
 		const { type, data } = entry;
 		switch (type) {
 			case ModerationAction.deletePost:
-				if (!mine.has(this.id)) {
+				//if (!mine.has(this.id)) {
 					this.view.el.classList.add("deleted");
 					if (options.hideBinned) {
 						hideRecursively(this);
 					}
-				}
+				//}
 				break;
 			case ModerationAction.deleteImage:
 				if (this.image) {
@@ -267,7 +267,7 @@ export class Post extends Model implements PostData {
 	}
 
 	public isDeleted(): boolean {
-		if (!this.moderation || mine.has(this.id)) {
+		if (!this.moderation /*|| mine.has(this.id)*/) {
 			return false;
 		}
 		for (let { type } of this.moderation) {
