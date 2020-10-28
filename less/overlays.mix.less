@@ -201,8 +201,10 @@ input[type=number], input[type=text], input[type=password], textarea {
 	width: 2em;
 }
 
-.blinking {
-  animation: blinker 1s linear infinite;
+.blinking path {
+  /*animation: blinker 1s linear infinite;*/
+  color: #FF0 !important;
+  filter: drop-shadow(0px 0px 1px #f00);
 }
 
 @keyframes blinker {
