@@ -14,6 +14,7 @@ import initPosting from "./posting"
 import initMenu from "./menu"
 import initInlineExpansion from "./inlineExpansion"
 import initHover from "./hover"
+import initHidePost from "./hidepost"
 
 export default () => {
 	initEtc()
@@ -21,5 +22,6 @@ export default () => {
 	initMenu()
 	initInlineExpansion()
 	initHover()
+	initHidePost()
 }
 
