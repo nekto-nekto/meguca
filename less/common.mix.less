@@ -143,6 +143,12 @@ em {
 
 del {
 	text-decoration: none;
+	* {
+		opacity: 0;
+	}
+	&:hover * {
+		opacity: 1;
+	}
 	&, em {
 		background-color: @del;
 	}
