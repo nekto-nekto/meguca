@@ -203,6 +203,7 @@ allow caching of generated posts.
 			{% endcomment %}
 			{% code idStr:= strconv.FormatUint(t.ID, 10) %}
 			{% code hasImage := t.Image != nil && t.Image.ThumbType != common.NoFile %}
+			{% code var src string %}
 			{% if hasImage %}
 			<article id="p{%s= idStr %}" {% space %} {%= postClass(t.Post, t.ID) %} {% space %} data-id="{%s= idStr %}">
 				{% comment %}
@@ -212,9 +213,14 @@ allow caching of generated posts.
 				{% if hasImage %}
 					<figure>
 						{% code img := *t.Image %}
-						<a href="/all/{%s= idStr %}">
+						{% code name := imageName(img.FileType, img.Name) %}
+						{% code src = assets.SourcePath(img.FileType, img.SHA1) %}
+						<a target="_blank" href="{%s= src %}">
 							{% if img.Spoiler %}{%s= ln.Common.Posts["spoiler"] %}!{% endif %}
 							<img width="{%s= strconv.FormatUint(uint64(img.Dims[2]), 10) %}" height="{%s= strconv.FormatUint(uint64(img.Dims[3]), 10) %}" class="catalog" src="{%s= assets.ThumbPath(img.ThumbType, img.SHA1) %}">
+						</a>
+						<a class="catalog-image-name" href="{%s= assets.RelativeSourcePath(img.FileType, img.SHA1) %}" download="{%s= name %}">
+							{%s= name %}
 						</a>
 					</figure>
 				{% endif %}
@@ -229,6 +235,9 @@ allow caching of generated posts.
 						{%s= strconv.FormatUint(uint64(t.ImageCount), 10) %}
 					</span>
 					{% endcomment %}
+					<a href="/all/{%s= idStr %}">
+						No. {%s= idStr %}
+					</a><br />
 					{%= last100Link("all", idStr) %}
 				</span>
 				<br>

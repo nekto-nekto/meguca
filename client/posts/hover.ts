@@ -173,7 +173,7 @@ function clonePost(el: HTMLElement): HTMLElement {
 }
 
 function renderImagePreview(event: MouseEvent) {
-	if (!options.imageHover || page.catalog) {
+	if (!options.imageHover || (page.catalog && (page.catalogMode !== 1))) {
 		return
 	}
 	const target = event.target as HTMLElement
