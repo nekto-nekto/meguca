@@ -215,7 +215,7 @@ setInterval(() => {
 	if (page.thread || isBanned()) {
 		return
 	}
-	if (document.hidden) {
+	if (document.hidden && !page.threadFormIsOpen) {
 		refreshBoard()
 	} else {
 		renderRefreshButton(threadsEl.querySelector("#refresh > a"))

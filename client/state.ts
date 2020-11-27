@@ -42,6 +42,7 @@ export type PageState = {
 	page: number
 	board: string
 	href: string
+	threadFormIsOpen: boolean
 }
 
 const tenDays = 10 * 24 * 60 * 60 * 1000
@@ -92,6 +93,7 @@ function read(href: string): PageState {
 		catalog: /^\/\w+\/catalog/.test(u.pathname),
 		catalogMode: /^\/\w+\/catalogMod/.test(u.pathname) ? 1 : 0,
 		thread: parseInt(thread && thread[1]) || 0,
+		threadFormIsOpen: false,
 	} as PageState
 }
 
