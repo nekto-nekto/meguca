@@ -6,7 +6,7 @@ import {
 	setAttrs, getClosestID, fetchJSON, hook, emitChanges, ChangeEmitter
 } from "../util"
 import { Post } from "./model"
-import ImageHandler, { sourcePath } from "./images"
+import ImageHandler, { sourcePath, thumbPath } from "./images"
 import PostView from "./view"
 import { PostData, fileTypes, isExpandable } from "../common"
 
@@ -190,8 +190,20 @@ function renderImagePreview(event: MouseEvent) {
 			imagePreview.remove()
 			imagePreview = null
 		}
+		if (target.matches && target.matches("figure, .post-container")) { // if mouse move from image then restore thumbnail
+			let img = target.querySelector("img");
+			if (img) {
+				post = getModel(target);
+				if (!post.image.spoiler) {
+					setAttrs(img, {
+						src: thumbPath(post.image.sha1, post.image.thumb_type),
+					});
+				}
+			}
+		}
 		return
 	}
+
 
 	let tag: string
 	if (isExpandable(post.image.file_type)) {
@@ -217,6 +229,11 @@ function renderImagePreview(event: MouseEvent) {
 	setAttrs(el, {
 		src: sourcePath(post.image.sha1, post.image.file_type),
 	});
+	if (tag !== 'video' && !post.image.spoiler) { // only for images and not spoiler
+		setAttrs(target, { // replace thumbnail by original image for usuable save original images by context menu
+			src: sourcePath(post.image.sha1, post.image.file_type),
+		});
+	}
 	if (tag === 'video') {
 		setAttrs(el, {
 			autoplay: "",
@@ -286,4 +303,3 @@ export default () => {
 	// Clear previews, when an image is expanded
 	hook("imageExpanded", clear)
 }
-
