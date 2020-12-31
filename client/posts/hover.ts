@@ -192,7 +192,7 @@ function renderImagePreview(event: MouseEvent) {
 		}
 		if (target.matches && target.matches("figure, .post-container")) { // if mouse move from image then restore thumbnail
 			let img = target.querySelector("img");
-			if (img) {
+			if (img && !img.classList.contains("expanded")) {
 				post = getModel(target);
 				if (!post.image.spoiler) {
 					setAttrs(img, {
