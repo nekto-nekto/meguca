@@ -194,7 +194,7 @@ function renderImagePreview(event: MouseEvent) {
 			let img = target.querySelector("img");
 			if (img && !img.classList.contains("expanded")) {
 				post = getModel(target);
-				if (!post.image.spoiler) {
+				if (!post.image.spoiler && !(post.image.thumb_type === fileTypes.noFile)) {
 					setAttrs(img, {
 						src: thumbPath(post.image.sha1, post.image.thumb_type),
 					});
