@@ -187,12 +187,12 @@ async function fetchInvidious(el: Element): Promise<void> {
 	))
 }
 
-// fetcher for the noembed.com meta-provider
+// fetcher for the noembed meta-provider
 function fetchNoEmbed(
 	type: provider,
 ): (el: Element) => Promise<OEmbedDoc | null> {
 	return async (el: Element) => {
-		const url = "https://noembed.com/embed?url=" + el.getAttribute("href") + "&autoplay=1",
+		const url = "https://noembed.0-chan.ru/embed?url=" + el.getAttribute("href") + "&maxwidth=480&maxheight=360&autoplay=1",
 			[data, err] = await fetchJSON<OEmbedDoc>(url)
 
 		if (err) {
