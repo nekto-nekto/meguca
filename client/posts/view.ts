@@ -268,9 +268,11 @@ export default class PostView extends ImageHandler {
             return;
         }
         const pc = this.el.querySelector(".post-moderation-block");
-        for (let el of Array.from(pc.children)) {
-            if (el.classList.contains("post-moderation")) {
-                el.remove();
+        if (pc) { 
+            for (let el of Array.from(pc.children)) {
+                if (el.classList.contains("post-moderation")) {
+                    el.remove();
+                }
             }
         }
 
