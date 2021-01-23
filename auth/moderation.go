@@ -33,6 +33,7 @@ type Report struct {
 	ID, Target    uint64
 	Created       time.Time
 	Board, Reason string
+	Illegal       bool
 }
 
 // DisconnectByBoardAndIP disconnects all banned

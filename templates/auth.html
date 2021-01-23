@@ -70,7 +70,7 @@ Renders a list of bans for a specific page with optional unbanning API links
 				<tr>
 					<td>{%s b.Reason %}</td>
 					<td>{%s b.By %}</td>
-					<td>{%= staticPostLink(b.ForPost) %}</td>
+					<td>{%= staticPostLink(b.ForPost, "all") %}</td>
 					{% code buf := make([]byte, 0, len(salt)+len(b.IP)) %}
 					{% code buf = append(buf, salt...) %}
 					{% code buf = append(buf, b.IP...) %}
@@ -105,8 +105,8 @@ Common style for plain html tables
 {% endstripspace %}{% endfunc %}
 
 Post link, that will redirect to the post from any page
-{% func staticPostLink(id uint64) %}{% stripspace %}
-	{%= postLink(common.Link{id, id, "all"}, true, true) %}
+{% func staticPostLink(id uint64, board string) %}{% stripspace %}
+	{%= postLink(common.Link{id, id, board}, true, true) %}
 {% endstripspace %}{% endfunc %}
 
 Renders a moderation log page
@@ -115,7 +115,7 @@ Renders a moderation log page
 	{% code ln := lang.Get() %}
 	{%= tableStyle() %}
 	<table>
-		{%= tableHeaders("type", "by", "post", "time", "data", "duration") %}
+		{%= tableHeaders("type", "by", "board", "post", "time", "data", "duration") %}
 		{% for _, l := range log %}
 			<tr>
 				<td>
@@ -143,9 +143,10 @@ Renders a moderation log page
 					{% endswitch %}
 				</td>
 				<td>{%s l.By %}</td>
+				<td>{%s l.Board %}</td>
 				<td>
 					{% if l.ID != 0 %}
-						{%= staticPostLink(l.ID) %}
+						{%= staticPostLink(l.ID, l.Board) %}
 					{% endif %}
 				</td>
 				<td>{%s l.Created.Format(time.UnixDate) %}</td>

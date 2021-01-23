@@ -35,11 +35,11 @@ func GetReports(board string) (rep []auth.Report, err error) {
 
 	var query squirrel.SelectBuilder
 	if board == "all" || board == "" {
-		query = sq.Select("id", "target", "reason", "created").
+		query = sq.Select("id", "target", "board", "reason", "illegal", "created").
 			From("reports").
 			OrderBy("created desc")
 	} else {
-		query = sq.Select("id", "target", "reason", "created").
+		query = sq.Select("id", "target", "board", "reason", "illegal", "created").
 			From("reports").
 			Where("board = ?", board).
 			OrderBy("created desc")
@@ -47,7 +47,7 @@ func GetReports(board string) (rep []auth.Report, err error) {
 	err = queryAll(
 		query,
 		func(r *sql.Rows) (err error) {
-			err = r.Scan(&tmp.ID, &tmp.Target, &tmp.Reason, &tmp.Created)
+			err = r.Scan(&tmp.ID, &tmp.Target, &tmp.Board, &tmp.Reason, &tmp.Illegal, &tmp.Created)
 			if err != nil {
 				return
 			}

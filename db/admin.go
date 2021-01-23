@@ -311,11 +311,11 @@ func GetModLog(board string) (log []auth.ModLogEntry, err error) {
 
 	var query squirrel.SelectBuilder
 	if board == "all" || board == "" {
-		query = sq.Select("type", "post_id", "by", "created", "length", "data").
+		query = sq.Select("type", "board", "post_id", "by", "created", "length", "data").
 			From("mod_log").
 			OrderBy("created desc")
 	} else {
-		query = sq.Select("type", "post_id", "by", "created", "length", "data").
+		query = sq.Select("type", "board", "post_id", "by", "created", "length", "data").
 			From("mod_log").
 			Where("board = ?", board).
 			OrderBy("created desc")
@@ -323,7 +323,7 @@ func GetModLog(board string) (log []auth.ModLogEntry, err error) {
 	err = queryAll(
 		query,
 		func(r *sql.Rows) (err error) {
-			err = r.Scan(&e.Type, &e.ID, &e.By, &e.Created, &e.Length,
+			err = r.Scan(&e.Type, &e.Board, &e.ID, &e.By, &e.Created, &e.Length,
 				&e.Data)
 			if err != nil {
 				return

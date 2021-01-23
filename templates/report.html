@@ -24,11 +24,13 @@ Render list of all reports on board
 	{%= htmlHeader() %}
 	{%= tableStyle() %}
 	<table>
-		{%= tableHeaders("id", "post", "reason", "time") %}
+		{%= tableHeaders("id", "board", "post", "illegal", "reason", "time") %}
 		{% for _, r := range reports %}
 			<tr>
 				<td>{%s= strconv.FormatUint(r.ID, 10) %}</td>
-				<td>{%= staticPostLink(r.Target) %}</td>
+				<td>{%s r.Board %}</td>
+				<td>{%= staticPostLink(r.Target, r.Board) %}</td>
+				<td>{%s= strconv.FormatBool(r.Illegal) %}</td>
 				<td>{%s r.Reason %}</td>
 				<td>{%s r.Created.Format(time.UnixDate) %}</td>
 			</tr>
