@@ -29,7 +29,7 @@ Render list of all reports on board
 			<tr>
 				<td>{%s= strconv.FormatUint(r.ID, 10) %}</td>
 				<td>{%s r.Board %}</td>
-				<td>{%= staticPostLink(r.Target, r.Board) %}</td>
+				<td>{%= staticPostLink(r.Target, "all") %}</td>
 				<td>{%s= strconv.FormatBool(r.Illegal) %}</td>
 				<td>{%s r.Reason %}</td>
 				<td>{%s r.Created.Format(time.UnixDate) %}</td>

@@ -146,7 +146,7 @@ Renders a moderation log page
 				<td>{%s l.Board %}</td>
 				<td>
 					{% if l.ID != 0 %}
-						{%= staticPostLink(l.ID, l.Board) %}
+						{%= staticPostLink(l.ID, "all") %}
 					{% endif %}
 				</td>
 				<td>{%s l.Created.Format(time.UnixDate) %}</td>
