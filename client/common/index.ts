@@ -136,7 +136,7 @@ export interface ImageData {
 // Possible file types of a post image
 export enum fileTypes {
 	jpg, png, gif, webm, pdf, svg, mp4, mp3, ogg, zip, "7z", "tar.gz", "tar.xz",
-	flac, noFile, txt, webp, rar, cbz, cbr,
+	flac, noFile, txt, webp, rar, cbz, cbr, swf,
 }
 
 // Return, if source file type can be expanded
@@ -153,6 +153,7 @@ export function isExpandable(t: fileTypes): boolean {
 		case fileTypes.rar:
 		case fileTypes.cbr:
 		case fileTypes.cbz:
+		case fileTypes.swf:
 			return false;
 		default:
 			return true;

@@ -142,6 +142,8 @@
 							{% switch img.FileType %}
 							{% case common.WEBM, common.MP4, common.MP3, common.OGG, common.FLAC %}
 								{% code file = "audio" %}
+							{% case common.SWF %}
+								{% code file = "flash" %}
 							{% default %}
 								{% code file = "file" %}
 							{% endswitch %}

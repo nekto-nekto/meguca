@@ -22,6 +22,7 @@ const (
 	RAR
 	CBZ
 	CBR
+	SWF
 )
 
 // Extensions maps internal file types to their canonical file extensions
@@ -44,6 +45,7 @@ var Extensions = map[uint8]string{
 	RAR:      "rar",
 	CBZ:      "cbz",
 	CBR:      "cbr",
+	SWF:      "swf",
 }
 
 // Image contains a post's image and thumbnail data

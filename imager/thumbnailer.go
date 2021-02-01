@@ -14,11 +14,12 @@ func init() {
 		detectTarGZ,
 		detectTarXZ,
 		detectText, // Has to be last, in case any other formats are pure UTF-8
+		detectFlash,
 	} {
 		thumbnailer.RegisterMatcher(fn)
 	}
 	for _, m := range [...]string{
-		mime7Zip, mimeTarGZ, mimeTarXZ, mimeText,
+		mime7Zip, mimeTarGZ, mimeTarXZ, mimeText, mimeSWF,
 		/// PDF thumbnailing can be very buggy and ghostcript is unreliable and
 		// a security risk
 		mimePDF,

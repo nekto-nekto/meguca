@@ -91,6 +91,9 @@ export default class ImageHandler extends View<Post> {
 				case fileTypes.flac:
 					file = "audio"
 					break
+				case fileTypes.swf:
+					file = "flash"
+					break
 				default:
 					file = "file"
 			}
@@ -360,6 +363,8 @@ export default class ImageHandler extends View<Post> {
 				} else {
 					return this.expandImage(event, false)
 				}
+			case fileTypes.swf:
+				return
 			default:
 				if (!isExpandable(img.file_type)) {
 					// Simply download the file
