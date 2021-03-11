@@ -32,7 +32,6 @@ class Syncwatch {
 	}
 
 	private render() {
-	
 		const now = Math.round(serverNow())
 		if (now > this.end) {
 			this.el.innerText = "⌚: " + lang.ui["finished"]
@@ -40,7 +39,6 @@ class Syncwatch {
 		} else if (!this.el.classList.contains("init")) {
 			const SWObj = this;
 			const SW = this.el as HTMLElement;
-			SW.innerText = "⌚: ???";
 			const eventObj = function() {
 				SW.classList.add("active");
 				SW.removeEventListener("mouseenter", eventObj, false);

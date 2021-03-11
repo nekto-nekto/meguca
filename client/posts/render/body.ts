@@ -658,7 +658,7 @@ function formatSyncwatch(bit: string, val: number[], state: TextState): string {
         "data-start": val[3].toString(),
         "data-end": val[4].toString()
     }
-    return `<em><strong ${makeAttrs(attrs)}>syncwatch</strong></em>`
+    return `<em><strong ${makeAttrs(attrs)}>⌚: ???</strong></em>`
 }
 
 // Splits off one byte of leading and trailing punctuation, if any, and returns

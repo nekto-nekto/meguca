@@ -755,7 +755,7 @@ func (c *bodyContext) formatSyncwatch(val [5]uint64) {
 	c.uint64(val[3])
 	c.string(` data-end=`)
 	c.uint64(val[4])
-	c.string(`>syncwatch</strong></em>`)
+	c.string(`>⌚: ???</strong></em>`)
 }
 
 func (c *bodyContext) uint64(i uint64) {
