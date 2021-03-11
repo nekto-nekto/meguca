@@ -41,6 +41,13 @@ server_force:
 server_force_full: generate statik
 	go build -v -a
 
+server_update_deps:
+	go mod download github.com/bakape/thumbnailer/v2
+	go mod download github.com/bakape/captchouli/v2
+
+server_update_deps_full:
+	go mod download
+
 client_clean:
 	rm -rf www/js www/css/*.css www/css/maps
 

@@ -6,23 +6,14 @@ All commands assume to be run by the root user.
 
 ### ArchLinux
 ```bash
-pacman -S git
-pacman -S postgresql
-pacman -S nodejs npm
-pacman -S wget
-pacman -S go
-# или вручную проверенная версия:
+pacman -Syu git postgresql nodejs npm wget go gcc ffmpeg base-devel pkg-config make opencv hdf5 vtk gtk3 glew qt5-base
+# или go вручную (проверенная версия, только если свежая не заработала):
 # wget  https://dl.google.com/go/go1.13.linux-amd64.tar.gz
 # tar -C /usr/local -xzf go1.13.linux-amd64.tar.gz
 # export PATH=$PATH:/usr/local/go/bin
 # Чтобы не писать каждый раз export PATH=$PATH:/usr/local/go/bin
 # Добавляем в конец ~/.bashrc
 # PATH=$PATH:/usr/local/go/bin
-
-pacman -S gcc
-pacman -S ffmpeg
-pacman -S base-devel pkg-config make
-pacman -S opencv hdf5 vtk gtk3 glew qt5-base
 
 # исправление ошибки ReferenceError: primordials is not defined
 # необходим даунгрейд ноды
@@ -59,8 +50,7 @@ make
 ```
 ```
 Исправление проблемы зависимостей. В файле (зависит от версии)
-/~/go/pkg/mod/github.com/bakape/captchouli@v1.1.6/thumbnail.go заменяем 
-/~/go/pkg/mod/github.com/bakape/captchouli@v1.2.0/thumbnail.go заменяем 
+/~/go/pkg/mod/github.com/bakape/captchouli@vX.X.X/thumbnail.go заменяем 
 // #cgo pkg-config: opencv
 на
 // #cgo pkg-config: opencv4
