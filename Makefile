@@ -32,9 +32,21 @@ statik:
 server:
 	go build -v
 
+server_full: generate statik
+	go build -v
+
+server_force:
+	go build -v -a
+
+server_force_full: generate statik
+	go build -v -a
+
 client_clean:
 	rm -rf www/js www/css/*.css www/css/maps
-	#rm -rf www/js www/css/*.css www/css/maps node_modules
+
+client_clean_full:
+	rm -rf www/js www/css/*.css www/css/maps node_modules
+
 
 clean: client_clean
 	rm -rf .build .ffmpeg .package target meguca-*.zip meguca-*.tar.xz meguca meguca.exe server/pkg
