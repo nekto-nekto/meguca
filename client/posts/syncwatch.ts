@@ -32,10 +32,25 @@ class Syncwatch {
 	}
 
 	private render() {
+	
 		const now = Math.round(serverNow())
 		if (now > this.end) {
-			this.el.innerText = lang.ui["finished"]
+			this.el.innerText = "⌚: " + lang.ui["finished"]
 			return
+		} else if (!this.el.classList.contains("init")) {
+			const SWObj = this;
+			const SW = this.el as HTMLElement;
+			SW.innerText = "⌚: ???";
+			const eventObj = function() {
+				SW.classList.add("active");
+				SW.removeEventListener("mouseenter", eventObj, false);
+				SWObj.render();
+			}
+			SW.addEventListener("mouseenter", eventObj, false);
+			SW.classList.add("init");
+			return;
+		} else if (!this.el.classList.contains("active")) {
+			return;
 		} else if (now < this.start) {
 			this.el.innerHTML = (this.start - now).toString()
 		} else {
@@ -44,7 +59,7 @@ class Syncwatch {
 			diff -= hour * 3600
 			const min = Math.floor(diff / 60)
 			diff -= min * 60
-			this.el.innerHTML = this.formatTime(hour, min, diff)
+			this.el.innerHTML = "⌚: " + this.formatTime(hour, min, diff)
 				+ " / "
 				+ this.formatTime(this.hour, this.min, this.sec)
 		}
