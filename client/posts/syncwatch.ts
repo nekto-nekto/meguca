@@ -52,7 +52,7 @@ class Syncwatch {
 		} else if (!this.el.classList.contains("active")) {
 			return;
 		} else if (now < this.start) {
-			this.el.innerHTML = (this.start - now).toString()
+			this.el.innerHTML =  "⌚: " + (this.start - now).toString()
 		} else {
 			let diff = now - this.start
 			const hour = Math.floor(diff / 3600)
