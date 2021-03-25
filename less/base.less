@@ -25,10 +25,6 @@ a, .svg-link {
 	stroke: currentColor;
 }
 
-.watcher-toggle.svg-link svg {
-	width: 1em;
-	height: 1em;
-}
 
 .watcher-toggle.enabled {
 	border: solid 1px currentColor;
@@ -216,6 +212,7 @@ td {
 
 #catalog-controls {
 	margin-left: auto;
+	margin-top: 10px;
 }
 
 .captcha-container {
@@ -226,14 +223,15 @@ td {
 		grid-template-columns: 240px;
 	}
 	img {
-    	background: white;
+		background: white;
 	}
 }
 
 .flag {
-    height: .8em;
-    margin-left: .3em;
-    border: 1px solid black;
+	height: .8em;
+	margin-left: .3em;
+	border: 1px solid black;
+	vertical-align: middle;
 }
 
 .fileinfo {
@@ -326,6 +324,8 @@ article .post-container blockquote {
 	overflow-x: hidden;
 	padding-right: 16px;
 }
+
+
 .index-thread article .post-container blockquote {
 	max-height: 600px !important;
 }
@@ -340,7 +340,7 @@ article .post-container blockquote {
 #catalog .deleted { background-color: #6F2900; }
 .deleted * { opacity: 1; }
 .deleted:hover { opacity: 1; }
-header .mod-checkbox { float: left; }
+/*header .mod-checkbox { float: left; }*/
 
 #catalog .mod-checkbox {
     display: inline;
@@ -365,34 +365,6 @@ header .mod-checkbox { float: left; }
 	max-height: 50vh !important;
 	width: 100vh !important;
 }
-
-
-
-.snowflakes, 
-#user-background, 
-#overlay-container { transform: translateZ(0); }
-.snowflakes_body { pointer-events: none; }
-figcaption.spaced { overflow: auto; display: inline-block; }
-.upload-container > span { display: inline-block; }
-.upload-container > input { margin-bottom: 10px; }
-#post-controls > input { margin-bottom: 10px; margin-right: 10px; }
-.reply-form { z-index: 300 !important; }
-.mainLink { font-size: 20px; margin: 5px 0px 0px 0px; }
-@keyframes zoom {
-	0% {transform: scale(1,1);}
-	50% {transform: scale(1.2,1.2);}
-	100% {transform: scale(1,1);}
-}
-.likes { display:inline; }
-.likes button { border:0; background:none; text-shadow:0px 0px 3px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; }
-.likes button:active { top:1px; left:2px; color:#FFF; position:relative; }
-.likes button span { border-radius:5px; padding:0 3px; text-shadow:1px 1px 3px #000,1px 1px 3px #000,1px 1px 3px #000; }
-.likes button.like span { border:1px solid #358e00; background:#196900; color:#60ff00; }
-.likes button.dislike span { border:1px solid #8c5902; background:#693b00; color:#ffa700; }
-.like { color:#60ff00 }
-.dislike { color:#ffa700 }
-.likes > button:active { animation: zoom 0.1s forwards; }
-.likes > button:active span { font-size: 16px; }
 
 
 
@@ -427,7 +399,7 @@ figcaption.spaced > a[download] {
 
 .thumb.youtube {
 	display: block;
-	width: 480px;
+	width: 100%;
 	object-fit: none;
 	background: #CCC;
 }
@@ -455,6 +427,9 @@ img.thumb:after{
 	overflow-y: auto;
 	max-height: 68px;
 }
+.mobile .post-moderation-block {
+	padding-left: 7px;
+}
 
 #new-reply-form {
 	margin-top: 30px;
@@ -463,3 +438,64 @@ img.thumb:after{
 .by-user .deleted-toggle {
 	filter: invert(1);
 }
+
+/* pages */
+aside.glass.spaced {
+	overflow-x: auto;
+	width: 100%;
+	display: block;
+	max-height: 32px;
+	white-space: nowrap;
+	margin-top: 10px;
+}
+aside.glass.spaced * {
+	margin: 10px;
+}
+.mobile aside.glass.spaced {
+	font-size: 16px;
+}
+
+/* captcha */
+input.captchouli-width {
+	height: 50px;
+	font-size: 16px;
+}
+
+.mobile .warning-mod {
+	display: block;
+	margin: 10px;
+}
+
+/* no meguca stuff */
+.snowflakes, 
+#user-background, 
+#overlay-container { transform: translateZ(0); }
+.snowflakes_body { pointer-events: none; }
+figcaption.spaced { overflow: auto; display: inline-block; }
+.upload-container > span { display: inline-block; }
+.upload-container > input { margin-bottom: 10px; }
+#post-controls > input { margin-bottom: 10px; margin-right: 10px; }
+.reply-form { z-index: 300 !important; }
+.mainLink { font-size: 20px; margin: 5px 0px 0px 0px; }
+@keyframes zoom {
+	0% {transform: scale(1,1);}
+	50% {transform: scale(1.2,1.2);}
+	100% {transform: scale(1,1);}
+}
+.likes { display:inline; }
+.mobile .likes {
+	display: inline-block;
+	margin: 0.3em 0.8em;
+}
+.likes button {
+	border:0; background:none; text-shadow:0px 0px 3px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+	/*min-height: 20px;*/
+}
+.likes button:active { top:1px; left:2px; color:#FFF; position:relative; }
+.likes button span { border-radius:5px; padding:0 3px; text-shadow:1px 1px 3px #000,1px 1px 3px #000,1px 1px 3px #000; }
+.likes button.like span { border:1px solid #358e00; background:#196900; color:#60ff00; }
+.likes button.dislike span { border:1px solid #8c5902; background:#693b00; color:#ffa700; }
+.like { color:#60ff00 }
+.dislike { color:#ffa700 }
+.likes > button:active { animation: zoom 0.1s forwards; }
+.likes > button:active span { font-size: 16px; }

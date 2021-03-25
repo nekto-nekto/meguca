@@ -76,6 +76,7 @@ code.code-tag {
 	padding: 2px;
 	color: black;
 	max-width: 480px;
+	width: 100%;
 	&.expanded {
 		background-color: transparent;
 		color: inherit;
@@ -83,7 +84,7 @@ code.code-tag {
 	}
 	& > iframe {
 		display: block;
-		width: 480px;
+		width: 100%;
 		margin: auto;
 		border-style: none;
 	}
@@ -118,6 +119,11 @@ figure {
 	}
 }
 
+.mobile figure {
+	margin: 0;
+}
+
+
 .fit-to-width {
 	max-width: 100%;
 }
@@ -145,10 +151,9 @@ header {
 	// Widen click area
 	width: 1em;
 	height: 1em;
-
 	svg {
-		width: 0.7em;
-		height: 0.7em;
+		width: 1em;
+		height: 1em;
 	}
 
 	header & {
@@ -156,6 +161,69 @@ header {
 		margin-left: 0.5em;
 		/*float: right;*/
 	}
+}
+
+.watcher-toggle.svg-link svg {
+	width: 1em;
+	height: 1em;
+}
+
+.mobile article .post-container blockquote {
+	padding-right: 7px;
+	margin-top: 7px;
+}
+.mobile article .post-container figure + blockquote {
+	padding-left: 7px;
+}
+@media screen and (max-width: 400px) {
+	.mobile article .post-container figure + blockquote {
+		padding-top: 7px;
+	}
+}
+
+
+
+article .svg-link {
+	// Widen click area
+	width: 1em;
+	height: 1em;
+	/*border: 1px solid;*/
+	padding: 1px 2px;
+	border-radius: 6px;
+	display: inline-block;
+	vertical-align: middle;
+	svg {
+		width: 1em;
+		height: 1em;
+	}
+
+	header & {
+		position: relative;
+		margin-left: 0.5em;
+		/*float: right;*/
+	}
+}
+
+.mobile article .svg-link {
+	margin: 0em 0.6em;
+}
+
+.mobile article header > * {
+    margin: 0.3em 0.3em;
+    /*min-height: 20px;*/
+}
+
+.mobile article .name,
+.mobile article time {
+	display: inline-block;
+	margin-right: 6px;
+}
+.mobile article header > span {
+	display: block;
+	float: right;
+	/*margin-top: 0.3em;
+	height: 20px;
+	margin: .3em .8em;*/
 }
 
 .control .popup-menu {
@@ -248,6 +316,10 @@ header {
 	background: none;
 }
 
+.mobile #threads:not(.custom-BG) section > article.op {
+	padding-left: 10px;
+}
+
 #threads  {
 	hr {
 		width: 100%;
@@ -298,6 +370,10 @@ header {
 	white-space: nowrap;
 }
 
+.mobile .image-search-container {
+	display: inline-block;
+	margin-top: 4px;
+}
 
 // Prevent double <hr> at bottom
 #index-thread-container > section:last-of-type hr {
