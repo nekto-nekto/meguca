@@ -101,6 +101,9 @@ h3 {
 .hidden {
 	display: none;
 }
+article.hidden {
+	display: none !important;
+}
 
 .spaced {
 	& > *:before {
@@ -378,8 +381,9 @@ figcaption.spaced > a[download] {
 }
 
 /*.mobile #text-input { max-height: 46vh !important; }*/
-.mobile .index-thread,
-.mobile article { display:block; }
+
+/*.mobile .index-thread,
+.mobile article { display:block; }*/
 .mobile #threads { padding: 0 !important; }
 
 .mobile .reply-form:not(.preview) {position: relative; margin: 1em 0;}
@@ -439,6 +443,14 @@ img.thumb:after{
 	filter: invert(1);
 }
 
+.mobile .deleted {
+	opacity: .8;
+}
+
+.mobile .index-thread.deleted hr {
+	display: none;
+}
+
 /* pages */
 aside.glass.spaced {
 	overflow-x: auto;
@@ -449,6 +461,9 @@ aside.glass.spaced {
 	margin-top: 10px;
 }
 aside.glass.spaced * {
+	margin: 4px;
+}
+.mobile aside.glass.spaced * {
 	margin: 10px;
 }
 .mobile aside.glass.spaced {
@@ -467,8 +482,8 @@ input.captchouli-width {
 }
 
 /* no meguca stuff */
-.snowflakes, 
-#user-background, 
+.snowflakes,
+#user-background,
 #overlay-container { transform: translateZ(0); }
 .snowflakes_body { pointer-events: none; }
 figcaption.spaced { overflow: auto; display: inline-block; }
