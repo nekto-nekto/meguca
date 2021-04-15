@@ -322,6 +322,7 @@ export default () => {
 		postModel = new FormModel()
 		postForm = new FormView(postModel)
 		window.addEventListener("beforeunload", preventExit);
+		window.onbeforeunload = preventExit; // chrome related
 		return postState.draft
 	})
 
@@ -425,16 +426,22 @@ export default () => {
 
 	// Cancel unallocated draft
 	postSM.act(postState.draft, postEvent.cancel, () => {
-		window.removeEventListener('beforeunload', preventExit);
-		//console.log("postState.draft, postEvent.cancel");
-		postForm.remove()
-		return postState.ready
+		if (window.confirm(lang.ui["cancel"]+"?")) {
+			window.removeEventListener('beforeunload', preventExit);
+			window.onbeforeunload = function(){}; // chrome related
+			//console.log("postState.draft, postEvent.cancel");
+			postForm.remove()
+			return postState.ready
+		} else {
+			return postState.draft;
+		}
 	})
 
 	// Close allocated post
 	postSM.act(postState.alloc, postEvent.done, () => {
 		//console.log("postState.alloc, postEvent.done");
 		window.removeEventListener('beforeunload', preventExit);
+		window.onbeforeunload = function(){}; // chrome related
 		if (captchaLoaded()) {
 			//console.log("postState.alloc, postEvent.done captchaLoaded()");
 			return postState.alloc;
@@ -449,6 +456,7 @@ export default () => {
 	postSM.act(postState.alloc, postEvent.cancel, () => {
 		//console.log("postState.alloc, postEvent.cancel");
 		window.removeEventListener('beforeunload', preventExit);
+		window.onbeforeunload = function(){}; // chrome related
 		postModel.commitClose(true)
 		return postState.ready;
 	})
