@@ -1,7 +1,7 @@
 [![GoDoc](https://godoc.org/github.com/bakape/meguca?status.svg)](https://godoc.org/github.com/bakape/meguca)
 [![Build Status](https://travis-ci.org/bakape/meguca.svg?branch=master)](https://travis-ci.org/bakape/meguca)
 
-# meguca
+# tetuca is fork meguca v6 with some improvements
 anonymous realtime imageboard with user-created boards focused on high
 performance, free speech and transparent moderation
 
@@ -13,7 +13,7 @@ License: GNU AGPL
 
 * [PostgresSQL](https://www.postgresql.org/download/) >= 10.0
 
-## Docker
+## Docker (not tested)
 
 Meguca can be deployed in a self-contained Docker container.
 
