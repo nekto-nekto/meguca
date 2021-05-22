@@ -28,6 +28,7 @@ const (
 	coub
 	bitChute
 	invidious
+	twitter
 )
 
 var (
@@ -41,6 +42,7 @@ var (
 		coub:       "Coub",
 		bitChute:   "BitChute",
 		invidious:  "Invidious",
+		twitter:    "Twitter",
 	}
 	embedPatterns = [...]struct {
 		typ  int
@@ -69,6 +71,10 @@ var (
 		{
 			invidious,
 			regexp.MustCompile(`https?:\/\/(?:www\.)?invidio\.us\/watch(.*&|\?)v=.+`),
+		},
+		{
+			twitter,
+			regexp.MustCompile(`https?:\/\/(?:www\.)?twitter\.com\/.+`),
 		},
 	}
 

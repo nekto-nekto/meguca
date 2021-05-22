@@ -23,7 +23,7 @@ const youtubeCache = new Map<string, OEmbedDoc>();
 const bitchuteCache = new Map<string, string>()
 
 // Types of different embeds by provider
-enum provider { YouTube, SoundCloud, Vimeo, Coub, BitChute, Invidious }
+enum provider { YouTube, SoundCloud, Vimeo, Coub, BitChute, Invidious, Twitter }
 
 // Matching patterns and their respective providers
 const patterns: [provider, RegExp][] = [
@@ -51,6 +51,10 @@ const patterns: [provider, RegExp][] = [
 		provider.Invidious,
 		/https?:\/\/(?:www\.)?invidio\.us\/watch(.*&|\?)v=.+/,
 	],
+	[
+		provider.Twitter,
+		/https?:\/\/(?:www\.)?twitter\.com\/.+/,
+	],
 ]
 
 // Map of providers to formatter functions
@@ -66,6 +70,7 @@ for (let p of [
 	"Coub",
 	"BitChute",
 	"Invidious",
+	"Twitter",
 ]) {
 	const id = (provider as any)[p] as number
 	formatters[id] = formatProvider(id)
@@ -95,9 +100,9 @@ function formatProvider(type: provider): (s: string, eid: string) => string {
 			"data-type": type.toString(),
 		}
 		if (type === provider.YouTube) {
-			return `<em><a ${makeAttrs(attrs)}>[${provider[type]}] ???<img class="thumb youtube" src="/assets/images/preview/${eid}.jpg" alt=" " onerror="this.style='display: none;'" /></a></em>`
+			return `<em><a ${makeAttrs(attrs)}>[${provider[type]}] ${attrs.href}<img class="thumb youtube" src="/assets/images/preview/${eid}.jpg" alt=" " onerror="this.style='display: none;'" /></a></em>`
 		}
-		return `<em><a ${makeAttrs(attrs)}>[${provider[type]}] ???</a></em>`
+		return `<em><a ${makeAttrs(attrs)}>[${provider[type]}] ${attrs.href}</a></em>`
 	}
 }
 
