@@ -584,7 +584,9 @@ func (c *bodyContext) parseEmbeds(s string) bool {
 		c.string(`">[`)
 		c.string(providers[t.typ])
 
-		c.string(`] ???`)
+		//c.string(`] ???`)
+		c.string(`] `)
+		c.escape(s)
 		if t.typ == youTube && idYoutubeLenValid {
 			c.string(`<img class="thumb youtube" src="/assets/images/preview/`)
 			c.string(id)
