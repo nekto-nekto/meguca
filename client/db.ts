@@ -221,20 +221,23 @@ export async function readIDRange(store: string,
 // Run function for each record in store
 export async function forEach<T>(store: string, fn: (data: T) => void) {
 	return new Promise<void>((resolve, reject) => {
-		const req = newTransaction(store, false).openCursor();
+		try {
+			const req = newTransaction(store, false).openCursor();
 
-		req.onerror = err =>
-			reject(err);
+			req.onerror = err =>
+				reject(err);
 
-		req.onsuccess = event => {
-			const cursor = (event as any).target.result as IDBCursorWithValue;
-			if (cursor) {
-				fn(cursor.value);
-				cursor.continue();
-			} else {
-				resolve();
-			}
-		};
+			req.onsuccess = event => {
+				const cursor = (event as any).target.result as IDBCursorWithValue;
+				if (cursor) {
+					fn(cursor.value);
+					cursor.continue();
+				} else {
+					resolve();
+				}
+			};
+		} catch(e) {
+		}
 	});
 }
 
