@@ -304,7 +304,10 @@ async function toggleExpansion(e: MouseEvent) {
 		for (let i = 0; i < el.childNodes.length; i++) {
 			if (el.childNodes[i].nodeName != "#text") {
 				let element = el.childNodes[i] as Element
-				element.classList.remove("hide")
+				//element.classList.remove("hide")
+				if (element.classList.contains("hide")) {
+					element.remove()
+				}
 			}
 		}
 
