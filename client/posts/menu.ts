@@ -1,6 +1,6 @@
 import { View } from "../base"
 import { Post } from "./model"
-import { getModel, mine } from "../state"
+import { getModel/*, mine*/ } from "../state"
 import { on, postJSON, HTML } from "../util"
 import { FormView } from "../ui"
 import lang from "../lang"
@@ -121,7 +121,8 @@ const actions: { [key: string]: ItemSpec } = {
 	hide: {
 		text: lang.posts["hide"],
 		shouldRender(m) {
-			return !mine.has(m.id);
+			//return !mine.has(m.id);
+			return true
 		},
 		handler: hidePost,
 	},
