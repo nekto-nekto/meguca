@@ -116,9 +116,9 @@ Render lock signifying a thread has posting disabled
 Render an image or video asset
 {% func asset(url, mime string) %}{% stripspace %}
 	{% if mime == "video/webm" %}
-		<video src="{%s= url %}" autoplay loop>
+		<video loading="lazy" src="{%s= url %}" autoplay loop>
 	{% else %}
-		<img src="{%s= url %}">
+		<img loading="lazy" src="{%s= url %}">
 	{% endif %}
 {% endstripspace %}{% endfunc %}
 

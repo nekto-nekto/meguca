@@ -157,9 +157,9 @@ allow caching of generated posts.
 						{% code img := *t.Image %}
 						<a href="/{%s= t.Board %}/{%s= idStr %}">
 							{% if img.Spoiler %}
-								<img src="/assets/spoil/default.jpg" width="150" height="150" class="catalog">
+								<img loading="lazy" loading="lazy" src="/assets/spoil/default.jpg" width="150" height="150" class="catalog">
 							{% else %}
-								<img width="{%s= strconv.FormatUint(uint64(img.Dims[2]), 10) %}" height="{%s= strconv.FormatUint(uint64(img.Dims[3]), 10) %}" class="catalog" src="{%s= assets.ThumbPath(img.ThumbType, img.SHA1) %}">
+								<img loading="lazy" loading="lazy" width="{%s= strconv.FormatUint(uint64(img.Dims[2]), 10) %}" height="{%s= strconv.FormatUint(uint64(img.Dims[3]), 10) %}" class="catalog" src="{%s= assets.ThumbPath(img.ThumbType, img.SHA1) %}">
 							{% endif %}
 						</a>
 					</figure>
@@ -217,7 +217,7 @@ allow caching of generated posts.
 						{% code src = assets.SourcePath(img.FileType, img.SHA1) %}
 						<a target="_blank" href="{%s= src %}">
 							{% if img.Spoiler %}{%s= ln.Common.Posts["spoiler"] %}!{% endif %}
-							<img width="{%s= strconv.FormatUint(uint64(img.Dims[2]), 10) %}" height="{%s= strconv.FormatUint(uint64(img.Dims[3]), 10) %}" class="catalog" src="{%s= assets.ThumbPath(img.ThumbType, img.SHA1) %}">
+							<img loading="lazy" width="{%s= strconv.FormatUint(uint64(img.Dims[2]), 10) %}" height="{%s= strconv.FormatUint(uint64(img.Dims[3]), 10) %}" class="catalog" src="{%s= assets.ThumbPath(img.ThumbType, img.SHA1) %}">
 						</a>
 						<a class="catalog-image-name" href="{%s= assets.RelativeSourcePath(img.FileType, img.SHA1) %}" download="{%s= name %}">
 							{%s= name %}

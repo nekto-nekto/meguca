@@ -50,7 +50,7 @@
 				{% if !ok %}
 					{% code title = p.Flag %}
 				{% endif %}
-				<img class="flag" src="/assets/flags/{%s= p.Flag %}.svg" title="{%s= title %}">
+				<img class="flag" loading="lazy" src="/assets/flags/{%s= p.Flag %}.svg" title="{%s= title %}">
 			{% endif %}
 			<time>
 				{%s= formatTime(p.Time) %}
@@ -147,14 +147,14 @@
 							{% default %}
 								{% code file = "file" %}
 							{% endswitch %}
-							<img src="/assets/{%s= file %}.png" width="150" height="150">
+							<img loading="lazy" src="/assets/{%s= file %}.png" width="150" height="150">
 						{% case img.Spoiler %}
 							{% comment %}
 								TODO: board-specific server-side spoiler rendering
 							{% endcomment %}
-							<img src="/assets/spoil/default.jpg" width="150" height="150">
+							<img loading="lazy" src="/assets/spoil/default.jpg" width="150" height="150">
 						{% default %}
-							<img src="{%s= assets.ThumbPath(img.ThumbType, img.SHA1) %}" width="{%d int(img.Dims[2]) %}" height="{%d int(img.Dims[3]) %}">
+							<img loading="lazy" src="{%s= assets.ThumbPath(img.ThumbType, img.SHA1) %}" width="{%d int(img.Dims[2]) %}" height="{%d int(img.Dims[3]) %}">
 						{% endswitch %}
 					</a>
 				</figure>
