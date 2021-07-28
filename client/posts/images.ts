@@ -291,11 +291,11 @@ export default class ImageHandler extends View<Post> {
 		)
 		iqdb.setAttribute(
 			"href",
-			"http://iqdb.org/?url=" + url,
+			"https://iqdb.org/?url=" + url,
 		)
 		saucenao.setAttribute(
 			"href",
-			"http://saucenao.com/search.php?db=999&url=" + url,
+			"https://saucenao.com/search.php?db=999&url=" + url,
 		)
 		whatanime.setAttribute(
 			"href",
@@ -323,7 +323,7 @@ export default class ImageHandler extends View<Post> {
 				case fileTypes.png:
 					exhentai.setAttribute(
 						"href",
-						"http://exhentai.org/?fs_similar=1&fs_exp=1&f_shash="
+						"https://exhentai.org/?fs_similar=1&fs_exp=1&f_shash="
 						+ sha1,
 					)
 					break
