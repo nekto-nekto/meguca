@@ -76,6 +76,7 @@ export type TextState = {
 	italic: boolean
 	red: boolean
 	blue: boolean
+	purple: boolean
 	haveSyncwatch: boolean
 	successive_newlines: number
 	iDice: number // Index of the next dice array item to use
