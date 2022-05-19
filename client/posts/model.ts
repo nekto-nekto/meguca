@@ -68,6 +68,7 @@ export class Post extends Model implements PostData {
 			italic: false,
 			red: false,
 			blue: false,
+			purple: false,
 			haveSyncwatch: false,
 			successive_newlines: 0,
 			iDice: 0,
