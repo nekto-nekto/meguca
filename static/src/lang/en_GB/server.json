@@ -329,8 +329,8 @@
 			"Don't ask"
 		],
 		"rbText": [
-			"Red/Blue Text",
-			"Display red and blue text if formatted with '^r' or '^b'"
+			"Red/Blue/Purple Text",
+			"Display red/blue/purple text if formatted with '^r', '^b' or '^p'"
 		],
 		"readOnly": [
 			"Read only",
@@ -521,4 +521,6 @@
 		"type": "Type",
 		"unban": "Unban"
 	}
+}
+
 }
