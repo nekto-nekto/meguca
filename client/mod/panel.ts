@@ -103,8 +103,7 @@ export default class ModPanel extends View<null> {
 				if (checked.length) {
 					const args = HidableForm.forms["ban"].vals();
 					args["ids"] = mapToIDs(models);
-					trigger("renderCaptchaForm", () =>
-						this.postJSON("/api/ban", args));
+					this.postJSON("/api/ban", args);
 				}
 				break;
 			case "purgePost":
