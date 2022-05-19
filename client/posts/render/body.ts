@@ -23,6 +23,7 @@ export default function renderBody(data: PostData): string {
         italic: false,
         red: false,
         blue: false,
+        purple: false,
         haveSyncwatch: false,
         successive_newlines: 0,
         iDice: 0,
@@ -62,6 +63,9 @@ export default function renderBody(data: PostData): string {
         if (state.blue) {
             html += "<span class=\"blue\">"
         }
+        if (state.purple) {
+            html += "<span class=\"purple\">"
+        }
 
         html += fn(l, data)
 
@@ -70,6 +74,9 @@ export default function renderBody(data: PostData): string {
             html += "</span>"
         }
         if (state.red) {
+            html += "</span>"
+        }
+        if (state.purple) {
             html += "</span>"
         }
         if (state.italic) {
@@ -98,6 +105,7 @@ function wrapTags(level: number, state: TextState): string {
         state.italic,
         state.red,
         state.blue,
+        state.purple,
     ]
     const opening = [
         "<del>",
@@ -105,11 +113,13 @@ function wrapTags(level: number, state: TextState): string {
         "<i>",
         "<span class=\"red\">",
         "<span class=\"blue\">",
+        "<span class=\"purple\">",
     ]
     const closing = [
         "</del>",
         "</b>",
         "</i>",
+        "</span>",
         "</span>",
         "</span>",
     ]
@@ -280,6 +290,8 @@ function parseBlues(
     state: TextState,
     fn: (frag: string) => string,
 ): string {
+	const _fn = (frag: string) =>
+        parsePurples(frag, state, fn)
     const _rbText = boardConfig.rbText ? () => {
         const wrapped = wrapTags(4, state)
         state.blue = !state.blue
@@ -289,6 +301,33 @@ function parseBlues(
 
     while (true) {
         const i = frag.indexOf("^b")
+        if (i !== -1) {
+            html += _fn(frag.slice(0, i)) + _rbText()
+            frag = frag.substring(i + 2)
+        } else {
+            html += _fn(frag)
+            break
+        }
+    }
+
+    return html
+}
+
+// Inject purple color tags and call fn on the remaining parts
+function parsePurples(
+    frag: string,
+    state: TextState,
+    fn: (frag: string) => string,
+): string {
+    const _rbText = boardConfig.rbText ? () => {
+        const wrapped = wrapTags(5, state)
+        state.purple = !state.purple
+        return wrapped
+    } : () => ""
+    let html = ""
+
+    while (true) {
+        const i = frag.indexOf("^p")
         if (i !== -1) {
             html += fn(frag.slice(0, i)) + _rbText()
             frag = frag.substring(i + 2)
