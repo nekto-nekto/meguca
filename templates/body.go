@@ -91,7 +91,7 @@ var (
 type bodyContext struct {
 	index bool     // Rendered for an index page
 	state struct { // Body parser state
-		spoiler, quote, code, bold, italic, red, blue, rbText, pyu bool
+		spoiler, quote, code, bold, italic, red, blue, purple, rbText, pyu bool
 		successiveNewlines                                         uint
 		iDice                                                      int
 	}
@@ -160,6 +160,9 @@ func streambody(
 		if c.state.blue {
 			c.string("<span class=\"blue\">")
 		}
+		if c.state.purple {
+			c.string("<span class=\"purple\">")
+		}
 
 		fn(l)
 
@@ -167,6 +170,9 @@ func streambody(
 			c.string("</span>")
 		}
 		if c.state.red {
+			c.string("</span>")
+		}
+		if c.state.purple {
 			c.string("</span>")
 		}
 		if c.state.italic {
@@ -193,6 +199,7 @@ func (c *bodyContext) wrapTags(level int) {
 		c.state.italic,
 		c.state.red,
 		c.state.blue,
+		c.state.purple,
 	}
 	opening := [...]string{
 		"<del>",
@@ -200,11 +207,13 @@ func (c *bodyContext) wrapTags(level int) {
 		"<i>",
 		"<span class=\"red\">",
 		"<span class=\"blue\">",
+		"<span class=\"purple\">",
 	}
 	closing := [...]string{
 		"</del>",
 		"</b>",
 		"</i>",
+		"</span>",
 		"</span>",
 		"</span>",
 	}
@@ -362,6 +371,9 @@ func (c *bodyContext) parseReds(frag string, fn func(string)) {
 
 // Inject blue color tags and call fn on the remaining parts
 func (c *bodyContext) parseBlues(frag string, fn func(string)) {
+	_fn := func(frag string) {
+		c.parsePurples(frag, fn)
+	}
 	_rbText := func() {}
 
 	if c.state.rbText {
@@ -373,6 +385,30 @@ func (c *bodyContext) parseBlues(frag string, fn func(string)) {
 
 	for {
 		i := strings.Index(frag, "^b")
+		if i != -1 {
+			_fn(frag[:i])
+			_rbText()
+			frag = frag[i+2:]
+		} else {
+			_fn(frag)
+			break
+		}
+	}
+}
+
+// Inject purple color tags and call fn on the remaining parts
+func (c *bodyContext) parsePurples(frag string, fn func(string)) {
+	_rbText := func() {}
+
+	if c.state.rbText {
+		_rbText = func() {
+			c.wrapTags(5)
+			c.state.purple = !c.state.purple
+		}
+	}
+
+	for {
+		i := strings.Index(frag, "^p")
 		if i != -1 {
 			fn(frag[:i])
 			_rbText()
@@ -782,3 +818,4 @@ func (c *bodyContext) parseOpenLine(line string) {
 		c.escape(s)
 	})
 }
+
