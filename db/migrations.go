@@ -1517,6 +1517,15 @@ var migrations = []func(*sql.Tx) error{
 		)
 		return
 	},
+	func(tx *sql.Tx) (err error) {
+	_, err = tx.Exec(`alter table last_solved_captchas add column ip inet`)
+		if err != nil {
+			return
+		}
+		return registerTriggers(tx, map[string][]triggerDescriptor{
+			"bans":{{after, tableInsert}},
+		})
+	},
 }
 
 func createIndex(table string, columns ...string) string {
