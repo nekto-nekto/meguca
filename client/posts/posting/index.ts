@@ -336,7 +336,7 @@ export default () => {
 
 	postSM.act(postState.draft, postEvent.sentAllocRequest, () => {
 		//console.log("postState.draft, postEvent.sentAllocRequest");
-		if (!identity.live) {
+		if (!state.boardConfig.forcedLive && !identity.live) {
 			//console.log("!identity.live");
 			//postModel.commitNonLiveEnd();
 			return postState.allocatingNonLive;
@@ -375,7 +375,7 @@ export default () => {
 			//console.log("postState.draft, postState.allocating, postState.alloc");
 			postSM.act(s, postEvent.captchaSolved, () => {
 				//console.log("postEvent.captchaSolved");
-				if (!identity.live) {
+				if (!state.boardConfig.forcedLive && !identity.live) {
 					if (isEmpty()) {
 						postForm.input.focus();
 						return postState.draft;
@@ -409,7 +409,7 @@ export default () => {
 		}
 
 		// Commit a draft made as a non-live post
-		if (!identity.live && !isEmpty()) {
+		if (!state.boardConfig.forcedLive && !identity.live && !isEmpty()) {
 			//console.log("!identity.live && !isEmpty() ->postState.allocatingNonLive");
 			postModel.commitNonLive();
 			//console.log("!identity.live && !isEmpty() ->postModel.commitNonLive() & return postState.allocatingNonLive");
