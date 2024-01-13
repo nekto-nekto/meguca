@@ -177,7 +177,7 @@
 		new URLSearchParams({q: "+"}).get('q') === "+" || loadScript("js/scripts/polyfill-url-search-params");
 
 		// fast dirty hacks for users
-		loadScript("js/scripts/fasthacksforusers");
+		//loadScript("js/scripts/fasthacksforusers");
 
 		// main script
 		loadScript("js/main").onload = function () {

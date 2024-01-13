@@ -1,5 +1,5 @@
 import { View } from "../base"
-import { postJSON, toggleHeadStyle, trigger } from "../util"
+import { postJSON, toggleHeadStyle } from "../util"
 import { Post } from "../posts"
 import { getModel } from "../state"
 

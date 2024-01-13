@@ -10,7 +10,7 @@ require (
 	github.com/aquilax/tripcode v1.0.0
 	github.com/badoux/goscraper v0.0.0-20181207103713-9b4686c4b62c
 	github.com/bakape/captchouli v1.5.0
-	github.com/bakape/captchouli/v2 v2.2.0
+	github.com/bakape/captchouli/v2 v2.2.2
 	github.com/bakape/mnemonics v0.0.0-20170918165711-056d8d325992
 	github.com/bakape/thumbnailer/v2 v2.6.7
 	github.com/boltdb/bolt v1.3.1
@@ -38,6 +38,7 @@ require (
 	github.com/ulikunitz/xz v0.5.6
 	github.com/valyala/quicktemplate v1.6.3
 	golang.org/x/crypto v0.0.0-20200622213623-75b288015ac9
+	golang.org/x/net v0.0.0-20221002022538-bcab6841153b // indirect
 	google.golang.org/appengine v1.6.2 // indirect
 	gopkg.in/alexcesaro/quotedprintable.v3 v3.0.0-20150716171945-2caba252f4dc // indirect
 	gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127 // indirect
