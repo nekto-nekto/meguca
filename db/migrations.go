@@ -21,6 +21,7 @@ import (
 
 var version = len(migrations)
 
+/* function start */
 var migrations = []func(*sql.Tx) error{
 	func(tx *sql.Tx) (err error) {
 		// Initialize DB
@@ -1527,6 +1528,7 @@ var migrations = []func(*sql.Tx) error{
 		})
 	},
 }
+/* function stop */
 
 func createIndex(table string, columns ...string) string {
 	var w strings.Builder
