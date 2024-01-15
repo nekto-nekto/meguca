@@ -1519,7 +1519,10 @@ var migrations = []func(*sql.Tx) error{
 		return
 	},
 	func(tx *sql.Tx) (err error) {
-	_, err = tx.Exec(`alter table last_solved_captchas add column ip inet`)
+		_, err = tx.Exec(`
+			ALTER TABLE last_solved_captchas
+				ADD COLUMN ip inet`,
+		)
 		if err != nil {
 			return
 		}

@@ -149,8 +149,8 @@
 			"Отключить имена, трипкоды и почту у постов"
 		],
 		"forcedLive": [
-			"Вынужденная жизнь",
-			"Заставьте всех анонов видеть, как вы печатаете"
+			"Forced liveposting",
+			"Force live updates of open post text and images"
 		],
 		"galleryMode": [
 			"Режим галереи",

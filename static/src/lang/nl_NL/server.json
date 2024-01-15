@@ -144,6 +144,10 @@
 			"Geforceerd Anoniem",
 			"Schakel gebruikersnamen, tripcodes en e-mails op berichten uit"
 		],
+		"forcedLive": [
+			"Forced liveposting",
+			"Force live updates of open post text and images"
+		],
 		"galleryMode": [
 			"Galerij Mode",
 			"Toon alleen berichten met afbeeldingen"
