@@ -144,6 +144,10 @@
 			"Anonymat forcé",
 			"Désactive les informations personnelles des publications"
 		],
+		"forcedLive": [
+			"Forced liveposting",
+			"Force live updates of open post text and images"
+		],
 		"galleryMode": [
 			"Mode galerie",
 			"Affiche uniquement les publications avec des images"

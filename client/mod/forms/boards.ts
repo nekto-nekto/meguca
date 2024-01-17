@@ -52,6 +52,7 @@ abstract class SelectedBoardForm extends AccountForm {
 	public abstract renderNext(board: string): void
 
 	constructor(attrs: FormAttrs) {
+		attrs.needCaptcha = true;
 		attrs.tag = "form"
 		super(attrs)
 		this.boardSelector = new OwnedBoardSelection(this)
@@ -91,7 +92,7 @@ export class BoardConfigForm extends SelectedBoardForm {
 
 export class BoardDeletionForm extends SelectedBoardForm {
 	constructor() {
-		super({ needCaptcha: true })
+		super({})
 	}
 
 	public renderNext(board: string) {

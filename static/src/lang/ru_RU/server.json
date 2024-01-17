@@ -148,6 +148,10 @@
 			"Форсированная анонимность",
 			"Отключить имена, трипкоды и почту у постов"
 		],
+		"forcedLive": [
+			"Forced liveposting",
+			"Force live updates of open post text and images"
+		],
 		"galleryMode": [
 			"Режим галереи",
 			"Показывать только посты с изображениями"

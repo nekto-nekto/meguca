@@ -316,6 +316,8 @@ function endsWithTag(body: string): boolean {
 			return sl === "^"
 		case "b":
 			return sl === "^"
+		case "p":
+			return sl === "^"
 	}
 	return false
 }

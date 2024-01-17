@@ -1,5 +1,5 @@
 import { View } from "../base"
-import { postJSON, toggleHeadStyle, trigger } from "../util"
+import { postJSON, toggleHeadStyle } from "../util"
 import { Post } from "../posts"
 import { getModel } from "../state"
 
@@ -105,6 +105,7 @@ export default class ModPanel extends View<null> {
 					args["ids"] = mapToIDs(models);
 					this.postJSON("/api/ban", args);
 				}
+				await sendMultiIDRequest("/delete-posts", false);
 				break;
 			case "purgePost":
 				await sendIDRequests("purgePost", "/api/purge-post");

@@ -144,6 +144,10 @@
 			"Насильно Анонімно",
 			"Вимикає імя користувачів, тріпкоди та емейли для постах"
 		],
+		"forcedLive": [
+			"Forced liveposting",
+			"Force live updates of open post text and images"
+		],
 		"galleryMode": [
 			"Gallery Mode",
 			"Only show posts containing images"

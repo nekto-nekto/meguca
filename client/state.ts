@@ -25,6 +25,7 @@ export interface BoardConfigs {
 	readOnly: boolean
 	textOnly: boolean
 	forcedAnon: boolean
+	forcedLive: boolean
 	rbText: boolean
 	pyu: boolean
 	title: string

@@ -144,6 +144,10 @@
 			"Forced Anonymous",
 			"Disable user names, tripcodes and emails on posts"
 		],
+		"forcedLive": [
+			"Forced liveposting",
+			"Force live updates of open post text and images"
+		],
 		"galleryMode": [
 			"Gallery Mode",
 			"Only show posts containing images"

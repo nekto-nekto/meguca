@@ -21,6 +21,7 @@ import (
 
 var version = len(migrations)
 
+/* function start */
 var migrations = []func(*sql.Tx) error{
 	func(tx *sql.Tx) (err error) {
 		// Initialize DB
@@ -64,6 +65,7 @@ var migrations = []func(*sql.Tx) error{
 				readOnly boolean not null,
 				textOnly boolean not null,
 				forcedAnon boolean not null,
+				forcedLive boolean not null,
 				hashCommands boolean not null,
 				codeTags boolean not null,
 				id varchar(3) primary key,
@@ -725,12 +727,12 @@ var migrations = []func(*sql.Tx) error{
 		_, err = sq.Insert("boards").
 			Columns(
 				"id", "readOnly", "textOnly", "forcedAnon", "disableRobots",
-				"flags", "NSFW", "nonLive",
+				"flags", "NSFW", "nonLive", "forcedLive",
 				"rbText", "created", "defaultCSS", "title",
 				"notice", "rules", "eightball").
 			Values(
 				c.ID, c.ReadOnly, c.TextOnly, c.ForcedAnon, c.DisableRobots,
-				c.Flags, c.NSFW, c.NonLive, c.RbText,
+				c.Flags, c.NSFW, c.NonLive, c.ForcedLive, c.RbText,
 				c.Created, c.DefaultCSS, c.Title, c.Notice, c.Rules,
 				pq.StringArray(c.Eightball)).
 			RunWith(tx).
@@ -1509,7 +1511,27 @@ var migrations = []func(*sql.Tx) error{
 			`alter table threads drop column nonLive`,
 		)
 	},*/
+	func(tx *sql.Tx) (err error) {
+		_, err = tx.Exec(
+			`ALTER TABLE boards
+				ADD COLUMN forcedLive bool default false`,
+		)
+		return
+	},
+	func(tx *sql.Tx) (err error) {
+		_, err = tx.Exec(`
+			ALTER TABLE last_solved_captchas
+				ADD COLUMN ip inet`,
+		)
+		if err != nil {
+			return
+		}
+		return registerTriggers(tx, map[string][]triggerDescriptor{
+			"bans":{{after, tableInsert}},
+		})
+	},
 }
+/* function stop */
 
 func createIndex(table string, columns ...string) string {
 	var w strings.Builder

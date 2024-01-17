@@ -67,7 +67,7 @@ export default class FormModel extends Post {
 	// Compare new value to old and generate appropriate commands
 	public parseInput(val: string): void {
 		// Handle live update toggling
-		if (postSM.state === postState.draft && !identity.live) {
+		if (postSM.state === postState.draft && !identity.live && !boardConfig.forcedLive ) {
 			return
 		}
 
@@ -353,7 +353,7 @@ export default class FormModel extends Post {
 
 	// Upload the file and request its allocation
 	public async uploadFile(file: File) {
-		if (!boardConfig.textOnly && !this.image && identity.live) { // ?
+		if (!boardConfig.textOnly && !this.image && identity.live || boardConfig.forcedLive ) { // ?
 			//console.log("upload!!! identity.live", identity.live);
 			//console.log("upload!!! this", this);
 			const pr = this.view.upload.uploadFile(file);
