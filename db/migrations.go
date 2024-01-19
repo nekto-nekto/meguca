@@ -65,7 +65,6 @@ var migrations = []func(*sql.Tx) error{
 				readOnly boolean not null,
 				textOnly boolean not null,
 				forcedAnon boolean not null,
-				forcedLive boolean not null,
 				hashCommands boolean not null,
 				codeTags boolean not null,
 				id varchar(3) primary key,
@@ -727,12 +726,12 @@ var migrations = []func(*sql.Tx) error{
 		_, err = sq.Insert("boards").
 			Columns(
 				"id", "readOnly", "textOnly", "forcedAnon", "disableRobots",
-				"flags", "NSFW", "nonLive", "forcedLive",
+				"flags", "NSFW", "nonLive",
 				"rbText", "created", "defaultCSS", "title",
 				"notice", "rules", "eightball").
 			Values(
 				c.ID, c.ReadOnly, c.TextOnly, c.ForcedAnon, c.DisableRobots,
-				c.Flags, c.NSFW, c.NonLive, c.ForcedLive, c.RbText,
+				c.Flags, c.NSFW, c.NonLive,  c.RbText,
 				c.Created, c.DefaultCSS, c.Title, c.Notice, c.Rules,
 				pq.StringArray(c.Eightball)).
 			RunWith(tx).
