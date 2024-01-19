@@ -44,3 +44,5 @@ require (
 	gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127 // indirect
 	gopkg.in/gomail.v2 v2.0.0-20160411212932-81ebce5c23df
 )
+
+replace github.com/bakape/thumbnailer/v2 => github.com/HeyPuter/thumbnailer/v2 v2.0.0-20230828231719-c526241bacef

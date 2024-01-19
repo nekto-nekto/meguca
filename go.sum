@@ -1,3 +1,5 @@
+github.com/HeyPuter/thumbnailer/v2 v2.0.0-20230828231719-c526241bacef h1:P2WZPZ43V6h5wVerWz3gjQNHHW7P3RQkTsk3mwJ5rhQ=
+github.com/HeyPuter/thumbnailer/v2 v2.0.0-20230828231719-c526241bacef/go.mod h1:+yOYrfZmQ3VO7uqVHxTr3p5J74WRjP5MeQQXaU6GBjY=
 github.com/Masterminds/squirrel v0.0.0-20190107164353-fa735ea14f09/go.mod h1:yaPeOnPG5ZRwL9oKdTsO/prlkPbXWZlRVMQ/gGlzIuA=
 github.com/Masterminds/squirrel v1.1.0 h1:baP1qLdoQCeTw3ifCdOq2dkYc6vGcmRdaociKLbEJXs=
 github.com/Masterminds/squirrel v1.1.0/go.mod h1:yaPeOnPG5ZRwL9oKdTsO/prlkPbXWZlRVMQ/gGlzIuA=
